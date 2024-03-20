@@ -32,6 +32,17 @@ app.get('/', (req, res) => {
     res.render("index");
 })
 
+app.get('/sign-in', (req, res) => {
+    res.render("login");
+})
+
+app.get('/sign-up', (req, res) => {
+    res.render("register");
+})
+app.get('/cart', (req, res) => {
+    res.render("index");
+})
+
 server.listen(port, () => {
     console.log(`Maintenant à l'écoute sur le port ${port}`);
 });

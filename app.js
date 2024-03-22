@@ -15,6 +15,9 @@ app.use(cookieParser())
 app.set("view engine", "ejs");
 // app.engine('ejs', require('ejs').__express);
 app.use(express.static(path.join(__dirname, "public")));
+
+const cookieSession = require('cookie-session')
+
 require('dotenv').config();
 
 const server = http.createServer(app);
@@ -23,25 +26,52 @@ const sequelize = require('sequelize');
 
 const db = require('./connexion');
 
+// Test DB
+db.authenticate()
+    .then(() => console.log('Database connected...'))
+    .catch(err => console.log('Error: ' + err))
+
 const User = require('./models/users');
 const Supplier = require('./models/supplier');
 const Schedule = require('./models/schedule');
 const Product = require('./models/product');
 
+const usersRouter = require('./routes/usersRouter')
+
+app.use(cookieSession({
+    name: 'session',
+    keys: [process.env.ACCESS_TOKEN_SECRET],
+  
+    // Cookie Options
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  }))
+
+//routes for the equipe API
+app.use('/', usersRouter)
+
 app.get('/', (req, res) => {
-    res.render("index");
+    // console.log(req.cookies);
+    // console.log(req.cookies.user);
+    // console.log(req.cookies.token);
+    let is_connected = false;
+    if(req.cookies.user){
+        is_connected=true
+    }
+    
+    res.render("index", {
+        "is_connected" : is_connected,
+        "user": req.cookies.user,
+        "token": req.cookies.token
+    });
 })
 
-app.get('/sign-in', (req, res) => {
-    res.render("login");
+app.get('/profile', (req, res) => {
+    res.render("profile");
 })
 
-app.get('/sign-up', (req, res) => {
-    res.render("register");
-})
-app.get('/cart', (req, res) => {
-    res.render("index");
-})
+// app.get('/cart', (req, res) => {
+//     res.render("index");
+// })
 
 server.listen(port, () => {
     console.log(`Maintenant à l'écoute sur le port ${port}`);

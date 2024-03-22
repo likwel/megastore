@@ -19,6 +19,10 @@ const User = db.define('user', {
         type: DataTypes.STRING,
         allowNull: true
     },
+    telephone: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
     types: {
         type: DataTypes.STRING,
         allowNull: true

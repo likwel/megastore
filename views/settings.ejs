@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Spaces - My Account</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta name="title" content="Spaces - My Account">
+    <meta name="author" content="Themesberg">
+    <meta name="description"
+        content="Premium Directory Listing Bootstrap 4 Template featuring 37 hand-crafted pages, a dashboard an Mapbox integration. Spaces also comes with a complete UI Kit featuring over 700 components by Themesberg.">
+    <meta name="keywords"
+        content="bootstrap, bootstrap 4 template, directory listing bootstrap, bootstrap 4 listing, bootstrap listing, bootstrap 4 directory listing template, vector map, leaflet js template, mapbox theme, mapbox template, dashboard, themesberg, user dashboard bootstrap, dashboard bootstrap, ui kit, bootstrap ui kit, premium bootstrap theme">
+    <link rel="canonical" href="https://themesberg.com/product/bootstrap/spaces-bootstrap-directory-listing-template">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://demo.themesberg.com/pixel-pro">
+    <meta property="og:title" content="Spaces - My Account">
+    <meta property="og:description"
+        content="Premium Directory Listing Bootstrap 4 Template featuring 37 hand-crafted pages, a dashboard an Mapbox integration. Spaces also comes with a complete UI Kit featuring over 700 components by Themesberg.">
+    <meta property="og:image"
+        content="../../../../../themesberg.s3.us-east-2.amazonaws.com/public/products/spaces/thumbnail.jpg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://demo.themesberg.com/pixel-pro">
+    <meta property="twitter:title" content="Spaces - My Account">
+    <meta property="twitter:description"
+        content="Premium Directory Listing Bootstrap 4 Template featuring 37 hand-crafted pages, a dashboard an Mapbox integration. Spaces also comes with a complete UI Kit featuring over 700 components by Themesberg.">
+    <meta property="twitter:image"
+        content="../../../../../themesberg.s3.us-east-2.amazonaws.com/public/products/spaces/thumbnail.jpg">
+    <link rel="apple-touch-icon" sizes="120x120"
+        href="https://demo.themesberg.com/bootstrap/spaces/assets/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="https://demo.themesberg.com/bootstrap/spaces/assets/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16"
+        href="https://demo.themesberg.com/bootstrap/spaces/assets/img/favicon/favicon-16x16.png">
+
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+
+    <%- include('style'); %>
+
+</head>
+
+<body>
+    
+    <%- include('component/header', {classNav : "navbar-light navbar-theme-primary"}); %>
+    <main>
+        
+        <div class="section section-lg bg-soft">
+            <div class="container">
+                <div class="row pt-5 pt-md-0">
+
+                    <%- include('component/profile-left', { dashboard:"", settings:"active", items:"", product:"", security:"", belling :"", message:""}); %>
+
+                    <div class="col-12 col-lg-8">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card card-body bg-white border-light mb-4">
+                                    <h2 class="h5 mb-4">Information générale</h2>
+                                    <form>
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <div class="form-group"><label for="first_name">Nom d'utilisateur</label>
+                                                    <input class="form-control" id="first_name" type="text"
+                                                        placeholder="Nom d'utilisateur" value="<%= JSON.parse(user).username%>"></div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="form-group"><label for="last_name">Nom complet</label> <input
+                                                        class="form-control" id="last_name" type="text" value="<%= JSON.parse(user).fullname%>"
+                                                        placeholder="Neil"></div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="row align-items-center">
+                                            <div class="col-md-6 mb-3">
+                                                <div class="form-group"><label for="birthday">Birthday</label> <input
+                                                        type="text" class="form-control flatpickr-input" id="birthday"
+                                                        data-toggle="date" placeholder="Select your birth date"></div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="form-group"><label for="gender">Gender</label> <select
+                                                        class="custom-select" id="gender">
+                                                        <option disabled="disabled" selected="selected">Select option
+                                                        </option>
+                                                        <option value="1">Female</option>
+                                                        <option value="2">Male</option>
+                                                    </select></div>
+                                            </div>
+                                        </div> -->
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <div class="form-group"><label for="email">E-mail</label> <input
+                                                        class="form-control" id="email" type="email" value="<%= JSON.parse(user).email%>"
+                                                        placeholder="name@company.com"></div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="form-group"><label for="phone">Téléphone</label> <input
+                                                        class="form-control" id="phone" type="number" value="<%= JSON.parse(user).telephone%>"
+                                                        placeholder="+12-345 678 910"></div>
+                                            </div>
+                                        </div>
+                                        <h2 class="h5 my-4">Adress</h2>
+                                        <div class="row">
+                                            <div class="col-sm-9 mb-3">
+                                                <div class="form-group"><label for="address">Address</label> <input
+                                                        class="form-control" id="address" type="text" value="<%= JSON.parse(user).address%>"
+                                                        placeholder="Your address"></div>
+                                            </div>
+                                            <div class="col-sm-3 mb-3">
+                                                <div class="form-group"><label for="number">Code postale</label> <input
+                                                        class="form-control" id="number" type="number"
+                                                        placeholder="No."></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6 mb-3">
+                                                <div class="form-group"><label for="city">Ville</label> <input
+                                                        class="form-control" id="city" type="text" placeholder="City" value="<%= JSON.parse(user).ville%>">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 mb-3">
+                                                <div class="form-group"><label for="country">Country</label> <select
+                                                        class="form-control select2-hidden-accessible" id="country"
+                                                        data-toggle="select" title="Country" data-live-search="true"
+                                                        data-live-search-placeholder="Country" data-select2-id="1"
+                                                        tabindex="-1" aria-hidden="true">
+                                                        <option data-select2-id="3"><%= JSON.parse(user).country%></option>
+                                                        <option>Canada</option>
+                                                        <option>Germany</option>
+                                                        <option>Spain</option>
+                                                        <option>Italy</option>
+                                                        <option>UK</option>
+                                                    </select></div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-3"><button type="submit" class="btn btn-primary">Save
+                                                All</button></div>
+                                    </form>
+                                </div>
+                                <div class="card card-body bg-white border-light">
+                                    <h2 class="h5 mb-4">Alerts & Notifications</h2>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item d-flex justify-content-between pl-0 border-bottom">
+                                            <div>
+                                                <h3 class="h6 mb-1">Company News</h3><span class="small">Get Spaces
+                                                    news, announcements, and product updates</span>
+                                            </div>
+                                            <div>
+                                                <div class="custom-control custom-switch"><input type="checkbox"
+                                                        class="custom-control-input" id="shop-notification-1"
+                                                        checked="checked"> <label class="custom-control-label"
+                                                        for="shop-notification-1"></label></div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between pl-0 border-bottom">
+                                            <div>
+                                                <h3 class="h6 mb-1">Account Activity</h3><span class="small">Get
+                                                    important notifications about you or activity you've missed</span>
+                                            </div>
+                                            <div>
+                                                <div class="custom-control custom-switch"><input type="checkbox"
+                                                        class="custom-control-input" id="shop-notification-2"> <label
+                                                        class="custom-control-label" for="shop-notification-2"></label>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between pl-0">
+                                            <div>
+                                                <h3 class="h6 mb-1">Meetups Near You</h3><span class="small">Get an
+                                                    email when a Dribbble Meetup is posted close to my location</span>
+                                            </div>
+                                            <div>
+                                                <div class="custom-control custom-switch"><input type="checkbox"
+                                                        class="custom-control-input" id="shop-notification-3"
+                                                        checked="checked"> <label class="custom-control-label"
+                                                        for="shop-notification-3"></label></div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <%- include('component/footer'); %>
+
+    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/popper.js/dist/umd/popper.min.js"></script>
+    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/headroom.js/dist/headroom.min.js"></script>
+    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/onscreen/dist/on-screen.umd.min.js"></script>
+    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/nouislider/distribute/nouislider.min.js"></script>
+    <script
+        src="https://demo.themesberg.com/bootstrap/spaces/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/waypoints/lib/jquery.waypoints.min.js"></script>
+    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/owl.carousel/dist/owl.carousel.min.js"></script>
+    <script
+        src="https://demo.themesberg.com/bootstrap/spaces/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+    <script
+        src="https://demo.themesberg.com/bootstrap/spaces/vendor/@fancyapps/fancybox/dist/jquery.fancybox.min.js"></script>
+    <script
+        src="https://demo.themesberg.com/bootstrap/spaces/vendor/sticky-sidebar/dist/sticky-sidebar.min.js"></script>
+    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/leaflet/dist/leaflet.js"></script>
+    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/chartist/dist/chartist.min.js"></script>
+    <script
+        src="https://demo.themesberg.com/bootstrap/spaces/vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/jqvmap/dist/jquery.vmap.min.js"></script>
+    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/jqvmap/dist/maps/jquery.vmap.usa.js"></script>
+    <script src="https://demo.themesberg.com/bootstrap/spaces/assets/js/jquery.slideform.js"></script>
+    <script src="https://demo.themesberg.com/bootstrap/spaces/assets/js/spaces.js"></script>
+    <script>(function () { if (!document.body) return; var js = "window['__CF$cv$params']={r:'86a6aa97ecbb52e6',t:'MTcxMTQ1MTEzNC45NzgwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../../../cdn-cgi/challenge-platform/h/g/scripts/jsd/dc6b543c1346/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);"; var _0xh = document.createElement('iframe'); _0xh.height = 1; _0xh.width = 1; _0xh.style.position = 'absolute'; _0xh.style.top = 0; _0xh.style.left = 0; _0xh.style.border = 'none'; _0xh.style.visibility = 'hidden'; document.body.appendChild(_0xh); function handler() { var _0xi = _0xh.contentDocument || _0xh.contentWindow.document; if (_0xi) { var _0xj = _0xi.createElement('script'); _0xj.innerHTML = js; _0xi.getElementsByTagName('head')[0].appendChild(_0xj); } } if (document.readyState !== 'loading') { handler(); } else if (window.addEventListener) { document.addEventListener('DOMContentLoaded', handler); } else { var prev = document.onreadystatechange || function () { }; document.onreadystatechange = function (e) { prev(e); if (document.readyState !== 'loading') { document.onreadystatechange = prev; handler(); } }; } })();</script>
+    <script defer
+        src="https://static.cloudflareinsights.com/beacon.min.js/v84a3a4012de94ce1a686ba8c167c359c1696973893317"
+        integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA=="
+        data-cf-beacon='{"rayId":"86a6aa97ecbb52e6","version":"2024.3.0","r":1,"token":"3a2c60bab7654724a0f7e5946db4ea5a","b":1}'
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

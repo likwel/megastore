@@ -1,0 +1,100 @@
+<div class="col-12 col-md-4 d-none d-lg-block">
+
+    <div class="card border-light p-2">
+        <div class="card-body p-2">
+            <div class="profile-thumbnail small-thumbnail mx-auto d-flex">
+                <img src="<%= JSON.parse(user).photo?JSON.parse(user).fullname:'/assets/images/default_pdp.jpg' %>"
+                    class="card-img-top rounded-circle border-white" alt="<%= JSON.parse(user).fullname %>">
+                    <i class="fa-solid fa-camera" style="position: absolute; left: 60%; top: 20%; border-radius: 50%; border: 2px solid dimgray; padding: 3px;cursor:pointer;"></i>
+                </div>
+            <h2 class="h5 font-weight-normal text-center mt-3 mb-0"><%= JSON.parse(user).fullname %></h2>
+            <h4 class="h6 font-weight-normal text-center mt-3 mb-0"><%= JSON.parse(user).email %></h4>
+            <div class="text-center">
+                <span class="badge badge-pill badge-success"><%= JSON.parse(user).types=="users"?"Utilisateur":"Fournisseur" %></span>
+            </div>
+            <div class="list-group dashboard-menu list-group-sm mt-4">
+                <a href="/my-account"
+                    class="d-flex list-group-item list-group-item-action <%= dashboard %>">Dashboard <span
+                        class="icon icon-xs ml-auto"><span
+                            class="fas fa-chevron-right"></span></span> 
+                </a>
+                <a href="/my-account/settings"
+                    class="d-flex list-group-item list-group-item-action <%= settings %>">Paramètres<span
+                        class="icon icon-xs ml-auto"><span
+                            class="fas fa-chevron-right"></span></span> 
+                </a>
+                <a href="/<%= JSON.parse(user).username%>"
+                    class="d-flex list-group-item list-group-item-action <%= items %>">Marketplace<span
+                        class="icon icon-xs ml-auto"><span
+                            class="fas fa-chevron-right"></span></span> 
+                </a>
+                <a href="/my-account/products"
+                    class="d-flex list-group-item list-group-item-action <%= product %>">Produits<span
+                        class="icon icon-xs ml-auto"><span
+                            class="fas fa-chevron-right"></span></span> 
+                </a>
+                <a href="/my-account/security"
+                    class="d-flex list-group-item list-group-item-action <%= security %>">Sécurité<span
+                        class="icon icon-xs ml-auto"><span
+                            class="fas fa-chevron-right"></span></span> 
+                </a>
+                <a href="https://demo.themesberg.com/bootstrap/spaces/html/dashboard/billing.html"
+                    class="d-flex list-group-item list-group-item-action <%= belling %>">Facturation<span
+                        class="icon icon-xs ml-auto"><span
+                            class="fas fa-chevron-right"></span></span> 
+                </a>
+                <a href="https://demo.themesberg.com/bootstrap/spaces/html/dashboard/messages.html"
+                    class="d-flex list-group-item list-group-item-action border-0 <%= message %>">Messages<span
+                        class="icon icon-xs ml-auto"><span
+                            class="fas fa-chevron-right"></span></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-12 d-lg-none">
+    <div class="card bg-white border-light mb-4 mb-lg-5">
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-10 d-flex">
+                    <a href="/my-account"
+                        class="list-group-item list-group-item-action border-0 <%= dashboard %>">Dashboard</a>
+                    <a href="/my-account/settings"
+                        class="list-group-item list-group-item-action border-0 <%= settings %>">Paramètres
+                    </a> 
+                    <a href="/<%= JSON.parse(user).username%>"
+                        class="list-group-item list-group-item-action d-none d-sm-block border-0 <%= items %>">Marketplace
+                    </a>
+                    <a href="/my-account/products"
+                        class="list-group-item list-group-item-action d-none d-md-block border-0 <%= product %>">Produits
+                    </a>
+                    <a href="/my-account/security"
+                        class="list-group-item list-group-item-action d-none d-md-block border-0 <%= security %>">Sécurité
+                    </a>
+                </div>
+                <div class="col-2 d-flex justify-content-center">
+                    <div class="btn-group dropleft"><button
+                            class="btn btn-link dropdown-toggle dropdown-toggle-split mr-2 m-0 p-0"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
+                                class="icon icon-sm"><span
+                                    class="fas fa-ellipsis-h icon-secondary fa-lg"></span>
+                            </span><span class="sr-only">Toggle Dropdown</span></button>
+                        <div class="dropdown-menu"><a
+                                href="/<%= JSON.parse(user).username%>"
+                                class="list-group-item list-group-item-action d-sm-none border-0">Marketplace</a> <a
+                                href="/my-account/security"
+                                class="list-group-item list-group-item-action d-md-none border-0">Sécurité</a>
+                                <a href="/my-account/products"
+                                class="list-group-item list-group-item-action border-0">Produits</a>
+
+                            <a href="https://demo.themesberg.com/bootstrap/spaces/html/dashboard/billing.html"
+                                class="list-group-item list-group-item-action border-0">Facturation</a>
+                            <a href="https://demo.themesberg.com/bootstrap/spaces/html/dashboard/messages.html"
+                                class="list-group-item list-group-item-action border-0">Messages</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

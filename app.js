@@ -57,6 +57,8 @@ app.get('/', (req, res) => {
     if(req.cookies.user){
         is_connected=true
     }
+
+    // console.log(req.cookies.user);
     
     res.render("index", {
         "is_connected" : is_connected,
@@ -65,8 +67,104 @@ app.get('/', (req, res) => {
     });
 })
 
-app.get('/profile', (req, res) => {
-    res.render("profile");
+app.get('/my-account', (req, res) => {
+
+    let is_connected = false;
+    if(req.cookies.user){
+        is_connected=true
+    }
+    
+    res.render("profile", {
+        "is_connected" : is_connected,
+        "user": req.cookies.user,
+        "token": req.cookies.token
+    });
+})
+
+app.get('/my-account/settings', (req, res) => {
+
+    let is_connected = false;
+    if(req.cookies.user){
+        is_connected=true
+    }
+    
+    res.render("settings", {
+        "is_connected" : is_connected,
+        "user": req.cookies.user,
+        "token": req.cookies.token
+    });
+})
+
+app.get('/my-account/security', (req, res) => {
+
+    let is_connected = false;
+    if(req.cookies.user){
+        is_connected=true
+    }
+    
+    res.render("security", {
+        "is_connected" : is_connected,
+        "user": req.cookies.user,
+        "token": req.cookies.token
+    });
+})
+
+app.get('/my-account/products', (req, res) => {
+
+    let is_connected = false;
+    if(req.cookies.user){
+        is_connected=true
+    }
+    
+    res.render("products", {
+        "is_connected" : is_connected,
+        "user": req.cookies.user,
+        "token": req.cookies.token
+    });
+})
+
+app.get('/:username', async (req, res) => {
+
+    let username = req.params.username
+
+    //find a user by their email
+    // const user = await User.findOne({
+    //     where: {
+    //         username: username
+    //     }
+
+    // });
+
+    //find a supplier by their email
+    const supplier = await Supplier.findOne({
+        where: {
+            username: username
+        }
+
+    });
+
+    if(supplier){
+
+        let is_connected = false;
+
+        if(req.cookies.user){
+            is_connected=true
+        }
+
+        res.render("shop/basic", {
+            "is_connected" : is_connected,
+            "user": req.cookies.user,
+            "token": req.cookies.token
+        });
+    }else{
+        res.redirect("/")
+    }
+
+    
+})
+
+app.get('/shop', (req, res) => {
+    res.render("index");
 })
 
 // app.get('/cart', (req, res) => {

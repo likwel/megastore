@@ -2,6 +2,8 @@ const { Sequelize, DataTypes } = require('sequelize');
 
 const db = require('../connexion');
 
+const Supplier = require('../models/supplier');
+
 const Product = db.define('product', {
 
     name: {
@@ -46,6 +48,10 @@ const Product = db.define('product', {
         allowNull: false
     }
 });
+
+
+Supplier.hasMany(Product, {foreignKey: 'supplier_id'})
+Product.belongsTo(Supplier, {foreignKey: 'supplier_id'})
 
 Product.sync().then(() => {
   console.log('table product created');

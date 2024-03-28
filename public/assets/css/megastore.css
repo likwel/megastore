@@ -37191,3 +37191,8 @@ blockquote {
     font-size: .75rem;
     font-weight: 500
 }
+
+.img_mobil_money img{
+    width: 100px;
+    height: 50px;
+}

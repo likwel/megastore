@@ -4,20 +4,26 @@ const db = require('../connexion');
 
 const Supplier = db.define('supplier', {
 
-    username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
-    },
+    // username: {
+    //     type: DataTypes.STRING,
+    //     allowNull: false,
+    //     unique: true
+    // },
+    // email: {
+    //     type: DataTypes.STRING,
+    //     unique: true,
+    //     isEmail: true, //checks for email format
+    //     allowNull: false
+    // },
+    // fullname: {
+    //     type: DataTypes.STRING,
+    //     allowNull: true
+    // },
     email: {
         type: DataTypes.STRING,
         unique: true,
         isEmail: true, //checks for email format
         allowNull: false
-    },
-    fullname: {
-        type: DataTypes.STRING,
-        allowNull: true
     },
     company_url: {
         type: DataTypes.STRING,
@@ -63,11 +69,15 @@ const Supplier = db.define('supplier', {
         type: DataTypes.FLOAT,
         allowNull: true
     },
-    password: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
+    // password: {
+    //     type: DataTypes.STRING,
+    //     allowNull: false
+    // },
     schedule_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+    },
+    user_id: {
         type: DataTypes.INTEGER,
         allowNull: true
     },

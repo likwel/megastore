@@ -12,7 +12,7 @@ const saveSupplier = async (req, res, next) => {
   try {
     const username = await Supplier.findOne({
       where: {
-        username: req.body.username,
+        company_url: req.body.username,
       },
     });
 

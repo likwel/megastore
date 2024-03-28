@@ -22,7 +22,7 @@
                 <ul class="navbar-nav navbar-nav-hover justify-content-center">
                     <li class="nav-item">
                         <a href="/shop" id="shopDropdown" class="nav-link">
-                            <span class="nav-link-inner-text mr-1">Shop</span>
+                            <span class="nav-link-inner-text mr-1">Boutiques</span>
                         </a>
                         
                     </li>
@@ -217,11 +217,19 @@
                                         <div class="ml-4"><span class="text-dark d-block">Support</span> <span
                                                 class="small">Looking for answers?</span></div>
                                     </a>
-                                    <a href="https://themesberg.com/contact" target="_blank"
-                                    class="list-group-item list-group-item-action d-flex align-items-center p-0 py-3 px-lg-4"><span
-                                        class="icon icon-md icon-primary"><i class="fa-solid fa-sack-dollar"></i></span>
-                                    <div class="ml-4"><span class="text-dark d-block">Prix</span> <span
-                                            class="small">Mettre à jour votre panier?</span></div>
+                                    <a href="/page/pricing" class="list-group-item list-group-item-action d-flex align-items-center p-0 py-3 px-lg-4">
+                                        <span class="icon icon-md icon-primary"><i class="fa-solid fa-circle-dollar-to-slot"></i></span>
+                                    <div class="ml-4">
+                                        <span class="text-dark d-block">Abonnement</span> 
+                                        <span class="small">Mettre à jour votre plan ici.</span>
+                                </div>
+                                </a>
+                                <a href="/page/faq" class="list-group-item list-group-item-action d-flex align-items-center p-0 py-3 px-lg-4">
+                                        <span class="icon icon-md icon-primary"><i class="fa-solid fa-circle-question"></i></span>
+                                    <div class="ml-4">
+                                        <span class="text-dark d-block">F.A.Q</span> 
+                                        <span class="small">Questions fréquentes ici.</span>
+                                </div>
                                 </a>
                                 </div>
                             </div>
@@ -229,7 +237,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="d-none d-lg-block @@cta_button_classes dropdown">
+            <div class="d-none d-lg-block dropdown">
                 <% if(is_connected) { %>
                     
                     <a href="/sign-in" class="btn btn-md btn-outline-white animate-up-2 mr-3 dropdown-toggle" data-toggle="dropdown"><i class="fa-solid fa-user-clock"></i> <span

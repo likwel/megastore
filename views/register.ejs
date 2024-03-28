@@ -50,7 +50,7 @@
             data-background="https://demo.themesberg.com/bootstrap/spaces/assets/img/form-image.jpg">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-12">
+                    <div class="col-12 mt-2 mb-2">
                         <div class="text-center text-md-center mb- mt-md-0 text-white">
                             <h1 class="mb-0 h3">Création d'un compte</h1>
                         </div>
@@ -66,7 +66,7 @@
                                         <input class="form-check-input" type="radio" name="exampleRadios"
                                             id="exampleRadios1" value="option1" checked onchange="openUserSignup()">
                                         <label class="form-check-label" for="exampleRadios1">
-                                            Utilisateur
+                                            Client
                                         </label>
                                     </div>
                                     <diV class="text-danger text-decoration-underline">ou</diV>
@@ -87,6 +87,7 @@
 
                             <form action="/save-user" class="collapse show" id="registerUser" method="post" name="registerUser">
 
+                                <input type="hidden" value="client" name="types" id="types"/>
                                 <div class="form-group"><label for="fullname">Votre nom complet</label>
                                     <div class="input-group mb-4">
                                         <div class="input-group-prepend"><span class="input-group-text"><span
@@ -172,6 +173,95 @@
                                 </div>
                                 <button type="submit" class="btn btn-block btn-primary" onsubmit="hello()">Créer le compte</button>
                             </form>
+
+                            <!-- <form action="/save-user" class="collapse show" id="registerSupplier" method="post" name="registerUser">
+
+                                <input type="hidden" value="vendor" name="types" id="types"/>
+                                <div class="form-group"><label for="fullname_v">Votre nom complet</label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend"><span class="input-group-text"><span
+                                                    class="fa-solid fa-file-signature"></span></span></div>
+                                        <input class="form-control" id="fullname_v"
+                                            placeholder="Ex. RALAMBOMANANA J. Pierre" type="text"
+                                            aria-label="email adress" name="fullname_v">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label for="username_v">Votre nom d'utilisateur</label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend"><span class="input-group-text"><span
+                                                    class="fa-solid fa-file-signature"></span></span></div>
+                                        <input class="form-control" id="username_v" placeholder="Ex. r.jeanpierre"
+                                            type="text" aria-label="email adress" name="username_v">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label for="email_v">Votre e-mail</label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend"><span class="input-group-text"><span
+                                                    class="fas fa-envelope"></span></span></div><input
+                                            class="form-control" id="email_v" placeholder="Ex. example@company.com"
+                                            type="text" aria-label="email adress" name="email_v">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label for="telephone_v">Votre téléphone</label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend"><span class="input-group-text"><span
+                                                    class="fas fa-phone"></span></span></div><input class="form-control"
+                                            id="telephone_v" placeholder="+261" type="text" aria-label="email adress"
+                                            name="telephone_v">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label for="address_v">Votre adresse</label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend"><span class="input-group-text"><span
+                                                    class="fas fa-location-dot"></span></span></div><input
+                                            class="form-control" id="address_v"
+                                            placeholder="Ex. Lot 48 TER Manankasina Antananarivo 101" type="text"
+                                            aria-label="email adress" name="address_v">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label for="ville_v">Ville</label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend"><span class="input-group-text"><span
+                                                    class="fas fa-city"></span></span></div><input class="form-control"
+                                            id="ville_v" placeholder="Ex. Antananarivo" type="text"
+                                            aria-label="email adress" name="ville_v">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label for="country_v">Pays</label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend"><span class="input-group-text"><span
+                                                    class="fas fa-globe"></span></span></div><input class="form-control"
+                                            id="country_v" placeholder="Ex. Madagascar" type="text"
+                                            aria-label="email adress" name="country_v">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-group"><label for="password_v">Mot de passe</label>
+                                        <div class="input-group mb-4">
+                                            <div class="input-group-prepend"><span class="input-group-text"><span
+                                                        class="fas fa-unlock-alt"></span></span></div><input
+                                                class="form-control" id="password_v" placeholder="Mot de passe"
+                                                type="password_v" aria-label="Password" autocomplete="on" required name="password">
+                                        </div>
+                                    </div>
+                                    <div class="form-group"><label for="password_confirm_v">Confirmer le mot de
+                                            passe</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend"><span class="input-group-text"><span
+                                                        class="fas fa-unlock-alt"></span></span></div><input
+                                                class="form-control" id="password_confirm"
+                                                placeholder="Confirmer le mot de passe" type="password"
+                                                aria-label="Password" autocomplete="on" required name="password_confirm">
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-4"><input class="form-check-input" type="checkbox"
+                                            id="terms" name="terms"> <label class="form-check-label" for="terms"><span
+                                                class="small">J'accepte les <a class="text-secondary"
+                                                    href="https://demo.themesberg.com/bootstrap/spaces/html/terms.html">termes
+                                                    et les conditions</a></span></label></div>
+                                </div>
+                                <button type="submit" class="btn btn-block btn-primary" onsubmit="hello()">Créer le compte</button>
+                            </form> -->
 
 
                             <!-- <form action="#" class="collapse" id="registerSupplier" method="post">

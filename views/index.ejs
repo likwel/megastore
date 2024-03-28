@@ -390,8 +390,8 @@
                     <div class="col-12 mb-5">
                         <div class="justify-content-between align-items-center d-none d-md-flex">
                             <div class="mr-3">
-                                <h2 class="h6 mb-3 mb-md-0">Total fournisseurs trouvés: <span
-                                        class="font-weiht-bolder text-primary">207</span></h2>
+                                <h2 class="h6 mb-3 mb-md-0">Total vendeur trouvés: <span
+                                        class="font-weiht-bolder text-primary"><%=all_vendor.length%></span></h2>
                             </div>
                             <div class="nav-wrapper position-relative p-0">
                                 <ul class="nav nav-pills small-pills" id="tab-34" role="tablist">
@@ -412,18 +412,20 @@
                             <div class="tab-pane fade" id="link-example-13" role="tabpanel"
                                 aria-labelledby="tab-link-example-13">
                                 <div class="row justify-content-center">
+
+                                    <% for(let vendor of all_vendor) {%>
                                     <div class="col-12 col-sm-10 col-md-6 col-lg-12">
                                         <div class="card border-light mb-4 animate-up-5">
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-12 col-lg-6 col-xl-5"><a
                                                         href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"><img
-                                                            src="https://demo.themesberg.com/bootstrap/spaces/assets/img/private-office.jpg"
+                                                            src="<%=vendor.company_photo?vendor.company_photo:'../assets/images/default_pdc.jpg'%>"
                                                             alt="private office" class="card-img p-2 rounded-xl"></a>
                                                 </div>
                                                 <div class="col-12 col-lg-6 col-xl-7">
                                                     <div class="card-body"><a
-                                                            href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html">
-                                                            <h4 class="h5">Collaborative Workspace</h4>
+                                                            href="<%=vendor.company_url%>">
+                                                            <h4 class="h5"><%=vendor.company_name%></h4>
                                                         </a>
                                                         <div class="d-flex my-4"><span
                                                                 class="star fas fa-star text-warning"></span> <span
@@ -435,11 +437,8 @@
                                                         </div>
                                                         <ul class="list-group mb-3">
                                                             <li class="list-group-item small p-0"><span
-                                                                    class="fas fa-map-marker-alt mr-2"></span>New York,
-                                                                Manhattan, USA</li>
-                                                            <li class="list-group-item small p-0"><span
-                                                                    class="fas fa-bullseye mr-2"></span>Old Street (2
-                                                                mins walk)</li>
+                                                                    class="fas fa-map-marker-alt mr-2"></span><%=vendor.address%></li>
+                                                            <li class="list-group-item small p-0"><span class="fa-solid fa-globe mr-2"></span><%=vendor.ville%> <%=vendor.country%></li>
                                                             <li class="list-group-item small p-0"><span
                                                                     class="fas fa-bullseye mr-2"></span>Shoreditch High
                                                                 Street (10 mins walk)</li>
@@ -463,7 +462,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-sm-10 col-md-6 col-lg-12 mb-4">
+                                    <%}%>
+                                    <!-- <div class="col-12 col-sm-10 col-md-6 col-lg-12 mb-4">
                                         <div class="card border-light mb-4 animate-up-5">
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-12 col-lg-6 col-xl-5"><a
@@ -615,21 +615,24 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="tab-pane fade show active" id="link-example-14" role="tabpanel"
                                 aria-labelledby="tab-link-example-14">
                                 <div class="row">
+
+                                    <% for(let vendor of all_vendor) {%>
+                                       
                                     <div class="col-12 col-md-6 col-lg-4">
                                         <div class="card border-light mb-4 animate-up-5"><a
                                                 href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"
                                                 class="position-relative"><img
-                                                    src="https://demo.themesberg.com/bootstrap/spaces/assets/img/image-office.jpg"
+                                                    src="<%=vendor.company_photo?vendor.company_photo:'../assets/images/default_pdc.jpg'%>"
                                                     class="card-img-top rounded-xl p-2" alt="themesberg office"></a>
                                             <div class="card-body"><a
-                                                    href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html">
-                                                    <h4 class="h5">Team Workspace</h4>
+                                                    href="<%=vendor.company_url%>">
+                                                    <h4 class="h5"> <%=vendor.company_name%></h4>
                                                 </a>
                                                 <div class="d-flex my-4"><i class="star fas fa-star text-warning"></i>
                                                     <i class="star fas fa-star text-warning"></i> <i
@@ -639,11 +642,10 @@
                                                         class="badge badge-pill badge-primary ml-2">5.0</span></div>
                                                 <ul class="list-group mb-3">
                                                     <li class="list-group-item small p-0"><span
-                                                            class="fas fa-map-marker-alt mr-2"></span>California, USA
+                                                            class="fas fa-map-marker-alt mr-2"></span><%=vendor.address%>
                                                     </li>
                                                     <li class="list-group-item small p-0"><span
-                                                            class="fas fa-bullseye mr-2"></span>Penny Market Street (15
-                                                        mins walk)</li>
+                                                            class="fas fa-globe mr-2"></span><%=vendor.ville%> <%=vendor.country%></li>
                                                     <li class="list-group-item small p-0"><span
                                                             class="fas fa-bullseye mr-2"></span>Museum Street (20 mins
                                                         walk)</li>
@@ -664,7 +666,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-6 col-lg-4">
+                                    <% } %>
+                                    <!-- <div class="col-12 col-md-6 col-lg-4">
                                         <div class="card border-light mb-4 animate-up-5"><a
                                                 href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"
                                                 class="position-relative"><img
@@ -878,7 +881,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>

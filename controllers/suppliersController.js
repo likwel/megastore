@@ -8,6 +8,7 @@ const app = express();
 
 // Assigning users to the variable User
 const Supplier = require('../models/supplier');
+const User = require('../models/users');
 
 //signing a user up
 //hashing users password before its saved to the database with bcrypt
@@ -18,44 +19,50 @@ const signup = async (req, res) => {
         // console.log(req.body);
 
         const data = {
-            username : req.body.username,
-            fullname : req.body.fullname,
+            company_name : req.body.fullname,
+            company_url : req.body.username,
+            company_photo :null,
             email  :req.body.email,
-            types : "users",
-            photo : null,
+            // types : req.body.types,
             address : req.body.address,
             telephone : req.body.telephone,
             ville : req.body.ville,
             country : req.body.country,
-            roles : "User",
-            password : await bcrypt.hash(req.body.password, 10)
+            nif : req.body.nif,
+            stat : req.body.stat,
+            rcs : req.body.rcs,
+            latitude : 0,
+            longitude : 0,
+            schedule_id : 0,
+            user_id : req.body.user_id,
         }
-
-        // console.log(req.body.terms);
-
-        // let user = null;
         
         if(req.body.password == req.body.password_confirm && req.body.terms == "on"){
             Supplier.create(data).then(rep=>{
 
-                let new_user =  Supplier.findOne({
+                User.findOne({
                     where: {
-                        email: req.body.email
+                        id: rep.dataValues.user_id
                     }
         
-                });
+                }).then(d=>{
 
-                console.log("user created");
+                    console.log("vendeur created");
+                    
+                    let new_user_ = d.dataValues
 
-                let token = jwt.sign({ id: new_user.id }, process.env.ACCESS_TOKEN_SECRET, {
-                    expiresIn: 1 * 24 * 60 * 60 * 1000,
-                });
+                    console.log(new_user_);
     
-                res.cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpOnly: false });
-                res.cookie("user", JSON.stringify(new_user), {maxAge: 86400000, httpOnly: false});
-                // console.log("User created");
-                res.redirect("/")
-
+                    let token = jwt.sign({ id: new_user_.id }, process.env.ACCESS_TOKEN_SECRET, {
+                        expiresIn: 1 * 24 * 60 * 60 * 1000,
+                    });
+        
+                    res.cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpOnly: false });
+                    res.cookie("user", JSON.stringify(new_user_), {maxAge: 86400000, httpOnly: false});
+                    res.cookie("vendor", JSON.stringify(rep.dataValues), {maxAge: 86400000, httpOnly: false});
+                    // console.log("User created");
+                    res.redirect("/my-account")
+                });
 
             });
 
@@ -125,7 +132,12 @@ const login = async (req, res) => {
 };
 
 const getAllSuppliers = async (req, res) => {
-    Supplier.findAll().then(result => {
+    Supplier.findAll({
+        include: [{
+          model: User,
+        //   required: true
+         }]
+      }).then(result => {
         res.send(result);
     })
 }
@@ -145,6 +157,15 @@ const updateSupplier = async (req, res, dataUser) => {
     Supplier.update(dataUser);
 }
 
+const setlatlong = async (req, res) => {
+
+    Supplier.update({ latitude: req.query.lat, longitude : req.query.lon }, {
+        where: {
+          id: req.query.id,
+        },
+      })
+}
+
 const logout = async (req, res) => {
     // req.cookies
     res.clearCookie("token");
@@ -155,7 +176,7 @@ module.exports = {
     getAllSuppliers,
     getSupplierById,
     signup,
-    //login, 
+    setlatlong, 
     logout, 
     updateSupplier
 };

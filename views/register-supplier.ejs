@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>MegaStore - Sign up</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta name="title" content="MegaStore - Sign up">
+    <meta name="author" content="Elie">
+    <!--  -->
+    <link rel="apple-touch-icon" sizes="120x120"
+        href="https://demo.themesberg.com/bootstrap/spaces/assets/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="https://demo.themesberg.com/bootstrap/spaces/assets/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16"
+        href="https://demo.themesberg.com/bootstrap/spaces/assets/img/favicon/favicon-16x16.png">
+    <!-- <link rel="mask-icon" href="https://demo.themesberg.com/bootstrap/spaces/assets/img/favicon/safari-pinned-tab.svg"
+        color="#ffffff">
+    <meta name="msapplication-TileColor" content="#ffffff"> -->
+    <meta name="theme-color" content="#ffffff">
+    <%- include('style'); %>
+    
+    <!-- <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    '../../../../www.googletagmanager.com/gtm5445.html?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-THQTXJ7');</script> -->
+</head>
+
+<body>
+    <!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THQTXJ7" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript> -->
+    <main>
+        <!-- <div class="preloader bg-dark flex-column justify-content-center align-items-center">
+            <div class="position-relative">
+                <img
+                    src="/assets/images/logo_2.png"
+                    alt="Logo loader"> 
+                <div class="progress mt-2" style="height: 2px;">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                </div>
+            </div>
+        </div> -->
+        <section class="min-vh-100 d-flex align-items-center section-image overlay-soft-dark py-5 py-lg-0"
+            data-background="https://demo.themesberg.com/bootstrap/spaces/assets/img/form-image.jpg">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 mt-2 mb-2">
+                        <div class="text-center text-md-center mb- mt-md-0 text-white">
+                            <h1 class="mb-0 h3">Création d'une boutique</h1>
+                        </div>
+                    </div>
+                    <div class="col-12 d-flex align-items-center justify-content-center">
+                        <div
+                            class="signin-inner mt-3 mt-lg-0 bg-white shadow-soft border rounded border-light p-4 p-lg-4 w-100 fmxw-500">
+
+                            <form action="/save-supplier" class="collapse show" id="registerUser" method="post" name="registerUser">
+
+                                <!-- <input type="hidden" value="client" name="types" id="types"/> -->
+                                <input type="hidden" value="<%=user_id%>" name="user_id" id="user_id"/>
+                                <div class="form-group"><label for="fullname">Nom de la boutique</label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend"><span class="input-group-text"><span
+                                                    class="fa-solid fa-file-signature"></span></span></div>
+                                        <input class="form-control" id="fullname"
+                                            placeholder="Ex. SHOPRAPHIA" type="text"
+                                            aria-label="email adress" name="fullname">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label for="username">URL dans MegaStore</label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend"><span class="input-group-text"><span
+                                                    class="fa-solid fa-file-signature"></span></span></div>
+                                        <input class="form-control" id="username" placeholder="Ex. www.megastore.mg/votre_url"
+                                            type="text" aria-label="email adress" name="username">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label for="email">E-mail</label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend"><span class="input-group-text"><span
+                                                    class="fas fa-envelope"></span></span></div><input
+                                            class="form-control" id="email" placeholder="Ex. example@company.com"
+                                            type="text" aria-label="email adress" name="email">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label for="telephone">Téléphone</label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend"><span class="input-group-text"><span
+                                                    class="fas fa-phone"></span></span></div><input class="form-control"
+                                            id="telephone" placeholder="+261" type="text" aria-label="email adress"
+                                            name="telephone">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label for="address">Adresse exacte</label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend"><span class="input-group-text"><span
+                                                    class="fas fa-location-dot"></span></span></div><input
+                                            class="form-control" id="address"
+                                            placeholder="Ex. Lot 48 TER Manankasina Antananarivo 101" type="text"
+                                            aria-label="email adress" name="address">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label for="ville">Ville</label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend"><span class="input-group-text"><span
+                                                    class="fas fa-city"></span></span></div><input class="form-control"
+                                            id="ville" placeholder="Ex. Antananarivo" type="text"
+                                            aria-label="email adress" name="ville">
+                                    </div>
+                                </div>
+                                <div class="form-group"><label for="country">Pays</label>
+                                    <div class="input-group mb-4">
+                                        <div class="input-group-prepend"><span class="input-group-text"><span
+                                                    class="fas fa-globe"></span></span></div><input class="form-control"
+                                            id="country" placeholder="Ex. Madagascar" type="text"
+                                            aria-label="email adress" name="country">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-group"><label for="nif">NIF</label>
+                                        <div class="input-group mb-4">
+                                            <div class="input-group-prepend"><span class="input-group-text"><span
+                                                        class="fas fa-unlock-alt"></span></span></div><input
+                                                class="form-control" id="nif" placeholder="NIF"
+                                                type="text" aria-label="Password" autocomplete="on" required name="nif">
+                                        </div>
+                                    </div>
+                                    <div class="form-group"><label for="stat">STAT</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend"><span class="input-group-text"><span
+                                                        class="fas fa-unlock-alt"></span></span></div><input
+                                                class="form-control" id="stat"
+                                                placeholder="STAT" type="text"
+                                                aria-label="Password" autocomplete="on" required name="stat">
+                                        </div>
+                                    </div>
+                                    <div class="form-group"><label for="rcs">RCS</label>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend"><span class="input-group-text"><span
+                                                        class="fas fa-unlock-alt"></span></span></div><input
+                                                class="form-control" id="rcs"
+                                                placeholder="RCS" type="text"
+                                                aria-label="Password" autocomplete="on" required name="rcs">
+                                        </div>
+                                    </div>
+                                    <div class="form-check mb-4"><input class="form-check-input" type="checkbox"
+                                            id="terms" name="terms"> <label class="form-check-label" for="terms"><span
+                                                class="small">J'accepte les <a class="text-secondary"
+                                                    href="https://demo.themesberg.com/bootstrap/spaces/html/terms.html">termes
+                                                    et les conditions</a></span></label></div>
+                                </div>
+                                <button type="submit" class="btn btn-block btn-primary" onsubmit="hello()">Créer la boutique</button>
+                            </form>
+
+                            <div class="d-block d-sm-flex justify-content-center align-items-center mt-4"><span
+                                    class="font-weight-normal">Vous avez déjà un compte? <a href="/sign-in"
+                                        class="font-weight-bold">Se connecter</a></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <%- include('script'); %>
+    <script src="/assets/js/megastore.js"></script>
+    <script>
+        function hello(){
+            console.log("Hello!");
+        }
+    </script>
+    <!-- <script>(function () { if (!document.body) return; var js = "window['__CF$cv$params']={r:'86765ed11e8c60de',t:'MTcxMDk0NDcxNC42ODAwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../../cdn-cgi/challenge-platform/h/g/scripts/jsd/956dacbeead0/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);"; var _0xh = document.createElement('iframe'); _0xh.height = 1; _0xh.width = 1; _0xh.style.position = 'absolute'; _0xh.style.top = 0; _0xh.style.left = 0; _0xh.style.border = 'none'; _0xh.style.visibility = 'hidden'; document.body.appendChild(_0xh); function handler() { var _0xi = _0xh.contentDocument || _0xh.contentWindow.document; if (_0xi) { var _0xj = _0xi.createElement('script'); _0xj.innerHTML = js; _0xi.getElementsByTagName('head')[0].appendChild(_0xj); } } if (document.readyState !== 'loading') { handler(); } else if (window.addEventListener) { document.addEventListener('DOMContentLoaded', handler); } else { var prev = document.onreadystatechange || function () { }; document.onreadystatechange = function (e) { prev(e); if (document.readyState !== 'loading') { document.onreadystatechange = prev; handler(); } }; } })();</script> -->
+
+</body>
+
+</html>

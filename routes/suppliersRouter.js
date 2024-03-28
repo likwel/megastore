@@ -6,7 +6,7 @@ const {
     getAllSuppliers,
     getSupplierById,
     signup,
-    login, 
+    setlatlong, 
     logout
     } = supController
 
@@ -16,6 +16,8 @@ const router = express.Router()
 //passing the middleware function to the signup
 router.post('/save-supplier', supAuth.saveSupplier, signup)
 
+router.post('/set-lat-long', setlatlong)
+
 
 
 // login user
@@ -24,9 +26,12 @@ router.post('/save-supplier', supAuth.saveSupplier, signup)
 // router.get('/logout', logout)
 
 //view register
-// router.get('/sign-up', (req, res) => {
-//     res.render("register")
-// })
+router.get('/sign-up/supplier', (req, res) => {
+    let user_id = req.query.user_id
+    res.render("register-supplier",{
+        user_id : user_id,
+    })
+})
 
 // router.get('/sign-in', (req, res) => {
 //     res.render("login");

@@ -37,6 +37,9 @@ const Schedule = require('./models/schedule');
 const Product = require('./models/product');
 
 const usersRouter = require('./routes/usersRouter')
+const vendorRouter = require('./routes/suppliersRouter')
+const productRouter = require('./routes/productsRouter')
+
 
 app.use(cookieSession({
     name: 'session',
@@ -48,8 +51,9 @@ app.use(cookieSession({
 
 //routes for the equipe API
 app.use('/', usersRouter)
+app.use('/', vendorRouter)
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     // console.log(req.cookies);
     // console.log(req.cookies.user);
     // console.log(req.cookies.token);
@@ -58,29 +62,57 @@ app.get('/', (req, res) => {
         is_connected=true
     }
 
-    // console.log(req.cookies.user);
+    let all_supp = await Supplier.findAll({
+        include: [{
+          model: Product
+         }]
+      })
+
+
+    // console.log(all_supp);
     
     res.render("index", {
         "is_connected" : is_connected,
         "user": req.cookies.user,
-        "token": req.cookies.token
+        "token": req.cookies.token,
+        "all_vendor" : all_supp,
     });
 })
 
 app.get('/my-account', (req, res) => {
+
+    // console.log(req.cookies);
+
+    let is_connected = false;
+    if(req.cookies.user){
+        is_connected=true
+        res.render("profile", {
+            "is_connected" : is_connected,
+            "user": req.cookies.user,
+            "vendor": req.cookies.vendor,
+            "token": req.cookies.token
+        });
+    }else{
+        res.redirect("/login")
+    }
+    
+    
+})
+
+app.get('/vendor/:url', (req, res) => {
 
     let is_connected = false;
     if(req.cookies.user){
         is_connected=true
     }
     
-    res.render("profile", {
+    res.render("vendor", {
         "is_connected" : is_connected,
         "user": req.cookies.user,
+        "vendor": req.cookies.vendor,
         "token": req.cookies.token
     });
 })
-
 app.get('/my-account/settings', (req, res) => {
 
     let is_connected = false;
@@ -91,6 +123,22 @@ app.get('/my-account/settings', (req, res) => {
     res.render("settings", {
         "is_connected" : is_connected,
         "user": req.cookies.user,
+        "vendor": req.cookies.vendor,
+        "token": req.cookies.token
+    });
+})
+
+app.get('/my-account/setting-advanced', (req, res) => {
+
+    let is_connected = false;
+    if(req.cookies.user){
+        is_connected=true
+    }
+    
+    res.render("settings-advanced", {
+        "is_connected" : is_connected,
+        "user": req.cookies.user,
+        "vendor": req.cookies.vendor,
         "token": req.cookies.token
     });
 })
@@ -105,6 +153,7 @@ app.get('/my-account/security', (req, res) => {
     res.render("security", {
         "is_connected" : is_connected,
         "user": req.cookies.user,
+        "vendor": req.cookies.vendor,
         "token": req.cookies.token
     });
 })
@@ -118,6 +167,7 @@ app.get('/my-account/products', (req, res) => {
     
     res.render("products", {
         "is_connected" : is_connected,
+        "vendor": req.cookies.vendor,
         "user": req.cookies.user,
         "token": req.cookies.token
     });
@@ -138,7 +188,7 @@ app.get('/:username', async (req, res) => {
     //find a supplier by their email
     const supplier = await Supplier.findOne({
         where: {
-            username: username
+            company_url: username
         }
 
     });
@@ -153,6 +203,7 @@ app.get('/:username', async (req, res) => {
 
         res.render("shop/basic", {
             "is_connected" : is_connected,
+            "vendor": req.cookies.vendor,
             "user": req.cookies.user,
             "token": req.cookies.token
         });
@@ -165,6 +216,38 @@ app.get('/:username', async (req, res) => {
 
 app.get('/shop', (req, res) => {
     res.render("index");
+})
+
+app.get('/page/faq', (req, res) => {
+
+    let is_connected = false;
+    if(req.cookies.user){
+        is_connected=true
+    }
+    
+    res.render("faq", {
+        "is_connected" : is_connected,
+        "user": req.cookies.user,
+        "vendor": req.cookies.vendor,
+        "token": req.cookies.token
+    });
+
+})
+
+app.get('/page/pricing', (req, res) => {
+
+    let is_connected = false;
+    if(req.cookies.user){
+        is_connected=true
+    }
+    
+    res.render("pricing", {
+        "is_connected" : is_connected,
+        "user": req.cookies.user,
+        "vendor": req.cookies.vendor,
+        "token": req.cookies.token
+    });
+
 })
 
 // app.get('/cart', (req, res) => {

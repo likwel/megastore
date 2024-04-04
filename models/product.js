@@ -19,6 +19,10 @@ const Product = db.define('product', {
         type: DataTypes.FLOAT,
         allowNull: true
     },
+    last_price: {
+        type: DataTypes.FLOAT,
+        allowNull: true
+    },
     devise: {
         type: DataTypes.STRING,
         allowNull: true

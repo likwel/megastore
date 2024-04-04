@@ -3,15 +3,15 @@
         class="navbar navbar-main navbar-theme-primary navbar-expand-lg headroom py-lg-3 px-lg-6 <%= classNav %>">
         <div class="container"><a class="navbar-brand @@logo_classes"
                 href="/">
-                 <img class="navbar-brand common"
+                 <img class="navbar-brand common mb-2"
                     src="/assets/images/logo_2.png" height="35"
                     alt="Logo dark"></a>
             <div class="navbar-collapse collapse" id="navbar_global">
                 <div class="navbar-collapse-header">
                     <div class="row">
                         <div class="col-6 collapse-brand"><a
-                                href="https://demo.themesberg.com/bootstrap/spaces/index.html"><img
-                                    src="https://demo.themesberg.com/bootstrap/spaces/assets/img/brand/dark.svg"
+                                href="/"><img
+                                    src="/assets/images/logo_2.png"
                                     height="35" alt="Logo Impact"></a></div>
                         <div class="col-6 collapse-close"><a href="#navbar_global" role="button"
                                 class="fas fa-times" data-toggle="collapse" data-target="#navbar_global"
@@ -238,10 +238,24 @@
                 </ul>
             </div>
             <div class="d-none d-lg-block dropdown">
+
+                
+                <a href="/wishlist" title="Mes favoris"
+                    class="btn btn-sm btn-outline-danger animate-up-2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg></a>
+
+                <a href="/cart" title="Mon panier"
+                    class="btn btn-sm btn-outline-danger animate-up-2"><i class="fa-solid fa-cart-shopping mr-1"></i></a>
+
                 <% if(is_connected) { %>
                     
-                    <a href="/sign-in" class="btn btn-md btn-outline-white animate-up-2 mr-3 dropdown-toggle" data-toggle="dropdown"><i class="fa-solid fa-user-clock"></i> <span
-                        class="d-xl-none">Docs</span> <span class="d-none d-xl-inline"> Mon compte</span></a> 
+                    <a href="/sign-in" title="Mon compte" class="btn btn-sm btn-outline-white animate-up-2 mr-3 dropdown-toggle" data-toggle="dropdown">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span class="d-xl-none"></span> <span class="d-none d-xl-inline"></span></a> 
 
                     <div class="dropdown-menu dropdown-menu-lg" aria-labelledby="supportDropdown">
                         <div class="col-auto px-0">
@@ -263,13 +277,17 @@
                     </div>
                     
                 <%}else{ %>
-                    <a href="/sign-in" class="btn btn-md btn-outline-white animate-up-2 mr-3"><i class="fa-solid fa-right-to-bracket"></i> <span
-                        class="d-xl-none">Docs</span> <span class="d-none d-xl-inline"> Se connecter</span></a> 
+                    <a href="/sign-in" title="Se connecter" class="btn btn-sm btn-outline-white animate-up-2 mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        <span
+                        class="d-xl-none"></span> <span class="d-none d-xl-inline"></span></a> 
                 <%}%>
                 <!-- <a href="/sign-in" class="btn btn-md btn-outline-white animate-up-2 mr-3"><i class="fa-solid fa-right-to-bracket"></i> <span
                         class="d-xl-none">Docs</span> <span class="d-none d-xl-inline"> <%= is_connected?"Mon compte":"Se connecter" %> Se connecter</span></a>  -->
-                <a href="/cart"
-                    class="btn btn-md btn-secondary animate-up-2"><i class="fas fa-shopping-bag mr-2"></i> Mon panier</a>
+                
             </div>
             <div class="d-flex d-lg-none align-items-center"><button class="navbar-toggler" type="button"
                     data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global"

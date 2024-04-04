@@ -26,8 +26,8 @@
 </head>
 
 <body>
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THQTXJ7" height="0" width="0"
-            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THQTXJ7" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript> -->
 
     <%- include('component/header', { classNav : "navbar-dark navbar-transparent navbar-theme-primary"}); %>
 
@@ -418,7 +418,7 @@
                                         <div class="card border-light mb-4 animate-up-5">
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-12 col-lg-6 col-xl-5"><a
-                                                        href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"><img
+                                                        href="<%=vendor.company_url%>"><img
                                                             src="<%=vendor.company_photo?vendor.company_photo:'../assets/images/default_pdc.jpg'%>"
                                                             alt="private office" class="card-img p-2 rounded-xl"></a>
                                                 </div>
@@ -427,7 +427,7 @@
                                                             href="<%=vendor.company_url%>">
                                                             <h4 class="h5"><%=vendor.company_name%></h4>
                                                         </a>
-                                                        <div class="d-flex my-4"><span
+                                                        <div class="d-flex my-2"><span
                                                                 class="star fas fa-star text-warning"></span> <span
                                                                 class="star fas fa-star text-warning"></span> <span
                                                                 class="star fas fa-star text-warning"></span> <span
@@ -439,22 +439,36 @@
                                                             <li class="list-group-item small p-0"><span
                                                                     class="fas fa-map-marker-alt mr-2"></span><%=vendor.address%></li>
                                                             <li class="list-group-item small p-0"><span class="fa-solid fa-globe mr-2"></span><%=vendor.ville%> <%=vendor.country%></li>
-                                                            <li class="list-group-item small p-0"><span
-                                                                    class="fas fa-bullseye mr-2"></span>Shoreditch High
-                                                                Street (10 mins walk)</li>
+                                                            <li class="list-group-item small p-0">
+                                                                <a href="<%=vendor.company_url%>" type="button" class="btn btn-sm btn-primary" title="Boutique"><i class="fas fa-shopping-bag mr-2"></i>Boutique</a>
+                                                                <a href="/vendor/<%=vendor.id%>"type="button" class="btn btn-sm btn-tertiary" title="Profil"> <i class="fa-regular fa-user mr-2"></i>Profil</a>
+                                                                <button class="btn btn-sm btn-icon-only rounded-circle btn-danger" type="button" title="Suivre">
+                                                                    <span class="btn-inner-icon"><i class="far fa-thumbs-up"></i></span>
+                                                                </button>
+                                                            </li>
                                                         </ul>
-                                                        <div class="d-flex justify-content-between">
-                                                            <div class="col pl-0"><span
-                                                                    class="text-muted font-small d-block mb-2">Monthly</span>
-                                                                <span class="h5 text-dark font-weight-bold">500$</span>
-                                                            </div>
-                                                            <div class="col"><span
-                                                                    class="text-muted font-small d-block mb-2">People</span>
-                                                                <span class="h5 text-dark font-weight-bold">12</span>
-                                                            </div>
-                                                            <div class="col pr-0"><span
-                                                                    class="text-muted font-small d-block mb-2">Sq.Ft</span>
-                                                                <span class="h5 text-dark font-weight-bold">1200</span>
+                                                        <div class="accordion">
+                                                            <div class="card card-sm card-body border-light mb-0 py-2">
+                                                                <a href="#panel-4" data-target="#panel-<%=vendor.id%>" class="accordion-panel-header" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="panel-1">
+                                                                    <span class="icon-title h6 mb-0 font-weight-bold"><span class="fab fa-leanpub"></span>Horraires</span>
+                                                                    <span class="icon"><span class="fas fa-plus"></span></span>
+                                                                </a>
+                                                                <div class="collapse" id="panel-<%=vendor.id%>">
+                                                                    <div class="card-footer bg-soft border-top p-0">
+                                                                        <div class="d-flex justify-content-between">
+                                                                            <div class="col pl-0"><span
+                                                                                    class="text-muted font-small d-block mb-2">Monthly</span>
+                                                                                <span class="h5 text-dark font-weight-bold">300$</span></div>
+                                                                            <div class="col"><span
+                                                                                    class="text-muted font-small d-block mb-2">People</span>
+                                                                                <span class="h5 text-dark font-weight-bold">24</span></div>
+                                                                            <div class="col pr-0"><span
+                                                                                    class="text-muted font-small d-block mb-2">Sq.Ft</span>
+                                                                                <span class="h5 text-dark font-weight-bold">2000</span></div>
+                                                                        </div>
+                                                                        
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -626,15 +640,15 @@
                                        
                                     <div class="col-12 col-md-6 col-lg-4">
                                         <div class="card border-light mb-4 animate-up-5"><a
-                                                href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"
+                                                href="<%=vendor.company_url%>"
                                                 class="position-relative"><img
                                                     src="<%=vendor.company_photo?vendor.company_photo:'../assets/images/default_pdc.jpg'%>"
                                                     class="card-img-top rounded-xl p-2" alt="themesberg office"></a>
-                                            <div class="card-body"><a
+                                            <div class="card-body py-1"><a
                                                     href="<%=vendor.company_url%>">
                                                     <h4 class="h5"> <%=vendor.company_name%></h4>
                                                 </a>
-                                                <div class="d-flex my-4"><i class="star fas fa-star text-warning"></i>
+                                                <div class="d-flex my-2"><i class="star fas fa-star text-warning"></i>
                                                     <i class="star fas fa-star text-warning"></i> <i
                                                         class="star fas fa-star text-warning"></i> <i
                                                         class="star fas fa-star text-warning"></i> <i
@@ -646,24 +660,39 @@
                                                     </li>
                                                     <li class="list-group-item small p-0"><span
                                                             class="fas fa-globe mr-2"></span><%=vendor.ville%> <%=vendor.country%></li>
-                                                    <li class="list-group-item small p-0"><span
-                                                            class="fas fa-bullseye mr-2"></span>Museum Street (20 mins
-                                                        walk)</li>
+                                                    <li class="list-group-item small p-0">
+                                                        <a href="<%=vendor.company_url%>" type="button" class="btn btn-sm btn-primary" title="Boutique"> <i class="fas fa-shopping-bag mr-2"></i>Boutique</a>
+                                                        <a href="/vendor/<%=vendor.id%>"type="button" class="btn btn-sm btn-tertiary" title="Profil"><i class="fa-regular fa-user mr-2"></i>Profil</a>
+                                                        <button class="btn btn-sm btn-icon-only rounded-circle btn-danger" type="button" title="Suivre"> 
+                                                            <span class="btn-inner-icon"><i class="far fa-thumbs-up"></i></span>
+                                                        </button>
+                                                    </li>
                                                 </ul>
                                             </div>
-                                            <div class="card-footer bg-soft border-top">
-                                                <div class="d-flex justify-content-between">
-                                                    <div class="col pl-0"><span
-                                                            class="text-muted font-small d-block mb-2">Monthly</span>
-                                                        <span class="h5 text-dark font-weight-bold">300$</span></div>
-                                                    <div class="col"><span
-                                                            class="text-muted font-small d-block mb-2">People</span>
-                                                        <span class="h5 text-dark font-weight-bold">24</span></div>
-                                                    <div class="col pr-0"><span
-                                                            class="text-muted font-small d-block mb-2">Sq.Ft</span>
-                                                        <span class="h5 text-dark font-weight-bold">2000</span></div>
+                                            <div class="accordion">
+                                                <div class="card card-sm card-body border-light mb-0 py-2">
+                                                    <a href="#panel-4" data-target="#panel-<%=vendor.id%>" class="accordion-panel-header" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="panel-1">
+                                                        <span class="icon-title h6 mb-0 font-weight-bold"><span class="fab fa-leanpub"></span>Horraires</span>
+                                                        <span class="icon"><span class="fas fa-plus"></span></span>
+                                                    </a>
+                                                    <div class="collapse" id="panel-<%=vendor.id%>">
+                                                        <div class="card-footer bg-soft border-top p-0">
+                                                            <div class="d-flex justify-content-between">
+                                                                <div class="col pl-0"><span
+                                                                        class="text-muted font-small d-block mb-2">Monthly</span>
+                                                                    <span class="h5 text-dark font-weight-bold">300$</span></div>
+                                                                <div class="col"><span
+                                                                        class="text-muted font-small d-block mb-2">People</span>
+                                                                    <span class="h5 text-dark font-weight-bold">24</span></div>
+                                                                <div class="col pr-0"><span
+                                                                        class="text-muted font-small d-block mb-2">Sq.Ft</span>
+                                                                    <span class="h5 text-dark font-weight-bold">2000</span></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            
                                         </div>
                                     </div>
                                     <% } %>

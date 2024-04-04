@@ -24,6 +24,8 @@ const server = http.createServer(app);
 
 const sequelize = require('sequelize');
 
+const Op = sequelize.Op;
+
 const db = require('./connexion');
 
 // Test DB
@@ -38,7 +40,8 @@ const Product = require('./models/product');
 
 const usersRouter = require('./routes/usersRouter')
 const vendorRouter = require('./routes/suppliersRouter')
-const productRouter = require('./routes/productsRouter')
+const productRouter = require('./routes/productsRouter');
+const { log } = require('console');
 
 
 app.use(cookieSession({
@@ -99,18 +102,29 @@ app.get('/my-account', (req, res) => {
     
 })
 
-app.get('/vendor/:url', (req, res) => {
+app.get('/vendor/:url',  async (req, res) => {
 
     let is_connected = false;
     if(req.cookies.user){
         is_connected=true
     }
+
+    let supp = await Supplier.findOne({ 
+        where: 
+            { id: req.params.url},
+        include: [{
+            model: Product
+        }]
+    })
+
+    // console.log(supp);
     
     res.render("vendor", {
         "is_connected" : is_connected,
         "user": req.cookies.user,
         "vendor": req.cookies.vendor,
-        "token": req.cookies.token
+        "token": req.cookies.token,
+        "profil" : supp,
     });
 })
 app.get('/my-account/settings', (req, res) => {
@@ -177,6 +191,8 @@ app.get('/:username', async (req, res) => {
 
     let username = req.params.username
 
+    let page = req.query.page?req.query.page:1;
+
     //find a user by their email
     // const user = await User.findOne({
     //     where: {
@@ -184,6 +200,8 @@ app.get('/:username', async (req, res) => {
     //     }
 
     // });
+
+    console.log(page);
 
     //find a supplier by their email
     const supplier = await Supplier.findOne({
@@ -193,13 +211,13 @@ app.get('/:username', async (req, res) => {
 
     });
 
+    let is_connected = false;
+
+    if(req.cookies.user){
+        is_connected=true
+    }
+
     if(supplier){
-
-        let is_connected = false;
-
-        if(req.cookies.user){
-            is_connected=true
-        }
 
         res.render("shop/basic", {
             "is_connected" : is_connected,
@@ -208,11 +226,76 @@ app.get('/:username', async (req, res) => {
             "token": req.cookies.token
         });
     }else{
-        res.redirect("/")
+
+        if(username==="shop"){
+
+            // console.log("Ato tsika zany");
+
+            let all_products = await Product.findAll();
+
+            // console.log(all_products);
+    
+            res.render("shop/shop", {
+                "is_connected" : is_connected,
+                "vendor": req.cookies.vendor,
+                "user": req.cookies.user,
+                "token": req.cookies.token,
+                "all_products" : all_products,
+                "page" : page,
+                "page_max" : all_products%10
+            });
+        }
     }
+    // else{
+    //     res.render("shop/home3", {
+    //         "is_connected" : is_connected,
+    //         "vendor": req.cookies.vendor,
+    //         "user": req.cookies.user,
+    //         "token": req.cookies.token
+    //     });
+    // }
+
+    
 
     
 })
+
+app.get('/shop/product/:id', async (req, res) => {
+
+    // let product = await Product.findAll();
+
+    const product = await Product.findOne({
+        where: {
+            id: req.params.id,
+        }
+
+    });
+    
+    const similar_product =  await Product.findAll({
+        where: {
+            name: {
+                [Op.like]: '%'+product.name+'%'
+              }
+        }
+    })
+
+    let is_connected = false;
+
+    if(req.cookies.user){
+        is_connected=true
+    }
+
+    res.render("shop/product-detail", {
+        "is_connected" : is_connected,
+        "vendor": req.cookies.vendor,
+        "user": req.cookies.user,
+        "token": req.cookies.token,
+        "product" : product,
+        "product_simitaire" : similar_product
+    });
+
+})
+
 
 app.get('/shop', (req, res) => {
     res.render("index");

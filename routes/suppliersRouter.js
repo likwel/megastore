@@ -12,6 +12,8 @@ const {
 
 const router = express.Router()
 
+const Supplier = require('../models/supplier');
+
 //signup endpoint
 //passing the middleware function to the signup
 router.post('/save-supplier', supAuth.saveSupplier, signup)
@@ -40,5 +42,32 @@ router.get('/sign-up/supplier', (req, res) => {
 
 //get all users
 router.get('/getAllSupplier', getAllSuppliers)
+
+router.get('/vendor/:url',  async (req, res) => {
+
+    let is_connected = false;
+    if(req.cookies.user){
+        is_connected=true
+    }
+
+    let supp = await Supplier.findOne({ 
+        where: 
+            { id: req.params.url},
+        include: [{
+            model: Product
+        }]
+    })
+
+    // console.log(supp);
+    
+    res.render("vendor", {
+        "is_connected" : is_connected,
+        "user": req.cookies.user,
+        "vendor": req.cookies.vendor,
+        "token": req.cookies.token,
+        "profil" : supp,
+    });
+})
+
 
 module.exports = router

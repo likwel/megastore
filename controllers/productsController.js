@@ -11,17 +11,28 @@ const Product = require('../models/product');
 const saveProduct = async (req, res) => {
     try {
 
+        const singleImage = req.files['featured_image'] ? req.files['featured_image'][0].filename : null; // Nom du fichier de l'image unique
+        const multipleImages = req.files['galleries'] ? req.files['galleries'].map(file => file.filename) : [];
+
         const data = {
             name : req.body.name,
             description : req.body.description,
+            reference : req.body.reference,
             price  :req.body.price,
+            last_price : 0,
             devise : req.body.devise,
-            photo : null,
+            weight : 0,
+            featured_image : singleImage,
+            photos : multipleImages,
             rates : 0,
             category : req.body.category,
             avis : req.body.avis,
             supplier_id : req.body.supplier_id,
-            is_promotion : 0
+            is_promotion : 0,
+            is_active : 1,
+            is_promotion : 0,
+            is_sponsored :0,
+            is_suggested :0
         }
 
         Product.create(data).then(rep=>{

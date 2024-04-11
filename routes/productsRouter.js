@@ -1,5 +1,13 @@
 //importing modules
 const express = require('express')
+
+const sequelize = require('sequelize');
+
+const multer = require('multer');
+const path = require('path');
+
+const Op = sequelize.Op;
+
 const proController = require('../controllers/productsController')
 const { 
     saveProduct,
@@ -12,9 +20,22 @@ const Supplier = require('../models/supplier');
 const Schedule = require('../models/schedule');
 const Product = require('../models/product');
 
+// Configuration de Multer pour gérer les uploads
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+      cb(null, 'public/data/uploads/') // Le dossier où les fichiers seront sauvegardés
+    },
+    filename: function(req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname)); // Nom du fichier
+    }
+  });
+  
+const upload = multer({ storage: storage });
+  
+
 //signup endpoint
 //passing the middleware function to the signup
-router.post('/save-product', saveProduct)
+router.post('/save-product', upload.fields([{ name: 'featured_image', maxCount: 1 }, { name: 'galleries' }]), saveProduct)
 
 router.get('/getAllProduct', getAllProduct)
 
@@ -77,7 +98,7 @@ router.get('/:username', async (req, res) => {
 
             // console.log(all_products);
     
-            res.render("shop/shop", {
+            res.render("shop/all-spaces-sidebar", {
                 "is_connected" : is_connected,
                 "vendor": req.cookies.vendor,
                 "user": req.cookies.user,

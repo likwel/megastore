@@ -1,0 +1,772 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>MegaStore | Boutiques</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta name="title" content="MegaStore - Madagascar">
+    
+    <link rel="apple-touch-icon" sizes="120x120"
+        href="https://demo.themesberg.com/bootstrap/spaces/assets/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="https://demo.themesberg.com/bootstrap/spaces/assets/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16"
+        href="https://demo.themesberg.com/bootstrap/spaces/assets/img/favicon/favicon-16x16.png">
+    <!-- <link rel="manifest" href="https://demo.themesberg.com/bootstrap/spaces/assets/img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="https://demo.themesberg.com/bootstrap/spaces/assets/img/favicon/safari-pinned-tab.svg"
+        color="#ffffff"> -->
+    <!-- <meta name="msapplication-TileColor" content="#ffffff"> -->
+    <meta name="theme-color" content="#ffffff">
+    <%- include('../style'); %>
+
+</head>
+
+<body>
+
+    <%- include('../component/header', { classNav : "navbar-light navbar-theme-primary"}); %>
+
+    <main>
+        <div class="preloader bg-dark flex-column justify-content-center align-items-center">
+            <div class="position-relative">
+                <img
+                    src="/assets/images/logo_2.png"
+                    alt="Logo loader"> 
+                <div class="progress mt-2" style="height: 2px;">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="section section-header section-image bg-tertiary overlay-primary text-white overflow-hidden pb-6"
+            data-background="https://demo.themesberg.com/bootstrap/spaces/assets/img/new-york-hero.jpg">
+            <div class="container z-2">
+                <div class="row justify-content-center pt-3">
+                    <div class="col-12 text-center">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb breadcrumb-transparent justify-content-center mb-4">
+                                <li class="breadcrumb-item text-secondary"><a
+                                        href="https://demo.themesberg.com/bootstrap/index.html">Home</a></li>
+                                <li class="breadcrumb-item text-secondary"><a
+                                        href="https://demo.themesberg.com/bootstrap/spaces/html/all-spaces.html">United
+                                        States</a></li>
+                                <li class="breadcrumb-item text-muted active" aria-current="page">New York</li>
+                            </ol>
+                        </nav>
+                        <h1 class="mb-5">Find a Space in <span class="font-weight-bolder">New York</span></h1>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="section section-lg pt-6">
+            <div id="spaces-container" class="container">
+                <div class="row">
+                    <div class="col-12 mb-4">
+                        <form autocomplete="off" class="row" action="#">
+
+                            <div class="col-12 col-lg-5">
+                                <div class="input-group input-group-md mb-3 mb-lg-0">
+                                    <div class="input-group-prepend"><span class="input-group-text"><span
+                                        class="fas fa-search"></span></span></div><input
+                                        class="form-control" placeholder="Nom du produit ou fournisseur" type="text" required>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-5">
+                                <div class="form-group mb-lg-0">
+                                    <div class="input-group input-group-md mb-lg-0">
+                                        <div class="input-group-prepend"><span class="input-group-text"><span
+                                                    class="fas fa-location-dot"></span></span></div><input
+                                            id="search-location" type="text" class="form-control autocomplete"
+                                            placeholder="Lieu ou adresse" tabindex="1" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12 col-lg-2"><button
+                                    class="btn btn-primary btn-block mb-3 mt-md-0 animate-up-2" type="submit"> <i class="fa-solid fa-magnifying-glass"></i> Rechercher</button></div>
+                            <!-- <div class="col-12 col-lg-3"><a href="#modal-map" data-toggle="modal"
+                                    data-target="#map-listings"
+                                    class="card bg-soft border-light p-3 mb-lg-3 flex-row align-items-center justify-content-center text-primary"><span
+                                        class="fas fa-map-marker-alt mr-2"></span> <span>Map View</span></a></div> -->
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <aside id="filters-container" class="col-12 col-lg-3 mt-3 mt-lg-0 z-2 order-lg-1">
+                        <button class="btn btn-sm btn-tertiary btn-block mb-3 mt-md-0 animate-up-2" type="button"> <i class="fa-solid fa-filter-circle-xmark"></i> Filtrer par </button>
+                        <div id="filters-sidebar" class="d-none d-lg-block">
+                            <form action="#" method="get" class="sidebar-inner">
+
+                                <div class="card border-light p-2 text-white bg-secondary"><a href="#" ><span
+                                        class="icon-title h6 pl-2 mb-0 font-weight-bold">Tous</span></a>
+                                    
+                                </div>
+
+                                <div class="card border-light mt-4 p-3"><a href="#tous" data-target="#amenities-1"
+                                    class="accordion-panel-header w-100 d-flex align-items-center justify-content-between"
+                                    data-toggle="collapse" role="button" aria-expanded="false"
+                                    aria-controls="amenities-1"><span
+                                        class="icon-title h6 mb-0 font-weight-bold">Catégories</span> <span
+                                        class="icon"><i class="fas fa-plus"></i></span></a>
+                                    <ul id="amenities-1"
+                                        class="collapse list-group list-group list-group-flush pt-4 border-0">
+                                        <li
+                                            class="list-group-item border-0 py-1 px-0 d-flex align-items-center justify-content-between">
+                                            <div class="form-check"><input class="form-check-input" type="checkbox"
+                                                    value id="defaultCheck6"> <label class="form-check-label"
+                                                    for="defaultCheck6">Kitchen</label></div>
+                                        </li>
+                                        <li
+                                            class="list-group-item border-0 py-1 px-0 d-flex align-items-center justify-content-between">
+                                            <div class="form-check"><input class="form-check-input" type="checkbox"
+                                                    value id="defaultCheck7"> <label class="form-check-label"
+                                                    for="defaultCheck7">Conference Room</label></div>
+                                        </li>
+                                        <li
+                                            class="list-group-item border-0 py-1 px-0 d-flex align-items-center justify-content-between">
+                                            <div class="form-check"><input class="form-check-input" type="checkbox"
+                                                    value id="defaultCheck8"> <label class="form-check-label"
+                                                    for="defaultCheck8">Coffee & Drinks</label></div>
+                                        </li>
+                                        <li
+                                            class="list-group-item border-0 py-1 px-0 d-flex align-items-center justify-content-between">
+                                            <div class="form-check"><input class="form-check-input" type="checkbox"
+                                                    value id="defaultCheck9"> <label class="form-check-label"
+                                                    for="defaultCheck9">Bike Parking</label></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="card border-light mt-4 p-3"><a href="#" data-target="#price"
+                                        class="accordion-panel-header w-100 d-flex align-items-center justify-content-between"
+                                        data-toggle="collapse" role="button" aria-expanded="false"
+                                        aria-controls="price"><span class="icon-title h6 mb-0 font-weight-bold">Échelle des prix</span> <span class="icon icon-xs"><span
+                                                class="fas fa-plus"></span></span></a>
+                                    <div id="price" class="collapse">
+                                        <div class="pt-5">
+                                            <div id="input-slider-range" data-range-value-min="1000"
+                                                data-range-value-max="50000"></div>
+                                            <div class="row d-none">
+                                                <div class="col-6"><span class="range-slider-value value-low"
+                                                        data-range-value-low="10000"
+                                                        id="input-slider-range-value-low"></span></div>
+                                                <div class="col-6 text-right"><span
+                                                        class="range-slider-value value-high"
+                                                        data-range-value-high="30000"
+                                                        id="input-slider-range-value-high"></span></div>
+                                            </div><span class="font-xs text-gray">*Prix en Ariary</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card border-light mt-4 p-3"><a href="#" data-target="#capacity"
+                                        class="accordion-panel-header w-100 d-flex align-items-center justify-content-between"
+                                        data-toggle="collapse" role="button" aria-expanded="false"
+                                        aria-controls="capacity"><span
+                                            class="icon-title h6 mb-0 font-weight-bold">Capacity</span> <span
+                                            class="icon icon-xs"><span class="fas fa-plus"></span></span></a>
+                                    <div id="capacity" class="collapse pt-4">
+                                        <div class="form-group"><label for="people" class="pt-2">People</label> <select
+                                                class="custom-select custom-select-sm" id="people">
+                                                <option>1 Person</option>
+                                                <option>2-5 Persons</option>
+                                                <option>10-20 Persons</option>
+                                                <option>20-40 Persons</option>
+                                                <option>50+ Persons</option>
+                                            </select></div>
+                                        <div class="form-group"><label for="size">Size</label> <select
+                                                class="custom-select custom-select-sm" id="size">
+                                                <option>10 Sq. Ft - 20 Sq. Ft</option>
+                                                <option>20 Sq. Ft - 50 Sq. Ft</option>
+                                                <option>50 Sq. Ft - 100 Sq. Ft</option>
+                                                <option>100 Sq. Ft - 200 Sq. Ft</option>
+                                                <option>200+ Sq. Ft</option>
+                                            </select></div>
+                                    </div>
+                                </div>
+                                <div class="card border-light mt-3 p-3"><a href="#" data-target="#reviews"
+                                        class="accordion-panel-header w-100 d-flex align-items-center justify-content-between"
+                                        data-toggle="collapse" role="button" aria-expanded="false"
+                                        aria-controls="reviews"><span
+                                            class="icon-title h6 mb-0 font-weight-bold">Notations</span> <span
+                                            class="icon"><span class="fas fa-plus"></span></span></a>
+                                    <ul id="reviews" class="collapse list-group list-group-flush pt-4 border-0">
+                                        <li
+                                            class="list-group-item border-0 py-1 pt-2 px-0 d-flex align-items-center justify-content-between">
+                                            <div class="form-check"><input class="form-check-input" type="checkbox"
+                                                    value id="defaultCheck1"> <label class="form-check-label"
+                                                    for="defaultCheck1"><span class="d-flex"><i
+                                                            class="star fas fa-star text-warning"></i> <i
+                                                            class="star fas fa-star text-warning"></i> <i
+                                                            class="star fas fa-star text-warning"></i> <i
+                                                            class="star fas fa-star text-warning"></i> <i
+                                                            class="star fas fa-star text-warning"></i> <span
+                                                            class="small font-weight-normal ml-2">(12)</span></span></label>
+                                            </div>
+                                        </li>
+                                        <li
+                                            class="list-group-item border-0 py-1 px-0 d-flex align-items-center justify-content-between">
+                                            <div class="form-check"><input class="form-check-input" type="checkbox"
+                                                    value id="defaultCheck2"> <label class="form-check-label"
+                                                    for="defaultCheck2"><span class="d-flex"><i
+                                                            class="star fas fa-star text-warning"></i> <i
+                                                            class="star fas fa-star text-warning"></i> <i
+                                                            class="star fas fa-star text-warning"></i> <i
+                                                            class="star fas fa-star text-warning"></i> <i
+                                                            class="star far fa-star text-dark"></i> <span
+                                                            class="small font-weight-normal ml-2">(22)</span></span></label>
+                                            </div>
+                                        </li>
+                                        <li
+                                            class="list-group-item border-0 py-1 px-0 d-flex align-items-center justify-content-between">
+                                            <div class="form-check"><input class="form-check-input" type="checkbox"
+                                                    value id="defaultCheck3"> <label class="form-check-label"
+                                                    for="defaultCheck3"><span class="d-flex"><i
+                                                            class="star fas fa-star text-warning"></i> <i
+                                                            class="star fas fa-star text-warning"></i> <i
+                                                            class="star fas fa-star text-warning"></i> <i
+                                                            class="star far fa-star text-dark"></i> <i
+                                                            class="star far fa-star text-dark"></i> <span
+                                                            class="small font-weight-normal ml-2">(32)</span></span></label>
+                                            </div>
+                                        </li>
+                                        <li
+                                            class="list-group-item border-0 py-1 px-0 d-flex align-items-center justify-content-between">
+                                            <div class="form-check"><input class="form-check-input" type="checkbox"
+                                                    value id="defaultCheck4"> <label class="form-check-label"
+                                                    for="defaultCheck4"><span class="d-flex"><i
+                                                            class="star fas fa-star text-warning"></i> <i
+                                                            class="star fas fa-star text-warning"></i> <i
+                                                            class="star far fa-star text-dark"></i> <i
+                                                            class="star far fa-star text-dark"></i> <i
+                                                            class="star far fa-star text-dark"></i> <span
+                                                            class="small font-weight-normal ml-2">(9)</span></span></label>
+                                            </div>
+                                        </li>
+                                        <li
+                                            class="list-group-item border-0 py-1 px-0 d-flex align-items-center justify-content-between">
+                                            <div class="form-check"><input class="form-check-input" type="checkbox"
+                                                    value id="defaultCheck5"> <label class="form-check-label"
+                                                    for="defaultCheck5"><span class="d-flex"><i
+                                                            class="star fas fa-star text-warning"></i> <i
+                                                            class="star far fa-star text-dark"></i> <i
+                                                            class="star far fa-star text-dark"></i> <i
+                                                            class="star far fa-star text-dark"></i> <i
+                                                            class="star far fa-star text-dark"></i> <span
+                                                            class="small font-weight-normal ml-2">(4)</span></span></label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <button class="btn btn-sm btn-block btn-primary animate-up-2 mt-4"
+                                    type="submit">Apply filters</button>
+                            </form>
+                        </div>
+                    </aside>
+                    <div class="col-12 col-lg-9 order-lg-2">
+                        <div class="justify-content-between align-items-center d-none d-md-flex">
+                            <div class="mr-3">
+                                <h2 class="h5 mb-3 mb-md-0">Total articles trouvés : <span
+                                        class="font-weiht-bolder text-primary"><%=all_products.length%></span></h2>
+                            </div>
+                            <div class="nav-wrapper position-relative p-0">
+                                <ul class="nav nav-pills small-pills" id="tab-34" role="tablist">
+                                    <li class="nav-item pr-0"><a class="nav-link text-sm-center border-0 active"
+                                            id="tab-link-example-14" data-toggle="tab" href="#link-example-14"
+                                            role="tab" aria-controls="link-example-14" aria-selected="false"><span
+                                                class="nav-link-icon d-block"><span
+                                                    class="fas fa-th-large"></span></span></a></li>
+                                    <li class="nav-item pr-0"><a class="nav-link text-sm-center border-0"
+                                            id="tab-link-example-13" data-toggle="tab" href="#link-example-13"
+                                            role="tab" aria-controls="link-example-13" aria-selected="true"><span
+                                                class="nav-link-icon d-block"><span
+                                                    class="fas fa-th-list"></span></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tab-content mt-4 mt-lg-4" id="tabcontentexample-5">
+                            <div class="tab-pane fade" id="link-example-13" role="tabpanel"
+                                aria-labelledby="tab-link-example-13">
+                                <div class="row justify-content-center">
+
+                                    <%for(let product of all_products){%>
+                                    <div class="col-12 col-sm-10 col-md-6 col-lg-12">
+                                        <div class="card border-light mb-4 animate-up-5">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-12 col-lg-6 col-xl-5">
+
+                                                    <div class="product-discount">
+                                                        Promotion
+                                                    </div>
+                                                    <a href="/shop/product/<%=product.id%>">
+                                                        <img src="<%=product.featured_image?product.featured_image:'/assets/images/noimg.jpg'%>"
+                                                            alt="private office" class="card-img p-2 rounded-xl product-custom">
+                                                    </a>
+                                                </div>
+                                                <div class="col-12 col-lg-6 col-xl-7">
+                                                    <div class="card-body">
+
+                                                        <h4 class="h6 text-secondary m-0"><%=product.category%></h4>
+                                                        <a href="/shop/product/<%=product.id%>">
+                                                            <h4 class="h6"><%=product.name%></h4>
+                                                        </a>
+                                                        <div class="d-flex my-2"><span
+                                                                class="star fas fa-star text-warning"></span> <span
+                                                                class="star fas fa-star text-warning"></span> <span
+                                                                class="star fas fa-star text-warning"></span> <span
+                                                                class="star fas fa-star text-warning"></span> <span
+                                                                class="star fas fa-star text-warning"></span> <span
+                                                                class="badge badge-pill badge-primary ml-2">5.0</span>
+                                                        </div>
+                                                        <ul class="list-group mb-3 d-flex flex-column">
+                                                            <li class="list-group-item small p-0 py-2">
+                                                                <h4 class="h6 my-0"><%=product.devise%> <%=product.price%></h4>
+                                                                <span class="badge badge-warning">En stock</span>
+                                                            </li>
+                                                            <li class="list-group-item small p-0">
+                                                                <button class="btn btn-sm btn-outline-success" type="button" title="Ajouter au panier"><i class="fa-solid fa-cart-shopping"></i> Ajouter au panier</button>
+                                                            </li>
+                                                        </ul>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <%}%>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade show active" id="link-example-14" role="tabpanel"
+                                aria-labelledby="tab-link-example-14">
+                                <div class="row">
+                                    <%for(let product of all_products){%>
+                                    <div class="col-12 col-md-4">
+                                        <div class="card border-light mb-4 animate-up-5">
+                                            <div class="product-discount">
+                                                Promotion
+                                            </div>
+                                            <a href="/shop/product/<%=product.id%>"
+                                                class="position-relative">
+                                                <img src="<%=product.featured_image?product.featured_image:'/assets/images/noimg.jpg'%>"
+                                                    class="card-img-top rounded-xl p-2 product-custom" alt="themesberg office">
+                                            </a>
+                                            <div class="card-body py-0 px-2">
+                                                <h4 class="h6 text-secondary m-0"><%=product.category%></h4>
+                                                <a
+                                                    href="/shop/product/<%=product.id%>">
+                                                    <h4 class="h6"><%=product.name%></h4>
+                                                </a>
+                                                <div class="d-flex my-2"><span
+                                                        class="star fas fa-star text-warning"></span> <span
+                                                        class="star fas fa-star text-warning"></span> <span
+                                                        class="star fas fa-star text-warning"></span> <span
+                                                        class="star fas fa-star text-warning"></span> <span
+                                                        class="star fas fa-star text-warning"></span> <span
+                                                        class="badge badge-pill badge-primary ml-2">5.0</span></div>
+                                                <ul class="list-group mb-3 d-flex flex-row justify-content-between align-items-center">
+                                                    <li class="list-group-item small p-0">
+                                                        <h4 class="h6 my-0"><%=product.devise%> <%=product.price%></h4>
+                                                        <span class="badge badge-warning">En stock</span>
+                                                    </li>
+                                                    <!-- <li class="list-group-item small p-0"> 25000 Ar</li> -->
+                                                    <li class="list-group-item small p-0">
+                                                        <button class="btn btn-sm btn-outline-success" type="button" title="Ajouter au panier"><i class="fa-solid fa-cart-shopping"></i></button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <%}%>
+                                    
+                                </div>
+                            </div>
+                            <div class="col mt-3 d-flex justify-content-center">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <li class="page-item disabled"><a class="page-link" tabindex="-1"
+                                                href="#">Previous</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="modal fade" id="map-listings" tabindex="-1" role="dialog" aria-labelledby="map-listings"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-full" role="document">
+            <div class="modal-content position-relative">
+                <div class="preloadermap bg-dark flex-column justify-content-center align-items-center">
+                    <div class="position-relative"><img
+                            src="https://demo.themesberg.com/bootstrap/spaces/assets/img/brand/light-without-letter.svg"
+                            alt="Logo loader"> <img
+                            src="https://demo.themesberg.com/bootstrap/spaces/assets/img/brand/letter.svg"
+                            class="rotate-letter" alt="Letter loader"></div>
+                </div>
+                <div class="modal-header border-0 pb-1 d-block">
+                    <div class="d-flex justify-content-end d-lg-none mb-2"><button type="button" class="close"
+                            data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i
+                                    class="fas fa-times"></i></span></button></div>
+                    <form action="#" class="row align-items-center">
+                        <div class="col-12 col-lg-3">
+                            <div class="form-group m-lg-0">
+                                <div class="input-group input-group-md mb-2 m-lg-0">
+                                    <div class="input-group-prepend"><span class="input-group-text"><i
+                                                class="fas fa-search"></i></span></div><input id="search-location-map"
+                                        type="text" class="form-control autocomplete" placeholder="Search location"
+                                        tabindex="1" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-3">
+                            <div class="input-group input-group-md mb-3 m-lg-0">
+                                <div class="input-group-prepend"><span class="input-group-text"><i
+                                            class="far fa-calendar-alt"></i></span></div><input
+                                    class="form-control datepicker" placeholder="Select date" type="text" required>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-2 mb-2 mb-lg-0"><button
+                                class="btn btn-primary btn-block m-0 animate-up-2" type="submit">Find a desk</button>
+                        </div>
+                        <div class="col-lg-2 d-flex align-items-center">
+                            <p class="m-0 font-small">Showing 13 results</p>
+                        </div>
+                        <div class="d-none col-lg-2 d-lg-block"><button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close"><span aria-hidden="true"><i class="fas fa-times"></i></span></button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-body overflow-hidden d-flex py-4">
+                    <div class="row h-100">
+                        <div class="d-none d-xl-block col-12 col-lg-5 overflow-auto h-100">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card border-light mb-4 animate-up-5">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col-12 col-lg-6 col-xl-5"><a
+                                                    href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"><img
+                                                        src="https://demo.themesberg.com/bootstrap/spaces/assets/img/private-office.jpg"
+                                                        alt="private office" class="card-img p-2 rounded-xl"></a></div>
+                                            <div class="col-12 col-lg-6 col-xl-7">
+                                                <div class="card-body px-3 py-2"><a
+                                                        href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html">
+                                                        <h4 class="h6">Collaborative Workspace</h4>
+                                                    </a>
+                                                    <div class="d-flex my-2 small"><span
+                                                            class="star fas fa-star text-warning"></span> <span
+                                                            class="star fas fa-star text-warning"></span> <span
+                                                            class="star fas fa-star text-warning"></span> <span
+                                                            class="star fas fa-star text-warning"></span> <span
+                                                            class="star fas fa-star text-warning"></span> <span
+                                                            class="badge badge-pill small badge-primary ml-2">5.0</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="col pl-0"><span
+                                                                class="text-muted small d-block mb-1">Monthly</span>
+                                                            <span
+                                                                class="h5 small text-dark font-weight-bold">500$</span>
+                                                        </div>
+                                                        <div class="col"><span
+                                                                class="text-muted small d-block mb-1">People</span>
+                                                            <span class="h5 small text-dark font-weight-bold">12</span>
+                                                        </div>
+                                                        <div class="col pr-0"><span
+                                                                class="text-muted small d-block mb-1">Sq.Ft</span> <span
+                                                                class="h5 small text-dark font-weight-bold">600</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="card border-light mb-4 animate-up-5">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col-12 col-lg-6 col-xl-5"><a
+                                                    href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"><img
+                                                        src="https://demo.themesberg.com/bootstrap/spaces/assets/img/meeting-office.jpg"
+                                                        alt="private office" class="card-img p-2 rounded-xl"></a></div>
+                                            <div class="col-12 col-lg-6 col-xl-7">
+                                                <div class="card-body px-3 py-2"><a
+                                                        href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html">
+                                                        <h4 class="h6">Meeting Office</h4>
+                                                    </a>
+                                                    <div class="d-flex my-2 small"><span
+                                                            class="star fas fa-star text-warning"></span> <span
+                                                            class="star fas fa-star text-warning"></span> <span
+                                                            class="star fas fa-star text-warning"></span> <span
+                                                            class="star fas fa-star text-warning"></span> <span
+                                                            class="star fas fa-star-half text-warning"></span> <span
+                                                            class="badge badge-pill small badge-primary ml-2">4.7</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="col pl-0"><span
+                                                                class="text-muted small d-block mb-1">Monthly</span>
+                                                            <span
+                                                                class="h5 small text-dark font-weight-bold">200$</span>
+                                                        </div>
+                                                        <div class="col"><span
+                                                                class="text-muted small d-block mb-1">People</span>
+                                                            <span class="h5 small text-dark font-weight-bold">40</span>
+                                                        </div>
+                                                        <div class="col pr-0"><span
+                                                                class="text-muted small d-block mb-1">Sq.Ft</span> <span
+                                                                class="h5 small text-dark font-weight-bold">1200</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="card border-light mb-4 animate-up-5">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col-12 col-lg-6 col-xl-5"><a
+                                                    href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"><img
+                                                        src="https://demo.themesberg.com/bootstrap/spaces/assets/img/lifestyle-office.jpg"
+                                                        alt="private office" class="card-img p-2 rounded-xl"></a></div>
+                                            <div class="col-12 col-lg-6 col-xl-7">
+                                                <div class="card-body px-3 py-2"><a
+                                                        href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html">
+                                                        <h4 class="h6">Lifestyle Office</h4>
+                                                    </a>
+                                                    <div class="d-flex my-2 small"><span
+                                                            class="star fas fa-star text-warning"></span> <span
+                                                            class="star fas fa-star text-warning"></span> <span
+                                                            class="star fas fa-star text-warning"></span> <span
+                                                            class="star fas fa-star text-warning"></span> <span
+                                                            class="star fas fa-star text-warning"></span> <span
+                                                            class="badge badge-pill small badge-primary ml-2">5.0</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="col pl-0"><span
+                                                                class="text-muted small d-block mb-1">Monthly</span>
+                                                            <span
+                                                                class="h5 small text-dark font-weight-bold">500$</span>
+                                                        </div>
+                                                        <div class="col"><span
+                                                                class="text-muted small d-block mb-1">People</span>
+                                                            <span
+                                                                class="h5 small text-dark font-weight-bold">10-50</span>
+                                                        </div>
+                                                        <div class="col pr-0"><span
+                                                                class="text-muted small d-block mb-1">Sq.Ft</span> <span
+                                                                class="h5 small text-dark font-weight-bold">900</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="card border-light mb-4 animate-up-5">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col-12 col-lg-6 col-xl-5"><a
+                                                    href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"><img
+                                                        src="https://demo.themesberg.com/bootstrap/spaces/assets/img/conference-office.jpg"
+                                                        alt="private office" class="card-img p-2 rounded-xl"></a></div>
+                                            <div class="col-12 col-lg-6 col-xl-7">
+                                                <div class="card-body px-3 py-2"><a
+                                                        href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html">
+                                                        <h4 class="h6">Conference Office</h4>
+                                                    </a>
+                                                    <div class="d-flex my-2 small"><span
+                                                            class="star fas fa-star text-warning"></span> <span
+                                                            class="star fas fa-star text-warning"></span> <span
+                                                            class="star fas fa-star text-warning"></span> <span
+                                                            class="star fas fa-star text-warning"></span> <span
+                                                            class="star fas fa-star text-warning"></span> <span
+                                                            class="badge badge-pill small badge-primary ml-2">5.0</span>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="col pl-0"><span
+                                                                class="text-muted small d-block mb-1">Monthly</span>
+                                                            <span
+                                                                class="h5 small text-dark font-weight-bold">500$</span>
+                                                        </div>
+                                                        <div class="col"><span
+                                                                class="text-muted small d-block mb-1">People</span>
+                                                            <span
+                                                                class="h5 small text-dark font-weight-bold">10-50</span>
+                                                        </div>
+                                                        <div class="col pr-0"><span
+                                                                class="text-muted small d-block mb-1">Sq.Ft</span> <span
+                                                                class="h5 small text-dark font-weight-bold">900</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="extraContent" style="display: none">
+                                    <div class="col-12">
+                                        <div class="card border-light mb-4 animate-up-5">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-12 col-lg-6 col-xl-5"><a
+                                                        href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"><img
+                                                            src="https://demo.themesberg.com/bootstrap/spaces/assets/img/meeting-office.jpg"
+                                                            alt="private office" class="card-img p-2 rounded-xl"></a>
+                                                </div>
+                                                <div class="col-12 col-lg-6 col-xl-7">
+                                                    <div class="card-body px-3 py-2"><a
+                                                            href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html">
+                                                            <h4 class="h6">Meeting Office</h4>
+                                                        </a>
+                                                        <div class="d-flex my-2 small"><span
+                                                                class="star fas fa-star text-warning"></span> <span
+                                                                class="star fas fa-star text-warning"></span> <span
+                                                                class="star fas fa-star text-warning"></span> <span
+                                                                class="star fas fa-star text-warning"></span> <span
+                                                                class="star fas fa-star-half text-warning"></span> <span
+                                                                class="badge badge-pill small badge-primary ml-2">4.7</span>
+                                                        </div>
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="col pl-0"><span
+                                                                    class="text-muted small d-block mb-1">Monthly</span>
+                                                                <span
+                                                                    class="h5 small text-dark font-weight-bold">200$</span>
+                                                            </div>
+                                                            <div class="col"><span
+                                                                    class="text-muted small d-block mb-1">People</span>
+                                                                <span
+                                                                    class="h5 small text-dark font-weight-bold">40</span>
+                                                            </div>
+                                                            <div class="col pr-0"><span
+                                                                    class="text-muted small d-block mb-1">Sq.Ft</span>
+                                                                <span
+                                                                    class="h5 small text-dark font-weight-bold">1200</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="card border-light mb-4 animate-up-5">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-12 col-lg-6 col-xl-5"><a
+                                                        href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"><img
+                                                            src="https://demo.themesberg.com/bootstrap/spaces/assets/img/lifestyle-office.jpg"
+                                                            alt="private office" class="card-img p-2 rounded-xl"></a>
+                                                </div>
+                                                <div class="col-12 col-lg-6 col-xl-7">
+                                                    <div class="card-body px-3 py-2"><a
+                                                            href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html">
+                                                            <h4 class="h6">Lifestyle Office</h4>
+                                                        </a>
+                                                        <div class="d-flex my-2 small"><span
+                                                                class="star fas fa-star text-warning"></span> <span
+                                                                class="star fas fa-star text-warning"></span> <span
+                                                                class="star fas fa-star text-warning"></span> <span
+                                                                class="star fas fa-star text-warning"></span> <span
+                                                                class="star fas fa-star text-warning"></span> <span
+                                                                class="badge badge-pill small badge-primary ml-2">5.0</span>
+                                                        </div>
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="col pl-0"><span
+                                                                    class="text-muted small d-block mb-1">Monthly</span>
+                                                                <span
+                                                                    class="h5 small text-dark font-weight-bold">500$</span>
+                                                            </div>
+                                                            <div class="col"><span
+                                                                    class="text-muted small d-block mb-1">People</span>
+                                                                <span
+                                                                    class="h5 small text-dark font-weight-bold">10-50</span>
+                                                            </div>
+                                                            <div class="col pr-0"><span
+                                                                    class="text-muted small d-block mb-1">Sq.Ft</span>
+                                                                <span
+                                                                    class="h5 small text-dark font-weight-bold">900</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="card border-light mb-4 animate-up-5">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col-12 col-lg-6 col-xl-5"><a
+                                                        href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"><img
+                                                            src="https://demo.themesberg.com/bootstrap/spaces/assets/img/conference-office.jpg"
+                                                            alt="private office" class="card-img p-2 rounded-xl"></a>
+                                                </div>
+                                                <div class="col-12 col-lg-6 col-xl-7">
+                                                    <div class="card-body px-3 py-2"><a
+                                                            href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html">
+                                                            <h4 class="h6">Conference Office</h4>
+                                                        </a>
+                                                        <div class="d-flex my-2 small"><span
+                                                                class="star fas fa-star text-warning"></span> <span
+                                                                class="star fas fa-star text-warning"></span> <span
+                                                                class="star fas fa-star text-warning"></span> <span
+                                                                class="star fas fa-star text-warning"></span> <span
+                                                                class="star fas fa-star text-warning"></span> <span
+                                                                class="badge badge-pill small badge-primary ml-2">5.0</span>
+                                                        </div>
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="col pl-0"><span
+                                                                    class="text-muted small d-block mb-1">Monthly</span>
+                                                                <span
+                                                                    class="h5 small text-dark font-weight-bold">500$</span>
+                                                            </div>
+                                                            <div class="col"><span
+                                                                    class="text-muted small d-block mb-1">People</span>
+                                                                <span
+                                                                    class="h5 small text-dark font-weight-bold">10-50</span>
+                                                            </div>
+                                                            <div class="col pr-0"><span
+                                                                    class="text-muted small d-block mb-1">Sq.Ft</span>
+                                                                <span
+                                                                    class="h5 small text-dark font-weight-bold">900</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mt-2 mb-4 text-center"><button id="loadOnClick"
+                                        class="btn btn-primary shadow-soft border-soft btn-loading-overlay mr-2 mb-2"
+                                        type="button"><span class="spinner"><span
+                                                class="spinner-border spinner-border-sm" role="status"
+                                                aria-hidden="true"></span> </span><span class="ml-1 btn-inner-text">Show
+                                            more</span></button>
+                                    <p id="allLoadedText" style="display: none;">That's all, Sparky!</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-7">
+                            <div id="mapListings"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../component/footer'); %>
+    <%- include('../script'); %>
+
+</body>
+
+</html>

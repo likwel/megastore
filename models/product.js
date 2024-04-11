@@ -12,6 +12,11 @@ const Product = db.define('product', {
         allowNull: false,
         unique: true
     },
+    reference: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+    },
     description: {
         type: DataTypes.TEXT,
         allowNull: false
@@ -52,10 +57,14 @@ const Product = db.define('product', {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    review_id: {
-        type: DataTypes.INTEGER,
+    is_active: {
+        type: DataTypes.BOOLEAN,
         allowNull: false
     },
+    // review_id: {
+    //     type: DataTypes.INTEGER,
+    //     allowNull: false
+    // },
     is_promotion :{
         type: DataTypes.BOOLEAN,
         allowNull: false
@@ -67,7 +76,11 @@ const Product = db.define('product', {
     is_suggested :{
         type: DataTypes.BOOLEAN,
         allowNull: false
-    }
+    },
+    date_promotion :{
+        type: DataTypes.DATE,
+        allowNull: true
+    },
 });
 
 

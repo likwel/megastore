@@ -56,15 +56,18 @@
 
                     <div class="col-12 col-lg-8">
                         <div class="row justify-content-center">
-                            <div class="col-12 col-sm-10 col-md-6 col-lg-12">
-                                <a href="#" data-toggle="modal" data-target="#newProduct"
+
+                            <a href="#" data-toggle="modal" data-target="#newProduct"
                                     class="btn btn-outline-secondary btn-block mb-3 py-3"><span class="mr-2"><span
                                             class="fas fa-plus"></span></span>Ajouter nouveau produit
                                 </a>
+                            <%for(let product of all_product){%>
+
+                            <div class="col-12 col-sm-10 col-md-6 col-lg-12">
                                 <div class="card border-light mb-4">
                                     <div class="row no-gutters align-items-center">
-                                        <div class="col-12 col-lg-6 col-xl-4"><a href="../single-space.html"><img
-                                                    src="../../assets/img/meeting-office.jpg" alt="private office"
+                                        <div class="col-12 col-lg-6 col-xl-4"><a href="/shop/product/<%=product.id%>"><img
+                                                    src="<%=product.featured_image?product.featured_image:'/assets/images/noimg.jpg'%>" alt="private office"
                                                     class="card-img p-2 rounded-xl"></a></div>
                                         <div class="col-12 col-lg-6 col-xl-8">
                                             <div class="card-body py-lg-0">
@@ -72,7 +75,7 @@
                                                     <div class="col text-left">
                                                         <ul class="list-group mb-0">
                                                             <li class="list-group-item small p-0"><span
-                                                                    class="fas fa-medal text-tertiary mr-2"></span>Promoted until: 12 June
+                                                                    class="fas fa-medal text-tertiary mr-2"></span>Promotion jusqu'au : <%=product.date_promotion?product.date_promotion:'NaN'%>
                                                             </li>
                                                         </ul>
                                                         <div class="modal fade bd-example-modal-lg" id="modal-notification" tabindex="-1"
@@ -80,7 +83,8 @@
                                                             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                                                 <div class="modal-content bg-white px-0">
                                                                     <div class="modal-header">
-                                                                        <h2 class="h5 mb-3">Collaborative Workspace</h2><button
+                                                                        
+                                                                        <h2 class="h5 mb-3"><%=product.name%></h2><button
                                                                             type="button" class="close" data-dismiss="modal"
                                                                             aria-label="Close"><span aria-hidden="true">×</span></button>
                                                                     </div>
@@ -114,272 +118,45 @@
                                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
                                                                     class="icon icon-sm"><span
                                                                         class="fas fa-ellipsis-h icon-secondary"></span> </span><span
-                                                                    class="sr-only">Toggle Dropdown</span></button>
+                                                                    class="sr-only">Actions</span></button>
                                                             <div class="dropdown-menu"><a class="dropdown-item"
-                                                                    href="./edit-item.html"><span class="fas fa-edit mr-2"></span> Edit
-                                                                    Item</a> <a class="dropdown-item text-danger" href="#"><span
-                                                                        class="fa fa-trash mr-2" aria-hidden="true"></span> Disable</a> <a
+                                                                    href="./edit-item.html"><span class="fas fa-edit mr-2"></span> Modifier</a> <a class="dropdown-item text-danger" href="#"><span
+                                                                        class="fa fa-trash mr-2" aria-hidden="true"></span> Archiver</a> <a
                                                                     class="dropdown-item" data-toggle="modal"
                                                                     data-target="#modal-notification"><span
-                                                                        class="fas fa-chart-line mr-2"></span>Statistics</a></div>
+                                                                        class="fas fa-chart-line mr-2"></span>Statistique</a></div>
                                                         </div>
                                                     </div>
-                                                </div><a href="../single-space.html">
-                                                    <h2 class="h5">Collaborative Workspace</h2>
+                                                </div><a href="/shop/product/<%=product.id%>">
+                                                    <h4 class="h6 text-secondary m-0"><%=product.category%></h4>
+                                                    <a href="/shop/product/<%=product.id%>">
+                                                        <h4 class="h6"><%=product.name%></h4>
+                                                    </a>
                                                 </a>
-                                                <div class="col d-flex pl-0"><span class="text-success font-small mr-3"><span
-                                                            class="fas fa-check-circle mr-2"></span>Active</span> <span
-                                                        class="text-muted font-small mr-3"><span class="fas fa-eye mr-2"></span>680</span>
-                                                    <span class="text-muted font-small mr-3"><span
-                                                            class="far fa-heart mr-2"></span>10</span> <a class="font-small text-dark"
-                                                        href="./messages.html"><span class="fas fa-envelope mr-2"></span>8</a></div>
+                                                <div class="col d-flex pl-0">
+                                                    <%if(product.is_active == 1){%>
+                                                    <span class="text-success font-small mr-3">
+                                                    <span class="fas fa-check-circle mr-2"></span>Active</span> 
+                                                    <%}else{%>
+                                                    <span class="text-danger font-small mr-3">
+                                                    <span class="fas fa-times-circle mr-2"></span>Archivé</span>
+                                                    <%}%>
+                                                    <span class="text-muted font-small mr-3">
+                                                        <span class="fas fa-eye mr-2"></span>680
+                                                    </span>
+                                                    <span class="text-muted font-small mr-3">
+                                                        <span class="far fa-heart mr-2"></span>10
+                                                    </span> 
+                                                    <!-- <a class="font-small text-dark" href="./messages.html">
+                                                        <span class="fas fa-envelope mr-2"></span>8
+                                                    </a> -->
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-sm-10 col-md-6 col-lg-12">
-                                <div class="card border-light mb-4">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col-12 col-lg-6 col-xl-4"><a href="../single-space.html"><img
-                                                    src="../../assets/img/spaces/meeting.jpg" alt="private office"
-                                                    class="card-img p-2 rounded-xl"></a></div>
-                                        <div class="col-12 col-lg-6 col-xl-8">
-                                            <div class="card-body py-lg-0">
-                                                <div class="d-flex no-gutters align-items-center mb-3">
-                                                    <div class="col text-left">
-                                                        <ul class="list-group mb-0">
-                                                            <li class="list-group-item small p-0"><span
-                                                                    class="fas fa-medal text-tertiary mr-2"></span>Promoted until: 12 June
-                                                            </li>
-                                                        </ul>
-                                                        <div class="modal fade bd-example-modal-lg" id="modal-notification-2" tabindex="-1"
-                                                            role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                                                                <div class="modal-content bg-white px-0">
-                                                                    <div class="modal-header">
-                                                                        <h2 class="h5 mb-3">Meeting Workspace</h2><button type="button"
-                                                                            class="close" data-dismiss="modal" aria-label="Close"><span
-                                                                                aria-hidden="true">×</span></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <div class="d-flex align-items-center">
-                                                                            <div class="col">
-                                                                                <h2 class="h4">Views</h2>
-                                                                            </div>
-                                                                            <div class="col-3">
-                                                                                <div class="form-group"><select class="custom-select"
-                                                                                        id="exampleFormControlSelect3">
-                                                                                        <option>15 days</option>
-                                                                                        <option>30 days</option>
-                                                                                        <option>60 days</option>
-                                                                                        <option>90 days</option>
-                                                                                    </select></div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="ct-chart-statistics-2 ct-golden-section ct-series-b">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer"><button type="button"
-                                                                            class="btn btn-sm btn-secondary">Go to Dashboard</button></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col text-right">
-                                                        <div class="btn-group"><button
-                                                                class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
-                                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
-                                                                    class="icon icon-sm"><span
-                                                                        class="fas fa-ellipsis-h icon-secondary"></span> </span><span
-                                                                    class="sr-only">Toggle Dropdown</span></button>
-                                                            <div class="dropdown-menu"><a class="dropdown-item"
-                                                                    href="./edit-item.html"><span class="fas fa-edit mr-2"></span> Edit
-                                                                    Item</a> <a class="dropdown-item text-success" href="#"><span
-                                                                        class="fas fa-plus mr-2" aria-hidden="true"></span> Publish</a> <a
-                                                                    class="dropdown-item" data-toggle="modal"
-                                                                    data-target="#modal-notification-2"><span
-                                                                        class="fas fa-chart-line mr-2"></span>Statistics</a></div>
-                                                        </div>
-                                                    </div>
-                                                </div><a href="../single-space.html">
-                                                    <h2 class="h5">Meeting Workspace</h2>
-                                                </a>
-                                                <div class="col d-flex pl-0"><span class="text-danger font-small mr-3"><span
-                                                            class="fas fa-times-circle mr-2"></span>Disabled</span> <span
-                                                        class="text-muted font-small mr-3"><span class="fas fa-eye mr-2"></span>3880</span>
-                                                    <span class="text-muted font-small mr-3"><span
-                                                            class="far fa-heart mr-2"></span>30</span> <a class="font-small text-dark"
-                                                        href="./messages.html"><span class="fas fa-envelope mr-2"></span>80</a></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-10 col-md-6 col-lg-12">
-                                <div class="card border-light mb-4">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col-12 col-lg-6 col-xl-4"><a href="../single-space.html"><img
-                                                    src="../../assets/img/private-office.jpg" alt="private office"
-                                                    class="card-img p-2 rounded-xl"></a></div>
-                                        <div class="col-12 col-lg-6 col-xl-8">
-                                            <div class="card-body py-lg-0">
-                                                <div class="d-flex no-gutters align-items-center mb-3">
-                                                    <div class="col text-left">
-                                                        <ul class="list-group mb-0">
-                                                            <li class="list-group-item small p-0"><span
-                                                                    class="fas fa-medal text-tertiary mr-2"></span>Promoted until: 12 June
-                                                            </li>
-                                                        </ul>
-                                                        <div class="modal fade bd-example-modal-lg" id="modal-notification-3" tabindex="-1"
-                                                            role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                                                                <div class="modal-content bg-white px-0">
-                                                                    <div class="modal-header">
-                                                                        <h2 class="h5 mb-3">Private Office</h2><button type="button"
-                                                                            class="close" data-dismiss="modal" aria-label="Close"><span
-                                                                                aria-hidden="true">×</span></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <div class="d-flex align-items-center">
-                                                                            <div class="col">
-                                                                                <h2 class="h4">Views</h2>
-                                                                            </div>
-                                                                            <div class="col-3">
-                                                                                <div class="form-group"><select class="custom-select"
-                                                                                        id="exampleFormControlSelect4">
-                                                                                        <option>15 days</option>
-                                                                                        <option>30 days</option>
-                                                                                        <option>60 days</option>
-                                                                                        <option>90 days</option>
-                                                                                    </select></div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="ct-chart-statistics-3 ct-golden-section ct-series-c">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer"><button type="button"
-                                                                            class="btn btn-sm btn-secondary">Go to Dashboard</button></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col text-right">
-                                                        <div class="btn-group"><button
-                                                                class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
-                                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
-                                                                    class="icon icon-sm"><span
-                                                                        class="fas fa-ellipsis-h icon-secondary"></span> </span><span
-                                                                    class="sr-only">Toggle Dropdown</span></button>
-                                                            <div class="dropdown-menu"><a class="dropdown-item"
-                                                                    href="./edit-item.html"><span class="fas fa-edit mr-2"></span> Edit
-                                                                    Item</a> <a class="dropdown-item text-danger" href="#"><span
-                                                                        class="fa fa-trash mr-2" aria-hidden="true"></span> Disable</a> <a
-                                                                    class="dropdown-item" data-toggle="modal"
-                                                                    data-target="#modal-notification-3"><span
-                                                                        class="fas fa-chart-line mr-2"></span>Statistics</a></div>
-                                                        </div>
-                                                    </div>
-                                                </div><a href="../single-space.html">
-                                                    <h2 class="h5">Pivate Workspace</h2>
-                                                </a>
-                                                <ul class="list-group mb-3">
-                                                    <li class="list-group-item small p-0"><span
-                                                            class="fas fa-medal text-tertiary mr-2"></span>Promoted until: 12 June</li>
-                                                </ul>
-                                                <div class="col d-flex pl-0"><span class="text-success font-small mr-3"><span
-                                                            class="fas fa-check-circle mr-2"></span>Active</span> <span
-                                                        class="text-muted font-small mr-3"><span class="fas fa-eye mr-2"></span>680</span>
-                                                    <span class="text-muted font-small mr-3"><span
-                                                            class="far fa-heart mr-2"></span>10</span> <a class="font-small text-dark"
-                                                        href="./messages.html"><span class="fas fa-envelope mr-2"></span>8</a></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-10 col-md-6 col-lg-12">
-                                <div class="card border-light mb-4">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col-12 col-lg-6 col-xl-4"><a href="../single-space.html"><img
-                                                    src="../../assets/img/meeting-office.jpg" alt="private office"
-                                                    class="card-img p-2 rounded-xl"></a></div>
-                                        <div class="col-12 col-lg-6 col-xl-8">
-                                            <div class="card-body py-lg-0">
-                                                <div class="d-flex no-gutters align-items-center mb-3">
-                                                    <div class="col text-left">
-                                                        <ul class="list-group mb-0">
-                                                            <li class="list-group-item small p-0"><span
-                                                                    class="fas fa-medal text-tertiary mr-2"></span>Promoted until: 12 June
-                                                            </li>
-                                                        </ul>
-                                                        <div class="modal fade bd-example-modal-lg" id="modal-notification-4" tabindex="-1"
-                                                            role="dialog" aria-labelledby="modal-notification" aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                                                                <div class="modal-content bg-white px-0">
-                                                                    <div class="modal-header">
-                                                                        <h2 class="h5 mb-3">Collaborative Workspace</h2><button
-                                                                            type="button" class="close" data-dismiss="modal"
-                                                                            aria-label="Close"><span aria-hidden="true">×</span></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <div class="d-flex align-items-center">
-                                                                            <div class="col">
-                                                                                <h2 class="h4">Views</h2>
-                                                                            </div>
-                                                                            <div class="col-3">
-                                                                                <div class="form-group"><select class="custom-select"
-                                                                                        id="exampleFormControlSelect1">
-                                                                                        <option>15 days</option>
-                                                                                        <option>30 days</option>
-                                                                                        <option>60 days</option>
-                                                                                        <option>90 days</option>
-                                                                                    </select></div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="ct-chart-statistics-4 ct-golden-section ct-series-d">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer"><button type="button"
-                                                                            class="btn btn-sm btn-secondary">Go to Dashboard</button></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col text-right">
-                                                        <div class="btn-group"><button
-                                                                class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
-                                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span
-                                                                    class="icon icon-sm"><span
-                                                                        class="fas fa-ellipsis-h icon-secondary"></span> </span><span
-                                                                    class="sr-only">Toggle Dropdown</span></button>
-                                                            <div class="dropdown-menu"><a class="dropdown-item"
-                                                                    href="./edit-item.html"><span class="fas fa-edit mr-2"></span> Edit
-                                                                    Item</a> <a class="dropdown-item text-danger" href="#"><span
-                                                                        class="fa fa-trash mr-2" aria-hidden="true"></span> Disable</a> <a
-                                                                    class="dropdown-item" data-toggle="modal"
-                                                                    data-target="#modal-notification-4"><span
-                                                                        class="fas fa-chart-line mr-2"></span>Statistics</a></div>
-                                                        </div>
-                                                    </div>
-                                                </div><a href="../single-space.html">
-                                                    <h2 class="h5">Collaborative Workspace</h2>
-                                                </a>
-                                                <ul class="list-group mb-3">
-                                                    <li class="list-group-item small p-0"><span
-                                                            class="fas fa-medal text-tertiary mr-2"></span>Promoted until: 12 June</li>
-                                                </ul>
-                                                <div class="col d-flex pl-0"><span class="text-success font-small mr-3"><span
-                                                            class="fas fa-check-circle mr-2"></span>Active</span> <span
-                                                        class="text-muted font-small mr-3"><span class="fas fa-eye mr-2"></span>680</span>
-                                                    <span class="text-muted font-small mr-3"><span
-                                                            class="far fa-heart mr-2"></span>10</span> <a class="font-small text-dark"
-                                                        href="./messages.html"><span class="fas fa-envelope mr-2"></span>8</a></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <%}%>
                         </div>
                         <div class="row">
                             <div class="col">
@@ -404,7 +181,7 @@
         <!-- Modal -->
         <div class="modal fade" id="newProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable">
-            <div class="modal-content">
+            <form class="modal-content" method="POST" action="/save-product" enctype="multipart/form-data">
                 <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Nouveau produit</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -412,117 +189,84 @@
                 </button>
                 </div>
                 <div class="modal-body p-0">
-                    <div class="col-12 col-lg-12 mt-4">
-                        <form action="#" method="post" class="card border-light p-3 mb-3">
-                            <div class="form-group"><label for="firstname">Title</label> <input type="text"
-                                    placeholder="A nice little title" class="form-control" id="firstname" required=""></div>
-                            <div class="form-group"><label for="location">Location</label> <input type="text"
-                                    placeholder="26, Vancouver, BC, Canada - 324578" class="form-control" id="location" required=""></div>
+                    <div class="col-12 col-lg-12">
+                        <div action="#" method="post" class="border-light p-3 mb-3">
+                            <div class="form-group"><label for="name">Titre ou nom</label> <input type="text"
+                                    placeholder="Ex. Iphone 12 Pro Max" class="form-control" id="name" name="name" required=""></div>
+                            <div class="form-group"><label for="reference">Référence</label> <input type="text"
+                                    placeholder="ART0001" class="form-control" id="reference" required="" name="reference"></div>
+                            
                             <div class="row">
                                 <div class="col-12 col-lg-6">
-                                    <div class="form-group"><label for="currency">Currency</label> <select class="custom-select"
+                                    <div class="form-group"><label for="term">Catégorie</label> <select class="custom-select" id="term">
+                                            <option value="0" selected="selected"></option>
+                                            <option value="1">Appareils électroniques et accessoires connectés</option>
+                                            <option value="2">Santé, beauté, cosmétiques bio</option>
+                                            <option value="3">Articles pour animaux de compagnie</option>
+                                            <option value="4">Produits et accessoires pour le sport</option>
+                                            <option value="5">Produits pour bébés et enfants</option>
+                                            <option value="6">DIY et produits artisanaux, éco-responsables</option>
+                                            <option value="7">Alimentation et produits locaux</option>
+                                        </select></div>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <div class="form-group"><label for="quantity">Quantité en stock</label> <input type="number" placeholder="1"
+                                            class="form-control text-gray" id="quantity" required="" name="quantity"></div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <div class="form-group"><label for="price">Prix unitaire</label> <input type="number" placeholder="250"
+                                            class="form-control text-gray" id="price" required="" name="price"></div>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <div class="form-group"><label for="currency" name="devise">Dévise</label> <select class="custom-select"
                                             id="currency">
-                                            <option value="USD">USD</option>
-                                            <option value="EUR">EUR</option>
-                                            <option value="GBP">GBP</option>
-                                            <option value="AUD">AUD</option>
-                                            <option value="CNY">CNY</option>
-                                            <option value="JPY">JPY</option>
+                                            <option value="Ar">Ariary MGA</option>
+                                            <option value="€">Euro EUR</option>
+                                            <option value="$">Dollar USD</option>
                                         </select></div>
                                 </div>
-                                <div class="col-12 col-lg-6">
-                                    <div class="form-group"><label for="price">Monthly price</label> <input type="number" placeholder="250"
-                                            class="form-control text-gray" id="price" required=""></div>
+                                
+                            </div>
+
+                            <div class="form-group focused"><label for="description">Description</label> 
+                                <textarea rows="2" class="form-control text-gray" id="description" required="" name="description">
+                                </textarea>
+                            </div>
+
+                            <div action="#" method="post" class="card text-gray border-light p-4 mb-4">
+                                <h2 class="h6">Featured image</h2>
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <div class="profile-image-small fmxw-100 mr-4"><img class="rounded" id="featured-image-bean"
+                                            src="/assets/images/noimg.jpg" alt="Office"></div>
+                                    <div class="custom-file"><input id="featured_image" type="file" onchange="readOneImageURL(this)"class="custom-file-input"> <label
+                                            class="custom-file-label" for="featured_image" name="featured_image">Choisir une photo</label></div>
+                                </div><small class="font-weight-light font-xs d-block mt-2 text-danger">L'image doit avoir une largeur d'au moins 500 pixels
+                                    et seuls les formats *.jpg, *.png et *.jpeg sont acceptés.</small>
+                                </div>
+                            <div action="#" method="post" class="card text-gray border-light p-4 mb-2">
+                                <h2 class="h6">Galleries</h2>
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <div class="custom-file"><input id="gallery" name="galleries" type="file" onchange="readImagesURL(this)" class="custom-file-input" multiple="multiple">
+                                        <label class="custom-file-label" for="gallery">Choisir des photos</label></div>
+                                </div><small class="font-weight-light font-xs d-block mt-2 text-secondary">L'image doit avoir une largeur d'au moins 500 pixels
+                                    et seuls les formats *.jpg, *.png et *.jpeg sont acceptés.</small>
+                                <div class="d-flex flex-wrap mt-4" id="gallery-image-bean">
+                                    
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-12 col-lg-6">
-                                    <div class="form-group"><label for="term">Minimum term</label> <select class="custom-select" id="term">
-                                            <option value="d">day</option>
-                                            <option value="m">month</option>
-                                            <option value="y" selected="selected">year</option>
-                                        </select></div>
-                                </div>
-                                <div class="col-12 col-lg-6">
-                                    <div class="form-group"><label for="term_amount">Amount</label> <input type="number" placeholder="1"
-                                            class="form-control text-gray" id="term_amount" required=""></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 col-lg-4">
-                                    <div class="form-group"><label for="sqfeet">Number input</label> <input type="number" placeholder="180"
-                                            class="form-control text-gray" id="sqfeet" required=""></div>
-                                </div>
-                                <div class="col-12 col-lg-4">
-                                    <div class="form-group"><label for="people">Dropdown example</label> <input type="number"
-                                            placeholder="15" class="form-control text-gray" id="people" required=""></div>
-                                </div>
-                                <div class="col-12 col-lg-4">
-                                    <div class="form-group"><label for="type">Another dropdown</label> <select class="custom-select"
-                                            id="type">
-                                            <option value="meeting" selected="selected">meeting</option>
-                                            <option value="work">work</option>
-                                            <option value="events">events</option>
-                                        </select></div>
-                                </div>
-                            </div>
-                            <div class="form-group focused"><label for="description">Description</label> <textarea rows="10"
-                                    class="form-control text-gray" id="description" required="">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cumque temporibus odio, ipsum sint animi sequi totam repellat quidem, placeat neque vel enim nisi. Quia dolor in earum labore, aperiam dolorum.
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae ipsa porro consequuntur, laborum eligendi laboriosam itaque quis nobis, tempora at id in repellendus eius reiciendis error, enim fugit modi molestiae!
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia velit, deserunt animi, debitis eum laudantium facere adipisci minus ad quaerat ipsam consectetur, obcaecati non sit! Voluptas voluptatum autem modi dolorem?
-                                                    </textarea></div>
-                            <div class="row">
-                                <div class="col"><button class="btn btn-primary btn-dark mt-2 animate-up-2" type="submit">Update</button>
-                                </div>
-                            </div>
-                        </form>
-                        <form action="#" method="post" class="card text-gray border-light p-4 mb-4">
-                            <h2 class="h6">Featured image</h2>
-                            <div class="d-flex justify-content-between align-items-center mt-2">
-                                <div class="profile-image-small fmxw-100 mr-4"><img class="rounded"
-                                        src="../../assets/img/account/office-1.jpg" alt="Office"></div>
-                                <div class="custom-file"><input id="featured_image" type="file" class="custom-file-input"> <label
-                                        class="custom-file-label" for="featured_image">Choose file</label></div>
-                            </div><small class="text-gray font-weight-light font-xs d-block mt-2">Image should be at least 500 pixels wide
-                                and only *.jpg, *.png and *.jpeg formats are accepted.</small>
-                        </form>
-                        <form action="#" method="post" class="card text-gray border-light p-4 mb-4">
-                            <h2 class="h6">Gallery</h2>
-                            <div class="d-flex justify-content-between align-items-center mt-2">
-                                <div class="custom-file"><input id="gallery" type="file" class="custom-file-input" multiple="multiple">
-                                    <label class="custom-file-label" for="gallery">Choose files</label></div>
-                            </div><small class="text-gray font-weight-light font-xs d-block mt-2">Images should be at least 500 pixels wide
-                                and only *.jpg, *.png and *.jpeg formats are accepted.</small>
-                            <div class="d-flex flex-wrap mt-4">
-                                <div class="profile-image-small fmxw-100 mr-3 mb-3"><img class="rounded"
-                                        src="../../assets/img/account/office-1.jpg" alt="Office Conference"></div>
-                                <div class="profile-image-small fmxw-100 mr-3 mb-3"><img class="rounded"
-                                        src="../../assets/img/account/office-2.jpg" alt="Office Cowork"></div>
-                                <div class="profile-image-small fmxw-100 mr-3 mb-3"><img class="rounded"
-                                        src="../../assets/img/account/office-3.jpg" alt="Office Lifestyle"></div>
-                                <div class="profile-image-small fmxw-100 mr-3 mb-3"><img class="rounded"
-                                        src="../../assets/img/account/office-1.jpg" alt="Themesberg Office"></div>
-                                <div class="profile-image-small fmxw-100 mr-3 mb-3"><img class="rounded"
-                                        src="../../assets/img/account/office-2.jpg" alt="Office Meeting"></div>
-                                <div class="profile-image-small fmxw-100 mr-3 mb-3"><img class="rounded"
-                                        src="../../assets/img/account/office-3.jpg" alt="Office Private"></div>
-                            </div>
-                        </form>
-                        <form action="#" method="post" class="card text-gray border-light p-4 mb-4">
-                            <div class="form-group focused"><label for="video">Video url</label> <input type="text"
-                                    value="https://vimeo.com/40842620" class="form-control text-gray" id="video" required=""></div>
-                            <div class="row">
-                                <div class="col"><button class="btn btn-primary btn-dark mt-2 animate-up-2 text-right"
-                                        type="submit">Update</button></div>
-                            </div>
-                        </form>
+                            
+                        </div>
+                        
                     </div>
                 </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <div class="modal-footer py-1">
+                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-sm btn-primary">Enregistrer</button>
                 </div>
-            </div>
+            </form>
             </div>
         </div>
     </main>
@@ -559,6 +303,65 @@
         integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA=="
         data-cf-beacon='{"rayId":"86a6aa97ecbb52e6","version":"2024.3.0","r":1,"token":"3a2c60bab7654724a0f7e5946db4ea5a","b":1}'
         crossorigin="anonymous"></script>
+
+        <script>
+            function readImagesURL(input) {
+                if (!input.files) {
+                    return;
+                }
+                const readers = [];
+                const bean = document.getElementById('gallery-image-bean');
+
+                for (let i = 0; i < input.files.length; i++) {
+                    readers.push(new FileReader());
+                    readers[i].onload = function(e) {
+
+                    let div_ = document.createElement('div');
+                    div_.classList = "profile-image-small fmxw-100 me-3 mb-3"
+                    
+                    const img = new Image();
+                    img.src = e.target.result;
+                    
+                    img.classList ="rounded"
+                    img.style = "max-width:100%;"
+                    
+                    div_.appendChild(img)
+
+                        // bean.appendChild(img);
+                    bean.appendChild(div_);
+                    };
+                    readers[i].readAsDataURL(input.files[i]);
+                }
+            }
+
+            function readOneImageURL(input) {
+            if (!input.files) {
+                return;
+            }
+            const readers = [];
+            const bean = document.getElementById('featured-image-bean');
+            // bean.innerHTML =""
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                const img = new Image();
+                img.src = e.target.result;
+                
+                img.classList ="rounded"
+                img.style = "max-width:100%;"
+
+                bean.src=e.target.result
+                
+                // bean.appendChild(img);
+
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+
+            }
+        </script>
 </body>
 
 </html>

@@ -2,6 +2,9 @@
 const express = require('express')
 const userController = require('../controllers/usersController')
 const userAuth = require('../middleware/usersMiddleware')
+
+const Product = require('../models/product');
+
 const { 
     getAllUsers,
     getUserById,
@@ -100,18 +103,31 @@ router.get('/my-account/security', (req, res) => {
     });
 })
 
-router.get('/my-account/products', (req, res) => {
+router.get('/my-account/products', async (req, res) => {
 
     let is_connected = false;
+    let all_product =[];
+
     if(req.cookies.user){
         is_connected=true
     }
-    
+
+    // console.log(JSON.parse(req.cookies.vendor));
+
+    if(req.cookies.vendor){
+        all_product =  await Product.findAll({
+            where: {
+                supplier_id: JSON.parse(req.cookies.vendor).id
+            }
+        })
+    }
+
     res.render("products", {
         "is_connected" : is_connected,
         "vendor": req.cookies.vendor,
         "user": req.cookies.user,
-        "token": req.cookies.token
+        "token": req.cookies.token,
+        "all_product": all_product,
     });
 })
 

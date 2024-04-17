@@ -181,13 +181,14 @@
         <!-- Modal -->
         <div class="modal fade" id="newProduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable">
-            <form class="modal-content" method="POST" action="/save-product" enctype="multipart/form-data">
+            <form action="/my-acount/product/create" method="POST" name="product" id="formNewProduct" class="modal-content" enctype="multipart/form-data">
                 <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Nouveau produit</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 </div>
+                <input type="hidden" value="<%=supplier_id%>" name="supplier_id" id="supplier_id">
                 <div class="modal-body p-0">
                     <div class="col-12 col-lg-12">
                         <div action="#" method="post" class="border-light p-3 mb-3">
@@ -198,15 +199,15 @@
                             
                             <div class="row">
                                 <div class="col-12 col-lg-6">
-                                    <div class="form-group"><label for="term">Catégorie</label> <select class="custom-select" id="term">
+                                    <div class="form-group"><label for="term">Catégorie</label> <select class="custom-select" id="category" name="category"> 
                                             <option value="0" selected="selected"></option>
-                                            <option value="1">Appareils électroniques et accessoires connectés</option>
-                                            <option value="2">Santé, beauté, cosmétiques bio</option>
-                                            <option value="3">Articles pour animaux de compagnie</option>
-                                            <option value="4">Produits et accessoires pour le sport</option>
-                                            <option value="5">Produits pour bébés et enfants</option>
-                                            <option value="6">DIY et produits artisanaux, éco-responsables</option>
-                                            <option value="7">Alimentation et produits locaux</option>
+                                            <option value="Electronique & info">Appareils électroniques et accessoires connectés</option>
+                                            <option value="Beauté & Cosmétique">Santé, beauté, cosmétiques bio</option>
+                                            <option value="Produits animaux">Articles pour animaux de compagnie</option>
+                                            <option value="Accessoires sport">Produits et accessoires pour le sport</option>
+                                            <option value="Bébés et enfants">Produits pour bébés et enfants</option>
+                                            <option value="Produits artisanaux">DIY et produits artisanaux, éco-responsables</option>
+                                            <option value="Alimentation">Alimentation et produits locaux</option>
                                         </select></div>
                                 </div>
                                 <div class="col-12 col-lg-6">
@@ -221,7 +222,7 @@
                                             class="form-control text-gray" id="price" required="" name="price"></div>
                                 </div>
                                 <div class="col-12 col-lg-6">
-                                    <div class="form-group"><label for="currency" name="devise">Dévise</label> <select class="custom-select"
+                                    <div class="form-group"><label for="currency">Dévise</label> <select class="custom-select" name="devise"
                                             id="currency">
                                             <option value="Ar">Ariary MGA</option>
                                             <option value="€">Euro EUR</option>
@@ -241,8 +242,8 @@
                                 <div class="d-flex justify-content-between align-items-center mt-2">
                                     <div class="profile-image-small fmxw-100 mr-4"><img class="rounded" id="featured-image-bean"
                                             src="/assets/images/noimg.jpg" alt="Office"></div>
-                                    <div class="custom-file"><input id="featured_image" type="file" onchange="readOneImageURL(this)"class="custom-file-input"> <label
-                                            class="custom-file-label" for="featured_image" name="featured_image">Choisir une photo</label></div>
+                                    <div class="custom-file"><input id="featured_image" type="file" onchange="readOneImageURL(this)"class="custom-file-input" name="featured_image"> <label
+                                            class="custom-file-label" for="featured_image">Choisir une photo</label></div>
                                 </div><small class="font-weight-light font-xs d-block mt-2 text-danger">L'image doit avoir une largeur d'au moins 500 pixels
                                     et seuls les formats *.jpg, *.png et *.jpeg sont acceptés.</small>
                                 </div>
@@ -264,7 +265,7 @@
                 </div>
                 <div class="modal-footer py-1">
                     <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="submit" class="btn btn-sm btn-primary">Enregistrer</button>
+                    <button type="submit" class="btn btn-sm btn-primary" name="saveProduct">Enregistrer</button>
                 </div>
             </form>
             </div>
@@ -272,37 +273,7 @@
     </main>
 
     <%- include('component/footer'); %>
-
-    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/jquery/dist/jquery.min.js"></script>
-    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/popper.js/dist/umd/popper.min.js"></script>
-    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/headroom.js/dist/headroom.min.js"></script>
-    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/onscreen/dist/on-screen.umd.min.js"></script>
-    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/nouislider/distribute/nouislider.min.js"></script>
-    <script
-        src="https://demo.themesberg.com/bootstrap/spaces/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/waypoints/lib/jquery.waypoints.min.js"></script>
-    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/owl.carousel/dist/owl.carousel.min.js"></script>
-    <script
-        src="https://demo.themesberg.com/bootstrap/spaces/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
-    <script
-        src="https://demo.themesberg.com/bootstrap/spaces/vendor/@fancyapps/fancybox/dist/jquery.fancybox.min.js"></script>
-    <script
-        src="https://demo.themesberg.com/bootstrap/spaces/vendor/sticky-sidebar/dist/sticky-sidebar.min.js"></script>
-    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/leaflet/dist/leaflet.js"></script>
-    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/chartist/dist/chartist.min.js"></script>
-    <script
-        src="https://demo.themesberg.com/bootstrap/spaces/vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
-    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/jqvmap/dist/jquery.vmap.min.js"></script>
-    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/jqvmap/dist/maps/jquery.vmap.usa.js"></script>
-    <script src="https://demo.themesberg.com/bootstrap/spaces/assets/js/jquery.slideform.js"></script>
-    <script src="https://demo.themesberg.com/bootstrap/spaces/assets/js/spaces.js"></script>
-    <script>(function () { if (!document.body) return; var js = "window['__CF$cv$params']={r:'86a6aa97ecbb52e6',t:'MTcxMTQ1MTEzNC45NzgwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../../../cdn-cgi/challenge-platform/h/g/scripts/jsd/dc6b543c1346/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);"; var _0xh = document.createElement('iframe'); _0xh.height = 1; _0xh.width = 1; _0xh.style.position = 'absolute'; _0xh.style.top = 0; _0xh.style.left = 0; _0xh.style.border = 'none'; _0xh.style.visibility = 'hidden'; document.body.appendChild(_0xh); function handler() { var _0xi = _0xh.contentDocument || _0xh.contentWindow.document; if (_0xi) { var _0xj = _0xi.createElement('script'); _0xj.innerHTML = js; _0xi.getElementsByTagName('head')[0].appendChild(_0xj); } } if (document.readyState !== 'loading') { handler(); } else if (window.addEventListener) { document.addEventListener('DOMContentLoaded', handler); } else { var prev = document.onreadystatechange || function () { }; document.onreadystatechange = function (e) { prev(e); if (document.readyState !== 'loading') { document.onreadystatechange = prev; handler(); } }; } })();</script>
-    <script defer
-        src="https://static.cloudflareinsights.com/beacon.min.js/v84a3a4012de94ce1a686ba8c167c359c1696973893317"
-        integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA=="
-        data-cf-beacon='{"rayId":"86a6aa97ecbb52e6","version":"2024.3.0","r":1,"token":"3a2c60bab7654724a0f7e5946db4ea5a","b":1}'
-        crossorigin="anonymous"></script>
+    <%- include('script'); %>
 
         <script>
             function readImagesURL(input) {
@@ -361,6 +332,9 @@
             }
 
             }
+
+            
+
         </script>
 </body>
 

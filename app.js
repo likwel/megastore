@@ -37,6 +37,7 @@ const User = require('./models/users');
 const Supplier = require('./models/supplier');
 const Schedule = require('./models/schedule');
 const Product = require('./models/product');
+const Ads = require('./models/ads');
 
 const usersRouter = require('./routes/usersRouter')
 const vendorRouter = require('./routes/suppliersRouter')
@@ -72,13 +73,34 @@ app.get('/', async (req, res) => {
          }]
       })
     
+    let page = (req.query.page && req.query.page > 0 )?req.query.page:1;
+
+    const limit = 6; // Nombre de produits par page
+
+    // Calculer l'offset en fonction de la page actuelle
+    const offset = (page - 1) * limit;
+
+    let all_vendor_limit = await Supplier.findAll({
+        include: [{
+            model: Product
+           }],
+        offset: offset,
+        limit: limit,
+    });
+    
+    const maxPage = Math.ceil(all_supp.length/limit);
+    
     res.render("index", {
         "is_connected" : is_connected,
         "user": req.cookies.user,
         "token": req.cookies.token,
         "all_vendor" : all_supp,
+        "all_vendor_limit" : all_vendor_limit,
+        "currentPage" : page,
+        "page_max" : maxPage,
     });
 })
+
 
 server.listen(port, () => {
     console.log(`Maintenant à l'écoute sur le port ${port}`);

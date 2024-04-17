@@ -49,7 +49,7 @@
                 <div class="row justify-content-end d-none d-lg-flex">
                     <div class="col-auto">
                         <div class="d-flex align-items-center flex-column flex-md-row z-2">
-                            <div class="nav-wrapper position-relative pb-4">
+                            <div class="nav-wrapper position-relative pb-1">
                                 <ul class="nav nav-pills nav-pill-rounded" id="tab-34" role="tablist">
                                     <li class="nav-item mr-3 mr-md-0 float-left"><h2>Liste des produits</h2></li>
                                     <li class="nav-item mr-3 mr-md-0"><a class="nav-link text-sm-center active"
@@ -77,14 +77,14 @@
                             <div class="sidebar-inner">
                                 <div class="card mt-n7 d-none d-lg-block border-light text-center p-2">
                                     <div class="profile-cover rounded-top"
-                                        data-background="https://demo.themesberg.com/bootstrap/spaces/assets/img/coworking.jpg">
+                                        data-background="<%=supplier.company_photo?supplier.company_photo:'../assets/images/default_pdc.jpg'%>">
                                     </div>
                                     <div class="card-body p-2">
                                         <div class="profile-thumbnail small-thumbnail mt-n6 mx-auto"><img
-                                                src="https://demo.themesberg.com/bootstrap/spaces/assets/img/team/profile-picture-4.jpg"
+                                                src="<%=supplier.company_photo?supplier.company_photo:'../assets/images/default_pdp.jpg'%>"
                                                 class="card-img-top rounded-circle border-white" alt="Joseph Portrait">
                                         </div>
-                                        <h4 class="font-weight-normal mt-4 mb-0">Neil Sims</h4>
+                                        <h4 class="font-weight-normal mt-4 mb-0"><%=supplier.company_name%></h4>
                                         <ul class="list-inline row mx-auto my-4">
                                             <li class="list-inline-item col-sm-4 col-auto px-2 px-xl-3 my-2 mx-0">
                                                 <h6 class="font-weight-normal font-small">Rentals</h6><a
@@ -113,9 +113,9 @@
                         <div class="card d-lg-none border-light text-center mt-n5 mt-md-n7 p-2">
                             <div class="card-body p-2">
                                 <div class="profile-thumbnail small-thumbnail mt-n6 mx-auto"><img
-                                        src="https://demo.themesberg.com/bootstrap/spaces/assets/img/team/profile-picture-4.jpg"
+                                        src="<%=supplier.company_photo?supplier.company_photo:'../assets/images/default_pdp.jpg'%>"
                                         class="card-img-top rounded-circle border-white" alt="Joseph Portrait"></div>
-                                <h4 class="font-weight-normal mt-4 mb-0">Neil Sims</h4>
+                                <h4 class="font-weight-normal mt-4 mb-0"><%=supplier.company_name%></h4>
                                 <ul class="list-inline row mx-auto my-4">
                                     <li class="list-inline-item col-4 px-2 px-xl-3 my-2 mx-0">
                                         <h6 class="font-weight-normal font-small">Rentals</h6><a
@@ -145,213 +145,30 @@
                             <div class="tab-pane fade show active" id="tab-grid-1" role="tabpanel"
                                 aria-labelledby="tab-grid-1-tab">
                                 <div class="row justify-content-center">
-                                    <div class="col-12 col-sm-10 col-md-6 col-lg-12 mb-4">
-                                        <div class="card border-light mb-4 animate-up-5">
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-12 col-lg-6 col-xl-5"><a
-                                                        href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"><img
-                                                            src="https://demo.themesberg.com/bootstrap/spaces/assets/img/private-office.jpg"
-                                                            alt="private office" class="card-img p-2 rounded-xl"></a>
-                                                </div>
-                                                <div class="col-12 col-lg-6 col-xl-7">
-                                                    <div class="card-body p-3 p-md-1"><a
-                                                            href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html">
-                                                            <h4 class="h5">Collaborative Workspace</h4>
-                                                        </a>
-                                                        <div class="d-flex my-3"><span
-                                                                class="star fas fa-star text-warning"></span> <span
-                                                                class="star fas fa-star text-warning"></span> <span
-                                                                class="star fas fa-star text-warning"></span> <span
-                                                                class="star fas fa-star text-warning"></span> <span
-                                                                class="star fas fa-star text-warning"></span> <span
-                                                                class="badge badge-pill badge-primary ml-2">5.0</span>
-                                                        </div>
-                                                        <ul class="list-group mb-3">
-                                                            <li class="list-group-item small p-0"><span
-                                                                    class="fas fa-map-marker-alt mr-2"></span>New York,
-                                                                Manhattan, USA</li>
-                                                            <li class="list-group-item small p-0"><span
-                                                                    class="fas fa-bullseye mr-2"></span>Old Street (2
-                                                                mins walk)</li>
-                                                        </ul>
-                                                        <div class="d-flex justify-content-between">
-                                                            <div class="col pl-0"><span
-                                                                    class="text-muted font-small d-block">Monthly</span>
-                                                                <span class="h6 text-dark font-weight-bold">500$</span>
-                                                            </div>
-                                                            <div class="col"><span
-                                                                    class="text-muted font-small d-block">People</span>
-                                                                <span class="h6 text-dark font-weight-bold">12</span>
-                                                            </div>
-                                                            <div class="col pr-0"><span
-                                                                    class="text-muted font-small d-block">Sq.Ft</span>
-                                                                <span class="h6 text-dark font-weight-bold">1200</span>
-                                                            </div>
-                                                        </div>
+
+                                    <%for(let product of all_products){%>
+
+                                        <div class="col-12 col-sm-10 col-md-6 col-lg-12 mb-1">
+                                            <div class="card border-light mb-1 animate-up-5">
+
+                                                <%if(product.is_promotion){%>
+                                                    <div class="product-discount">
+                                                        Promotion
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-10 col-md-6 col-lg-12 mb-4">
-                                        <div class="card border-light mb-4 animate-up-5">
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-12 col-lg-6 col-xl-5"><a
-                                                        href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"><img
-                                                            src="https://demo.themesberg.com/bootstrap/spaces/assets/img/meeting-office.jpg"
-                                                            alt="meeting office" class="card-img p-2 rounded-xl"></a>
-                                                </div>
-                                                <div class="col-12 col-lg-6 col-xl-7">
-                                                    <div class="card-body p-3 p-md-1"><a
-                                                            href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html">
-                                                            <h4 class="h5">Meeting Office Space</h4>
-                                                        </a>
-                                                        <div class="d-flex my-3"><span
-                                                                class="star fas fa-star text-warning"></span> <span
-                                                                class="star fas fa-star text-warning"></span> <span
-                                                                class="star fas fa-star text-warning"></span> <span
-                                                                class="star fas fa-star text-warning"></span> <span
-                                                                class="star fas fa-star text-light"></span> <span
-                                                                class="badge badge-pill badge-primary ml-2">4.0</span>
-                                                        </div>
-                                                        <ul class="list-group mb-3">
-                                                            <li class="list-group-item small p-0"><span
-                                                                    class="fas fa-map-marker-alt mr-2"></span>New York,
-                                                                Manhattan, USA</li>
-                                                            <li class="list-group-item small p-0"><span
-                                                                    class="fas fa-bullseye mr-2"></span>Old Street (2
-                                                                mins walk)</li>
-                                                        </ul>
-                                                        <div class="d-flex justify-content-between">
-                                                            <div class="col pl-0"><span
-                                                                    class="text-muted font-small d-block">Monthly</span>
-                                                                <span class="h6 text-dark font-weight-bold">50$</span>
-                                                            </div>
-                                                            <div class="col"><span
-                                                                    class="text-muted font-small d-block">People</span>
-                                                                <span class="h6 text-dark font-weight-bold">2-4</span>
-                                                            </div>
-                                                            <div class="col pr-0"><span
-                                                                    class="text-muted font-small d-block">Sq.Ft</span>
-                                                                <span class="h6 text-dark font-weight-bold">400</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-10 col-md-6 col-lg-12 mb-4">
-                                        <div class="card border-light mb-4 animate-up-5">
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-12 col-lg-6 col-xl-5"><a
-                                                        href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"><img
-                                                            src="https://demo.themesberg.com/bootstrap/spaces/assets/img/conference-office.jpg"
-                                                            alt="conference office" class="card-img p-2 rounded-xl"></a>
-                                                </div>
-                                                <div class="col-12 col-lg-6 col-xl-7">
-                                                    <div class="card-body p-3 p-md-1"><a
-                                                            href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html">
-                                                            <h4 class="h5">Conference Room</h4>
-                                                        </a>
-                                                        <div class="d-flex my-3"><span
-                                                                class="star fas fa-star text-warning"></span> <span
-                                                                class="star fas fa-star text-warning"></span> <span
-                                                                class="star fas fa-star text-warning"></span> <span
-                                                                class="star fas fa-star text-warning"></span> <span
-                                                                class="fas fa-star-half text-warning"></span> <span
-                                                                class="badge badge-pill badge-primary ml-2">4.7</span>
-                                                        </div>
-                                                        <ul class="list-group mb-3">
-                                                            <li class="list-group-item small p-0"><span
-                                                                    class="fas fa-map-marker-alt mr-2"></span>Paris,
-                                                                Île-de-France, France</li>
-                                                            <li class="list-group-item small p-0"><span
-                                                                    class="fas fa-bullseye mr-2"></span>LE BHV MARAIS (5
-                                                                mins walk)</li>
-                                                        </ul>
-                                                        <div class="d-flex justify-content-between">
-                                                            <div class="col pl-0"><span
-                                                                    class="text-muted font-small d-block">Monthly</span>
-                                                                <span class="h6 text-dark font-weight-bold">150$</span>
-                                                            </div>
-                                                            <div class="col"><span
-                                                                    class="text-muted font-small d-block">People</span>
-                                                                <span class="h6 text-dark font-weight-bold">2-10</span>
-                                                            </div>
-                                                            <div class="col pr-0"><span
-                                                                    class="text-muted font-small d-block">Sq.Ft</span>
-                                                                <span class="h6 text-dark font-weight-bold">200</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-10 col-md-6 col-lg-12">
-                                        <div class="card border-light mb-4 animate-up-5">
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-12 col-lg-6 col-xl-5"><a
-                                                        href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"><img
-                                                            src="https://demo.themesberg.com/bootstrap/spaces/assets/img/lifestyle-office.jpg"
-                                                            alt="lifestyle office" class="card-img p-2 rounded-xl"></a>
-                                                </div>
-                                                <div class="col-12 col-lg-6 col-xl-7">
-                                                    <div class="card-body p-3 p-md-1"><a
-                                                            href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html">
-                                                            <h4 class="h5">Lifestyle Space</h4>
-                                                        </a>
-                                                        <div class="d-flex my-3"><span
-                                                                class="star fas fa-star text-warning"></span> <span
-                                                                class="star fas fa-star text-warning"></span> <span
-                                                                class="star fas fa-star text-warning"></span> <span
-                                                                class="star fas fa-star text-warning"></span> <span
-                                                                class="star fas fa-star text-warning"></span> <span
-                                                                class="badge badge-pill badge-primary ml-2">4.7</span>
-                                                        </div>
-                                                        <ul class="list-group mb-3">
-                                                            <li class="list-group-item small p-0"><span
-                                                                    class="fas fa-map-marker-alt mr-2"></span>Madrid,
-                                                                Hortaleza, Spain</li>
-                                                            <li class="list-group-item small p-0"><span
-                                                                    class="fas fa-bullseye mr-2"></span>Plaza Mayor (2
-                                                                mins walk)</li>
-                                                        </ul>
-                                                        <div class="d-flex justify-content-between">
-                                                            <div class="col pl-0"><span
-                                                                    class="text-muted font-small d-block">Monthly</span>
-                                                                <span class="h6 text-dark font-weight-bold">200$</span>
-                                                            </div>
-                                                            <div class="col"><span
-                                                                    class="text-muted font-small d-block">People</span>
-                                                                <span class="h6 text-dark font-weight-bold">10-30</span>
-                                                            </div>
-                                                            <div class="col pr-0"><span
-                                                                    class="text-muted font-small d-block">Sq.Ft</span>
-                                                                <span class="h6 text-dark font-weight-bold">500</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="extraContent" style="display: none;">
-                                    <div class="row">
-                                        <div class="col-12 col-sm-10 col-md-6 col-lg-12 mb-4">
-                                            <div class="card border-light mb-4 animate-up-5">
+                                                <%}%>
+
                                                 <div class="row no-gutters align-items-center">
                                                     <div class="col-12 col-lg-6 col-xl-5"><a
-                                                            href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"><img
-                                                                src="https://demo.themesberg.com/bootstrap/spaces/assets/img/private-office.jpg"
-                                                                alt="private office"
-                                                                class="card-img p-2 rounded-xl"></a></div>
+                                                            href="/shop/product/<%=product.id%>"><img
+                                                                src="<%=product.featured_image?product.featured_image:'/assets/images/noimg.jpg'%>"
+                                                                alt="private office" class="card-img p-2 rounded-xl"></a>
+                                                    </div>
                                                     <div class="col-12 col-lg-6 col-xl-7">
-                                                        <div class="card-body p-1"><a
-                                                                href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html">
-                                                                <h4 class="h5">Collaborative Workspace</h4>
+                                                        <div class="card-body p-3 p-md-1"><a
+                                                                href="/shop/product/<%=product.id%>">
+                                                                
+                                                                <h4 class="mt-2 mb-0 h6 text-danger"><%=product.category%></h4>
+                                                                <h4 class="h5"><%=product.name%></h4>
                                                             </a>
                                                             <div class="d-flex my-3"><span
                                                                     class="star fas fa-star text-warning"></span> <span
@@ -361,143 +178,94 @@
                                                                     class="star fas fa-star text-warning"></span> <span
                                                                     class="badge badge-pill badge-primary ml-2">5.0</span>
                                                             </div>
-                                                            <ul class="list-group mb-3">
-                                                                <li class="list-group-item small p-0"><span
-                                                                        class="fas fa-map-marker-alt mr-2"></span>New
-                                                                    York, Manhattan, USA</li>
-                                                                <li class="list-group-item small p-0"><span
-                                                                        class="fas fa-bullseye mr-2"></span>Old Street
-                                                                    (2 mins walk)</li>
+                                                            <ul
+                                                                class="list-group mb-3 d-flex flex-row justify-content-between align-items-center">
+                                                                <li class="list-group-item small p-0">
+                                                                    <h4 class="h6 my-0">
+                                                                        <%=product.devise%>
+                                                                            <%=product.price%>
+                                                                    </h4>
+                                                                    <span class="badge badge-warning">En stock</span>
+                                                                </li>
+                                                                <!-- <li class="list-group-item small p-0"> 25000 Ar</li> -->
+                                                                <li class="list-group-item small p-0">
+                                                                    <button class="btn btn-sm btn-outline-success"
+                                                                        type="button" title="Ajouter au panier"><i
+                                                                            class="fa-solid fa-cart-shopping"></i> Ajouter au panier</button>
+                                                                </li>
                                                             </ul>
-                                                            <div class="d-flex justify-content-between">
+                                                            <!-- <div class="d-flex justify-content-between">
                                                                 <div class="col pl-0"><span
                                                                         class="text-muted font-small d-block">Monthly</span>
-                                                                    <span
-                                                                        class="h6 text-dark font-weight-bold">500$</span>
+                                                                    <span class="h6 text-dark font-weight-bold">500$</span>
                                                                 </div>
                                                                 <div class="col"><span
                                                                         class="text-muted font-small d-block">People</span>
-                                                                    <span
-                                                                        class="h6 text-dark font-weight-bold">12</span>
+                                                                    <span class="h6 text-dark font-weight-bold">12</span>
                                                                 </div>
                                                                 <div class="col pr-0"><span
                                                                         class="text-muted font-small d-block">Sq.Ft</span>
-                                                                    <span
-                                                                        class="h6 text-dark font-weight-bold">1200</span>
+                                                                    <span class="h6 text-dark font-weight-bold">1200</span>
                                                                 </div>
-                                                            </div>
+                                                            </div> -->
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+
+                                    <%}%>
+                                    
+                                </div>
+                                <div id="extraContent" style="display: none;">
+                                    <%for(let product of all_products){%>
                                     <div class="row">
                                         <div class="col-12 col-sm-10 col-md-6 col-lg-12 mb-4">
                                             <div class="card border-light mb-4 animate-up-5">
                                                 <div class="row no-gutters align-items-center">
                                                     <div class="col-12 col-lg-6 col-xl-5"><a
-                                                            href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"><img
-                                                                src="https://demo.themesberg.com/bootstrap/spaces/assets/img/meeting-office.jpg"
-                                                                alt="meeting office"
+                                                            href="/shop/product/<%=product.id%>"><img
+                                                                src="<%=product.featured_image?product.featured_image:'/assets/images/noimg.jpg'%>"
+                                                                alt="private office"
                                                                 class="card-img p-2 rounded-xl"></a></div>
                                                     <div class="col-12 col-lg-6 col-xl-7">
                                                         <div class="card-body p-1"><a
-                                                                href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html">
-                                                                <h4 class="h5">Meeting Office Space</h4>
+                                                                href="/shop/product/<%=product.id%>">
+                                                                <h4 class="mt-2 mb-0 h6 text-danger"><%=product.category%></h4>
+                                                                <h4 class="h5"><%=product.name%></h4>
                                                             </a>
                                                             <div class="d-flex my-3"><span
                                                                     class="star fas fa-star text-warning"></span> <span
                                                                     class="star fas fa-star text-warning"></span> <span
                                                                     class="star fas fa-star text-warning"></span> <span
                                                                     class="star fas fa-star text-warning"></span> <span
-                                                                    class="star fas fa-star text-light"></span> <span
-                                                                    class="badge badge-pill badge-primary ml-2">4.0</span>
+                                                                    class="star fas fa-star text-warning"></span> <span
+                                                                    class="badge badge-pill badge-primary ml-2">5.0</span>
                                                             </div>
-                                                            <ul class="list-group mb-3">
-                                                                <li class="list-group-item small p-0"><span
-                                                                        class="fas fa-map-marker-alt mr-2"></span>New
-                                                                    York, Manhattan, USA</li>
-                                                                <li class="list-group-item small p-0"><span
-                                                                        class="fas fa-bullseye mr-2"></span>Old Street
-                                                                    (2 mins walk)</li>
+                                                            <ul
+                                                                class="list-group mb-3 d-flex flex-row justify-content-between align-items-center">
+                                                                <li class="list-group-item small p-0">
+                                                                    <h4 class="h6 my-0">
+                                                                        <%=product.devise%>
+                                                                            <%=product.price%>
+                                                                    </h4>
+                                                                    <span class="badge badge-warning">En stock</span>
+                                                                </li>
+                                                                <!-- <li class="list-group-item small p-0"> 25000 Ar</li> -->
+                                                                <li class="list-group-item small p-0">
+                                                                    <button class="btn btn-sm btn-outline-success"
+                                                                        type="button" title="Ajouter au panier"><i
+                                                                            class="fa-solid fa-cart-shopping"></i> Ajouter au panier</button>
+                                                                </li>
                                                             </ul>
-                                                            <div class="d-flex justify-content-between">
-                                                                <div class="col pl-0"><span
-                                                                        class="text-muted font-small d-block">Monthly</span>
-                                                                    <span
-                                                                        class="h6 text-dark font-weight-bold">50$</span>
-                                                                </div>
-                                                                <div class="col"><span
-                                                                        class="text-muted font-small d-block">People</span>
-                                                                    <span
-                                                                        class="h6 text-dark font-weight-bold">2-4</span>
-                                                                </div>
-                                                                <div class="col pr-0"><span
-                                                                        class="text-muted font-small d-block">Sq.Ft</span>
-                                                                    <span
-                                                                        class="h6 text-dark font-weight-bold">400</span>
-                                                                </div>
-                                                            </div>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-12 col-sm-10 col-md-6 col-lg-12 mb-4">
-                                            <div class="card border-light mb-4 animate-up-5">
-                                                <div class="row no-gutters align-items-center">
-                                                    <div class="col-12 col-lg-6 col-xl-5"><a
-                                                            href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"><img
-                                                                src="https://demo.themesberg.com/bootstrap/spaces/assets/img/conference-office.jpg"
-                                                                alt="conference office"
-                                                                class="card-img p-2 rounded-xl"></a></div>
-                                                    <div class="col-12 col-lg-6 col-xl-7">
-                                                        <div class="card-body p-1"><a
-                                                                href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html">
-                                                                <h4 class="h5">Conference Room</h4>
-                                                            </a>
-                                                            <div class="d-flex my-3"><span
-                                                                    class="star fas fa-star text-warning"></span> <span
-                                                                    class="star fas fa-star text-warning"></span> <span
-                                                                    class="star fas fa-star text-warning"></span> <span
-                                                                    class="star fas fa-star text-warning"></span> <span
-                                                                    class="fas fa-star-half text-warning"></span> <span
-                                                                    class="badge badge-pill badge-primary ml-2">4.7</span>
-                                                            </div>
-                                                            <ul class="list-group mb-3">
-                                                                <li class="list-group-item small p-0"><span
-                                                                        class="fas fa-map-marker-alt mr-2"></span>Paris,
-                                                                    Île-de-France, France</li>
-                                                                <li class="list-group-item small p-0"><span
-                                                                        class="fas fa-bullseye mr-2"></span>LE BHV
-                                                                    MARAIS (5 mins walk)</li>
-                                                            </ul>
-                                                            <div class="d-flex justify-content-between">
-                                                                <div class="col pl-0"><span
-                                                                        class="text-muted font-small d-block">Monthly</span>
-                                                                    <span
-                                                                        class="h6 text-dark font-weight-bold">150$</span>
-                                                                </div>
-                                                                <div class="col"><span
-                                                                        class="text-muted font-small d-block">People</span>
-                                                                    <span
-                                                                        class="h6 text-dark font-weight-bold">2-10</span>
-                                                                </div>
-                                                                <div class="col pr-0"><span
-                                                                        class="text-muted font-small d-block">Sq.Ft</span>
-                                                                    <span
-                                                                        class="h6 text-dark font-weight-bold">200</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <%}%>
                                 </div>
                                 <div class="mt-4 text-center"><button id="loadOnClick"
                                         class="btn btn-primary shadow-soft border-soft btn-loading-overlay mr-2 mb-2"
@@ -510,270 +278,46 @@
                             </div>
                             <div class="tab-pane fade" id="tab-grid-2" role="tabpanel" aria-labelledby="tab-grid-2-tab">
                                 <div class="row">
+                                    <%for(let product of all_products){%>
                                     <div class="col-12 col-md-6">
                                         <div class="card border-light mb-4 animate-up-5"><a
-                                                href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"
+                                                href="/shop/product/<%=product.id%>"
                                                 class="position-relative"><img
-                                                    src="https://demo.themesberg.com/bootstrap/spaces/assets/img/image-office.jpg"
-                                                    class="card-img-top rounded-xl p-2" alt="themesberg office"></a>
+                                                    src="<%=product.featured_image?product.featured_image:'/assets/images/noimg.jpg'%>"
+                                                    class="card-img-top rounded-xl p-2 product-custom" alt="themesberg office"></a>
                                             <div class="card-body"><a
-                                                    href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html">
-                                                    <h4 class="h5">Coworking Workspace</h4>
+                                                    href="/shop/product/<%=product.id%>">
+                                                    <h4 class="mt-2 mb-0 h6 text-danger text-truncate"><%=product.category%></h4>
+                                                    <h4 class="h5 text-truncate"><%=product.name%></h4>
                                                 </a>
-                                                <div class="d-flex my-4"><span
+                                                <div class="d-flex my-1"><span
                                                         class="star fas fa-star text-warning"></span> <span
                                                         class="star fas fa-star text-warning"></span> <span
                                                         class="star fas fa-star text-warning"></span> <span
                                                         class="star fas fa-star text-warning"></span> <span
                                                         class="star fas fa-star text-warning"></span> <span
                                                         class="badge badge-pill badge-primary ml-2">5.0</span></div>
-                                                <ul class="list-group mb-3">
-                                                    <li class="list-group-item small p-0"><span
-                                                            class="fas fa-map-marker-alt mr-2"></span>California, USA
-                                                    </li>
-                                                    <li class="list-group-item small p-0"><span
-                                                            class="fas fa-bullseye mr-2"></span>Penny Market Street (15
-                                                        mins walk)</li>
-                                                    <li class="list-group-item small p-0"><span
-                                                            class="fas fa-bullseye mr-2"></span>Museum Street (20 mins
-                                                        walk)</li>
-                                                </ul>
+                                                    <ul
+                                                        class="list-group mb-3 d-flex flex-row justify-content-between align-items-center">
+                                                        <li class="list-group-item small p-0">
+                                                            <h4 class="h6 my-0">
+                                                                <%=product.devise%>
+                                                                    <%=product.price%>
+                                                            </h4>
+                                                            <span class="badge badge-warning">En stock</span>
+                                                        </li>
+                                                        <!-- <li class="list-group-item small p-0"> 25000 Ar</li> -->
+                                                        <li class="list-group-item small p-0">
+                                                            <button class="btn btn-sm btn-outline-success"
+                                                                type="button" title="Ajouter au panier"><i
+                                                                    class="fa-solid fa-cart-shopping"></i> Ajouter au panier</button>
+                                                        </li>
+                                                    </ul>
                                             </div>
-                                            <div class="card-footer bg-soft border-top">
-                                                <div class="d-flex justify-content-between">
-                                                    <div class="col pl-0"><span
-                                                            class="text-muted font-small d-block mb-2">Monthly</span>
-                                                        <span class="h5 text-dark font-weight-bold">300$</span></div>
-                                                    <div class="col"><span
-                                                            class="text-muted font-small d-block mb-2">People</span>
-                                                        <span class="h5 text-dark font-weight-bold">24</span></div>
-                                                    <div class="col pr-0"><span
-                                                            class="text-muted font-small d-block mb-2">Sq.Ft</span>
-                                                        <span class="h5 text-dark font-weight-bold">2000</span></div>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="card border-light mb-4 animate-up-5"><a
-                                                href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"
-                                                class="position-relative"><img
-                                                    src="https://demo.themesberg.com/bootstrap/spaces/assets/img/cowork-office.jpg"
-                                                    class="card-img-top rounded-xl p-2" alt="developer desk"></a>
-                                            <div class="card-body"><a
-                                                    href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html">
-                                                    <h4 class="h5">Coworking Workspace</h4>
-                                                </a>
-                                                <div class="d-flex my-4"><span
-                                                        class="star fas fa-star text-warning"></span> <span
-                                                        class="star fas fa-star text-warning"></span> <span
-                                                        class="star fas fa-star text-warning"></span> <i
-                                                        class="star fas fa-star text-light"></i> <i
-                                                        class="star fas fa-star text-light"></i> <span
-                                                        class="badge badge-pill badge-primary ml-2">3.0</span></div>
-                                                <ul class="list-group mb-3">
-                                                    <li class="list-group-item small p-0"><span
-                                                            class="fas fa-map-marker-alt mr-2"></span>California, USA
-                                                    </li>
-                                                    <li class="list-group-item small p-0"><span
-                                                            class="fas fa-bullseye mr-2"></span>Penny Market Street (15
-                                                        mins walk)</li>
-                                                    <li class="list-group-item small p-0"><span
-                                                            class="fas fa-bullseye mr-2"></span>Museum Street (20 mins
-                                                        walk)</li>
-                                                </ul>
-                                            </div>
-                                            <div class="card-footer bg-soft border-top">
-                                                <div class="d-flex justify-content-between">
-                                                    <div class="col pl-0"><span
-                                                            class="text-muted font-small d-block mb-2">Monthly</span>
-                                                        <span class="h5 text-dark font-weight-bold">300$</span></div>
-                                                    <div class="col"><span
-                                                            class="text-muted font-small d-block mb-2">People</span>
-                                                        <span class="h5 text-dark font-weight-bold">24</span></div>
-                                                    <div class="col pr-0"><span
-                                                            class="text-muted font-small d-block mb-2">Sq.Ft</span>
-                                                        <span class="h5 text-dark font-weight-bold">2000</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="card border-light mb-4 animate-up-5"><a
-                                                href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"
-                                                class="position-relative"><img
-                                                    src="https://demo.themesberg.com/bootstrap/spaces/assets/img/meeting-office.jpg"
-                                                    class="card-img-top rounded-xl p-2" alt="wood office"></a>
-                                            <div class="card-body"><a
-                                                    href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html">
-                                                    <h4 class="h5">Meeting Office Space</h4>
-                                                </a>
-                                                <div class="d-flex my-4"><span
-                                                        class="star fas fa-star text-warning"></span> <span
-                                                        class="star fas fa-star text-warning"></span> <span
-                                                        class="star fas fa-star text-warning"></span> <span
-                                                        class="star fas fa-star text-warning"></span> <i
-                                                        class="star fas fa-star text-light"></i> <span
-                                                        class="badge badge-pill badge-primary ml-2">4.0</span></div>
-                                                <ul class="list-group mb-3">
-                                                    <li class="list-group-item small p-0"><span
-                                                            class="fas fa-map-marker-alt mr-2"></span>London, Canary
-                                                        Wharf, UK</li>
-                                                    <li class="list-group-item small p-0"><span
-                                                            class="fas fa-bullseye mr-2"></span>Stamford Bridge Stadium
-                                                        (5 mins walk)</li>
-                                                    <li class="list-group-item small p-0"><span
-                                                            class="fas fa-bullseye mr-2"></span>Bluebird Chelsea
-                                                        Restaurant (15 mins walk)</li>
-                                                </ul>
-                                            </div>
-                                            <div class="card-footer bg-soft border-top">
-                                                <div class="d-flex justify-content-between">
-                                                    <div class="col pl-0"><span
-                                                            class="text-muted font-small d-block mb-2">Monthly</span>
-                                                        <span class="h5 text-dark font-weight-bold">50$</span></div>
-                                                    <div class="col"><span
-                                                            class="text-muted font-small d-block mb-2">People</span>
-                                                        <span class="h5 text-dark font-weight-bold">2-4</span></div>
-                                                    <div class="col pr-0"><span
-                                                            class="text-muted font-small d-block mb-2">Sq.Ft</span>
-                                                        <span class="h5 text-dark font-weight-bold">400</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="card border-light mb-4 animate-up-5"><a
-                                                href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"
-                                                class="position-relative"><img
-                                                    src="https://demo.themesberg.com/bootstrap/spaces/assets/img/conference-office.jpg"
-                                                    class="card-img-top rounded-xl p-2" alt="pixel room"></a>
-                                            <div class="card-body"><a
-                                                    href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html">
-                                                    <h4 class="h5">Conference Room</h4>
-                                                </a>
-                                                <div class="d-flex my-4"><span
-                                                        class="star fas fa-star text-warning"></span> <span
-                                                        class="star fas fa-star text-warning"></span> <span
-                                                        class="star fas fa-star text-warning"></span> <span
-                                                        class="star fas fa-star text-warning"></span> <i
-                                                        class="fas fa-star-half text-warning"></i> <span
-                                                        class="badge badge-pill badge-primary ml-2">4.7</span></div>
-                                                <ul class="list-group mb-3">
-                                                    <li class="list-group-item small p-0"><span
-                                                            class="fas fa-map-marker-alt mr-2"></span>Paris,
-                                                        Île-de-France, France</li>
-                                                    <li class="list-group-item small p-0"><span
-                                                            class="fas fa-bullseye mr-2"></span>LE BHV MARAIS (5 mins
-                                                        walk)</li>
-                                                    <li class="list-group-item small p-0"><span
-                                                            class="fas fa-bullseye mr-2"></span>Shakespeare & Company
-                                                        (15 mins walk)</li>
-                                                </ul>
-                                            </div>
-                                            <div class="card-footer bg-soft border-top">
-                                                <div class="d-flex justify-content-between">
-                                                    <div class="col pl-0"><span
-                                                            class="text-muted font-small d-block mb-2">Monthly</span>
-                                                        <span class="h5 text-dark font-weight-bold">150$</span></div>
-                                                    <div class="col"><span
-                                                            class="text-muted font-small d-block mb-2">People</span>
-                                                        <span class="h5 text-dark font-weight-bold">2-10</span></div>
-                                                    <div class="col pr-0"><span
-                                                            class="text-muted font-small d-block mb-2">Sq.Ft</span>
-                                                        <span class="h5 text-dark font-weight-bold">200</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="card border-light mb-4 animate-up-5"><a
-                                                href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"
-                                                class="position-relative"><img
-                                                    src="https://demo.themesberg.com/bootstrap/spaces/assets/img/lifestyle-office.jpg"
-                                                    class="card-img-top rounded-xl p-2" alt="modern desk"></a>
-                                            <div class="card-body"><a
-                                                    href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html">
-                                                    <h4 class="h5">Lifestyle Space</h4>
-                                                </a>
-                                                <div class="d-flex my-4"><span
-                                                        class="star fas fa-star text-warning"></span> <span
-                                                        class="star fas fa-star text-warning"></span> <span
-                                                        class="star fas fa-star text-warning"></span> <span
-                                                        class="star fas fa-star text-warning"></span> <span
-                                                        class="star fas fa-star text-warning"></span> <span
-                                                        class="badge badge-pill badge-primary ml-2">4.7</span></div>
-                                                <ul class="list-group mb-3">
-                                                    <li class="list-group-item small p-0"><span
-                                                            class="fas fa-map-marker-alt mr-2"></span>Madrid, Hortaleza,
-                                                        Spain</li>
-                                                    <li class="list-group-item small p-0"><span
-                                                            class="fas fa-bullseye mr-2"></span>Plaza Mayor (2 mins
-                                                        walk)</li>
-                                                    <li class="list-group-item small p-0"><span
-                                                            class="fas fa-bullseye mr-2"></span>eal Casa de Correos (15
-                                                        mins walk)</li>
-                                                </ul>
-                                            </div>
-                                            <div class="card-footer bg-soft border-top">
-                                                <div class="d-flex justify-content-between">
-                                                    <div class="col pl-0"><span
-                                                            class="text-muted font-small d-block mb-2">Monthly</span>
-                                                        <span class="h5 text-dark font-weight-bold">200$</span></div>
-                                                    <div class="col"><span
-                                                            class="text-muted font-small d-block mb-2">People</span>
-                                                        <span class="h5 text-dark font-weight-bold">10-30</span></div>
-                                                    <div class="col pr-0"><span
-                                                            class="text-muted font-small d-block mb-2">Sq.Ft</span>
-                                                        <span class="h5 text-dark font-weight-bold">500</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="card border-light mb-4 animate-up-5"><a
-                                                href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"
-                                                class="position-relative"><img
-                                                    src="https://demo.themesberg.com/bootstrap/spaces/assets/img/private-office.jpg"
-                                                    class="card-img-top rounded-xl p-2" alt="office modern"></a>
-                                            <div class="card-body"><a
-                                                    href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html">
-                                                    <h4 class="h5">Private Space</h4>
-                                                </a>
-                                                <div class="d-flex my-4"><span
-                                                        class="star fas fa-star text-warning"></span> <span
-                                                        class="star fas fa-star text-warning"></span> <span
-                                                        class="star fas fa-star text-warning"></span> <span
-                                                        class="star fas fa-star text-warning"></span> <span
-                                                        class="star fas fa-star text-warning"></span> <span
-                                                        class="badge badge-pill badge-primary ml-2">5.0</span></div>
-                                                <ul class="list-group mb-3">
-                                                    <li class="list-group-item small p-0"><span
-                                                            class="fas fa-map-marker-alt mr-2"></span>New York,
-                                                        Manhattan, USA</li>
-                                                    <li class="list-group-item small p-0"><span
-                                                            class="fas fa-bullseye mr-2"></span>Old Street (2 mins walk)
-                                                    </li>
-                                                    <li class="list-group-item small p-0"><span
-                                                            class="fas fa-bullseye mr-2"></span>Shoreditch High Street
-                                                        (10 mins walk)</li>
-                                                </ul>
-                                            </div>
-                                            <div class="card-footer bg-soft border-top">
-                                                <div class="d-flex justify-content-between">
-                                                    <div class="col pl-0"><span
-                                                            class="text-muted font-small d-block mb-2">Monthly</span>
-                                                        <span class="h5 text-dark font-weight-bold">100$</span></div>
-                                                    <div class="col"><span
-                                                            class="text-muted font-small d-block mb-2">People</span>
-                                                        <span class="h5 text-dark font-weight-bold">1</span></div>
-                                                    <div class="col pr-0"><span
-                                                            class="text-muted font-small d-block mb-2">Sq.Ft</span>
-                                                        <span class="h5 text-dark font-weight-bold">10</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <%}%>
                                 </div>
                             </div>
                         </div>
@@ -784,37 +328,9 @@
     </main>
 
     <%- include('../component/footer'); %>
+    <%- include('../script'); %>
 
-    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/jquery/dist/jquery.min.js"></script>
-    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/popper.js/dist/umd/popper.min.js"></script>
-    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/headroom.js/dist/headroom.min.js"></script>
-    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/onscreen/dist/on-screen.umd.min.js"></script>
-    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/nouislider/distribute/nouislider.min.js"></script>
-    <script
-        src="https://demo.themesberg.com/bootstrap/spaces/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/waypoints/lib/jquery.waypoints.min.js"></script>
-    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/owl.carousel/dist/owl.carousel.min.js"></script>
-    <script
-        src="https://demo.themesberg.com/bootstrap/spaces/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
-    <script
-        src="https://demo.themesberg.com/bootstrap/spaces/vendor/@fancyapps/fancybox/dist/jquery.fancybox.min.js"></script>
-    <script
-        src="https://demo.themesberg.com/bootstrap/spaces/vendor/sticky-sidebar/dist/sticky-sidebar.min.js"></script>
-    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/leaflet/dist/leaflet.js"></script>
-    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/chartist/dist/chartist.min.js"></script>
-    <script
-        src="https://demo.themesberg.com/bootstrap/spaces/vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
-    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/jqvmap/dist/jquery.vmap.min.js"></script>
-    <script src="https://demo.themesberg.com/bootstrap/spaces/vendor/jqvmap/dist/maps/jquery.vmap.usa.js"></script>
-    <script src="https://demo.themesberg.com/bootstrap/spaces/assets/js/jquery.slideform.js"></script>
-    <script src="https://demo.themesberg.com/bootstrap/spaces/assets/js/spaces.js"></script>
-    <script>(function () { if (!document.body) return; var js = "window['__CF$cv$params']={r:'86a7705fda4394c0',t:'MTcxMTQ1OTIzNi4wOTAwMDA='};_cpo=document.createElement('script');_cpo.nonce='',_cpo.src='../../../cdn-cgi/challenge-platform/h/g/scripts/jsd/dc6b543c1346/main.js',document.getElementsByTagName('head')[0].appendChild(_cpo);"; var _0xh = document.createElement('iframe'); _0xh.height = 1; _0xh.width = 1; _0xh.style.position = 'absolute'; _0xh.style.top = 0; _0xh.style.left = 0; _0xh.style.border = 'none'; _0xh.style.visibility = 'hidden'; document.body.appendChild(_0xh); function handler() { var _0xi = _0xh.contentDocument || _0xh.contentWindow.document; if (_0xi) { var _0xj = _0xi.createElement('script'); _0xj.innerHTML = js; _0xi.getElementsByTagName('head')[0].appendChild(_0xj); } } if (document.readyState !== 'loading') { handler(); } else if (window.addEventListener) { document.addEventListener('DOMContentLoaded', handler); } else { var prev = document.onreadystatechange || function () { }; document.onreadystatechange = function (e) { prev(e); if (document.readyState !== 'loading') { document.onreadystatechange = prev; handler(); } }; } })();</script>
-    <script defer
-        src="https://static.cloudflareinsights.com/beacon.min.js/v84a3a4012de94ce1a686ba8c167c359c1696973893317"
-        integrity="sha512-euoFGowhlaLqXsPWQ48qSkBSCFs3DPRyiwVu3FjR96cMPx+Fr+gpWRhIafcHwqwCqWS42RZhIudOvEI+Ckf6MA=="
-        data-cf-beacon='{"rayId":"86a7705fda4394c0","version":"2024.3.0","r":1,"token":"3a2c60bab7654724a0f7e5946db4ea5a","b":1}'
-        crossorigin="anonymous"></script>
+    
 </body>
 
 </html>

@@ -19,6 +19,7 @@ const router = express.Router()
 const Supplier = require('../models/supplier');
 const Schedule = require('../models/schedule');
 const Product = require('../models/product');
+const Ads = require('../models/ads');
 
 // Configuration de Multer pour gérer les uploads
 const storage = multer.diskStorage({
@@ -35,7 +36,26 @@ const upload = multer({ storage: storage });
 
 //signup endpoint
 //passing the middleware function to the signup
-router.post('/save-product', upload.fields([{ name: 'featured_image', maxCount: 1 }, { name: 'galleries' }]), saveProduct)
+router.post('/my-acount/product/create', upload.fields([{ name: 'featured_image', maxCount: 1 }, { name: 'galleries' }]), saveProduct );
+// Route pour afficher le formulaire
+// router.get('/my-acount/product/create', (req, res) => {
+
+//     let is_connected = false;
+
+//     if(req.cookies.user){
+//         is_connected=true
+//     }
+
+//     console.log(req.cookies.vendor);
+
+//     res.render('create-product',{
+//         "is_connected" : is_connected,
+//         "vendor": req.cookies.vendor,
+//         "user": req.cookies.user,
+//         "token": req.cookies.token,
+//         "suplier_id" : req.cookies.vendor.id
+//     });
+//   });
 
 router.get('/getAllProduct', getAllProduct)
 
@@ -54,7 +74,7 @@ router.get('/:username', async (req, res) => {
 
     let username = req.params.username
 
-    let page = req.query.page?req.query.page:1;
+    let page = (req.query.page && req.query.page > 0 )?req.query.page:1;
 
     //find a user by their email
     // const user = await User.findOne({
@@ -64,7 +84,7 @@ router.get('/:username', async (req, res) => {
 
     // });
 
-    console.log(page);
+    // console.log(page);
 
     //find a supplier by their email
     const supplier = await Supplier.findOne({
@@ -82,11 +102,19 @@ router.get('/:username', async (req, res) => {
 
     if(supplier){
 
+        let all_products = await Product.findAll({
+            where: {
+                supplier_id: supplier.id
+            }
+        });
+
         res.render("shop/basic", {
             "is_connected" : is_connected,
             "vendor": req.cookies.vendor,
             "user": req.cookies.user,
-            "token": req.cookies.token
+            "token": req.cookies.token,
+            "all_products":all_products,
+            "supplier": supplier
         });
     }else{
 
@@ -94,9 +122,28 @@ router.get('/:username', async (req, res) => {
 
             // console.log("Ato tsika zany");
 
-            let all_products = await Product.findAll();
+            const limit = 6; // Nombre de produits par page
+
+            // Calculer l'offset en fonction de la page actuelle
+            const offset = (page - 1) * limit;
+
+            let tous_sans_filtre = await Product.findAll();
+
+            let all_products = await Product.findAll({
+                offset: offset,
+                limit: limit,
+            });
+
+            let all_sponsored = await Product.findAll({
+                where: {
+                    is_sponsored: true
+                }
+            });
+
+            let ads = await Ads.findAll();
 
             // console.log(all_products);
+            const maxPage = Math.ceil(tous_sans_filtre.length/limit);
     
             res.render("shop/all-spaces-sidebar", {
                 "is_connected" : is_connected,
@@ -104,8 +151,11 @@ router.get('/:username', async (req, res) => {
                 "user": req.cookies.user,
                 "token": req.cookies.token,
                 "all_products" : all_products,
-                "page" : page,
-                "page_max" : all_products%10
+                "all_sponsored" : all_sponsored,
+                "ads" : ads,
+                "currentPage" : page,
+                "page_max" : maxPage,
+                "total_products" :tous_sans_filtre.length
             });
         }
     }

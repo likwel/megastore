@@ -12,7 +12,7 @@ const saveProduct = async (req, res) => {
     try {
 
         const singleImage = req.files['featured_image'] ? req.files['featured_image'][0].filename : null; // Nom du fichier de l'image unique
-        const multipleImages = req.files['galleries'] ? req.files['galleries'].map(file => file.filename) : [];
+        const multipleImages = req.files['galleries'] ? req.files['galleries'].map(file => "/data/uploads/"+file.filename) : [];
 
         const data = {
             name : req.body.name,
@@ -22,12 +22,13 @@ const saveProduct = async (req, res) => {
             last_price : 0,
             devise : req.body.devise,
             weight : 0,
-            featured_image : singleImage,
+            featured_image : "/data/uploads/"+singleImage,
             photos : multipleImages,
             rates : 0,
             category : req.body.category,
-            avis : req.body.avis,
+            // avis : req.body.avis,
             supplier_id : req.body.supplier_id,
+            review_id : 1,
             is_promotion : 0,
             is_active : 1,
             is_promotion : 0,
@@ -35,9 +36,16 @@ const saveProduct = async (req, res) => {
             is_suggested :0
         }
 
+        // console.log(data);
+
         Product.create(data).then(rep=>{
-            res.redirect("my-account/products");
+            // res.redirect("my-account/products");
+            console.log("Product created");
         })
+
+        // res.status(200).send('Article ajouté avec succès');
+
+        res.redirect('/my-account/products');
         
     } catch (error) {
         console.log(error);

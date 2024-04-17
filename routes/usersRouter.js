@@ -113,6 +113,7 @@ router.get('/my-account/products', async (req, res) => {
     }
 
     // console.log(JSON.parse(req.cookies.vendor));
+    let supplier_id = JSON.parse(req.cookies.vendor).id
 
     if(req.cookies.vendor){
         all_product =  await Product.findAll({
@@ -122,12 +123,15 @@ router.get('/my-account/products', async (req, res) => {
         })
     }
 
+    // console.log(JSON.parse(req.cookies.vendor));
+
     res.render("products", {
         "is_connected" : is_connected,
         "vendor": req.cookies.vendor,
         "user": req.cookies.user,
         "token": req.cookies.token,
         "all_product": all_product,
+        "supplier_id" : supplier_id
     });
 })
 

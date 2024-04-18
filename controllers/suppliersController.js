@@ -166,6 +166,20 @@ const setlatlong = async (req, res) => {
       })
 }
 
+const choosePlan = async (req, res) => {
+    // Supplier.update(dataUser);
+    Supplier.update({ subscription : req.query.plan}, {
+        where: {
+          id: req.query.id,
+        }
+    })
+
+    res.redirect("/page/pricing");
+
+}
+
+
+
 const logout = async (req, res) => {
     // req.cookies
     res.clearCookie("token");
@@ -178,5 +192,6 @@ module.exports = {
     signup,
     setlatlong, 
     logout, 
-    updateSupplier
+    updateSupplier,
+    choosePlan,
 };

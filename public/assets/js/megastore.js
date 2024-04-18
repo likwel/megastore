@@ -966,3 +966,89 @@ function openSupplierSignup(){
     // $("#registerSupplier").collapse("show")
 document.querySelector("#types").value = "vendor"
 }
+
+
+function choosePlan(id, val){
+
+    Swal.fire({
+        title: "Payement d'abonnement",
+        input: "text",
+        inputAttributes: {
+          autocapitalize: "off"
+        },
+        showCancelButton: true,
+        confirmButtonText: "Envoyer",
+        cancelButtonText: "Annuler",
+        showLoaderOnConfirm: true,
+        preConfirm: async (login) => {
+          try {
+
+            let plane = {
+                "0": "0",
+                "5000": "1",
+                "8000": "2",
+                "15000": "3",
+                "35000": "4",
+                "50000": "5"
+            }
+
+            const baseUrl = `/update-plan`;
+
+            const queryParams = {
+                id: id,
+                plan: val
+              };
+
+              let url = baseUrl + '?' + new URLSearchParams(queryParams);
+
+              // Envoi de la requête GET
+
+              if(plane[login.toString()] == val){
+                fetch(url)
+                .then(async response => {
+                  if (!response.ok) {
+                    return Swal.showValidationMessage(`
+                        ${JSON.stringify(await response.json())}
+                    `);
+                  }
+                  return response.json();
+                })
+                .then(data => {
+                  console.log('Response data:', data);
+                })
+                .catch(error => {
+                  console.error('Error during fetch:', error);
+                }).finally(() => {
+                  // Masquer le chargement après 5 secondes
+                  setTimeout(() => {
+                    Swal.hideLoading();
+                    window.location.href = "/page/pricing"
+                  }, 5000);
+                });
+              }else{
+                Swal.showValidationMessage(`
+                    Veuillez saisir un montant valide.
+                `);
+              }
+              
+              
+          } catch (error) {
+            console.log(error);
+            Swal.showValidationMessage(`
+              Request failed: ${error}
+            `);
+          }
+        },
+        allowOutsideClick: () => !Swal.isLoading()
+      }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Changement de plan en cours...',
+                willOpen: () => {
+                  Swal.showLoading();
+                }
+            });
+        }
+      });
+
+}

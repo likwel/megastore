@@ -7,7 +7,8 @@ const {
     getSupplierById,
     signup,
     setlatlong, 
-    logout
+    logout,
+    choosePlan,
     } = supController
 
 const router = express.Router()
@@ -19,6 +20,8 @@ const Supplier = require('../models/supplier');
 router.post('/save-supplier', supAuth.saveSupplier, signup)
 
 router.post('/set-lat-long', setlatlong)
+
+router.get('/update-plan', choosePlan)
 
 
 

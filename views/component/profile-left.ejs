@@ -1,4 +1,4 @@
-<div class="col-12 col-md-4 d-none d-lg-block">
+<div class="col-12 col-md-4 d-lg-block mb-2 mb-md-0">
 
     <div class="card border-light p-2">
         <div class="card-body p-2">
@@ -10,9 +10,23 @@
             <h2 class="h5 font-weight-normal text-center mt-3 mb-0"><%= user?JSON.parse(user).fullname:'' %></h2>
             <h4 class="h6 font-weight-normal text-center mt-3 mb-0"><%= user?JSON.parse(user).email:'' %></h4>
             <div class="text-center">
-                <span class="badge badge-pill badge-success"><%= (user && JSON.parse(user).types=="users")?"Utilisateur":"Fournisseur" %></span>
+
+                <% let plane = {
+                    '0' : 'Gratuit',
+                    '1' : 'Basic',
+                    '2' : 'Pro',
+                    '3' : 'Affaire',
+                    '4' : 'Entreprise',
+                    '5' : 'Illimité',
+                }%>
+                <span class="badge badge-pill badge-success"><%= (user && JSON.parse(user).types=="users")?"Utilisateur":"Vendeur" %></span><br>
+                
+                <%if(vendor){%>
+                    <span class="badge badge-pill badge-warning">Vous utilisez le plan <%=plane[JSON.parse(vendor).subscription]%></span>
+                    <br><a href="/page/pricing" class="mt-2 badge badge-pill badge-info"><i class="fa-solid fa-tags"></i> Mettre à jour votre plan</a>
+                <%}%>
             </div>
-            <div class="list-group dashboard-menu list-group-sm mt-4">
+            <div class="list-group dashboard-menu list-group-sm mt-4 d-none d-lg-block">
                 <a href="/my-account"
                     class="d-flex list-group-item list-group-item-action <%= dashboard %>">Dashboard <span
                         class="icon icon-xs ml-auto"><span

@@ -30,7 +30,9 @@ router.get('/page/pricing', (req, res) => {
         "is_connected" : is_connected,
         "user": req.cookies.user,
         "vendor": req.cookies.vendor,
-        "token": req.cookies.token
+        "token": req.cookies.token,
+        "plan" : JSON.parse(req.cookies.vendor).subscription,
+        "vendor_id" : JSON.parse(req.cookies.vendor).id
     });
 
 })

@@ -250,7 +250,7 @@
 
                 <% if(is_connected) { %>
                     
-                    <a href="/sign-in" title="Mon compte" class="btn btn-sm btn-outline-white animate-up-2 mr-3 dropdown-toggle" data-toggle="dropdown">
+                    <a href="/sign-in" title="Mon compte" class="btn btn-sm btn-outline-danger animate-up-2 mr-3 dropdown-toggle" data-toggle="dropdown">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                 <circle cx="12" cy="7" r="4"></circle>
@@ -277,7 +277,7 @@
                     </div>
                     
                 <%}else{ %>
-                    <a href="/sign-in" title="Se connecter" class="btn btn-sm btn-outline-white animate-up-2 mr-3">
+                    <a href="/sign-in" title="Se connecter" class="btn btn-sm btn-outline-danger animate-up-2 mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                 <circle cx="12" cy="7" r="4"></circle>
@@ -296,3 +296,27 @@
         </div>
     </nav>
 </header>
+
+<%
+getStarForNote = function(note) {
+
+    let rate = parseFloat(note) - Math.trunc(parseFloat(note));
+    let rateYellow = rate * 100;
+    let rateBlack = 100 - rateYellow;
+    let startIcon =""
+    for (let i = 0; i < 5; i++) {
+        if (i < parseInt(note)) {
+                startIcon += `<i class="star fas fa-star text-warning" style="color: rgb(245, 209, 101);"></i>`;
+            } else {
+                if (rate != 0 && i === Math.trunc(parseFloat(note))) {
+                    startIcon += `<i class="star fas fa-star" data-rank="1" `+`style ="background: linear-gradient(90deg, #f0b400 ${rateYellow}%, #000 ${rateBlack}%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;" }}"></i>`;
+                    rate = 0;
+                } else {
+                    startIcon += `<i class="star far fa-star" data-rank="1"></i>`;
+                }
+            }
+        }
+      return startIcon;
+}
+%>
+

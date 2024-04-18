@@ -34,57 +34,15 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
   
 
-//signup endpoint
-//passing the middleware function to the signup
 router.post('/my-acount/product/create', upload.fields([{ name: 'featured_image', maxCount: 1 }, { name: 'galleries' }]), saveProduct );
-// Route pour afficher le formulaire
-// router.get('/my-acount/product/create', (req, res) => {
-
-//     let is_connected = false;
-
-//     if(req.cookies.user){
-//         is_connected=true
-//     }
-
-//     console.log(req.cookies.vendor);
-
-//     res.render('create-product',{
-//         "is_connected" : is_connected,
-//         "vendor": req.cookies.vendor,
-//         "user": req.cookies.user,
-//         "token": req.cookies.token,
-//         "suplier_id" : req.cookies.vendor.id
-//     });
-//   });
 
 router.get('/getAllProduct', getAllProduct)
-
-
-//view register
-// router.get('/sign-up/supplier', (req, res) => {
-//     let user_id = req.query.user_id
-//     res.render("register-supplier",{
-//         user_id : user_id,
-//     })
-// })
-
-
 
 router.get('/:username', async (req, res) => {
 
     let username = req.params.username
 
     let page = (req.query.page && req.query.page > 0 )?req.query.page:1;
-
-    //find a user by their email
-    // const user = await User.findOne({
-    //     where: {
-    //         username: username
-    //     }
-
-    // });
-
-    // console.log(page);
 
     //find a supplier by their email
     const supplier = await Supplier.findOne({
@@ -108,14 +66,56 @@ router.get('/:username', async (req, res) => {
             }
         });
 
-        res.render("shop/basic", {
-            "is_connected" : is_connected,
-            "vendor": req.cookies.vendor,
-            "user": req.cookies.user,
-            "token": req.cookies.token,
-            "all_products":all_products,
-            "supplier": supplier
-        });
+        // Simple template => GRATUIT MODE
+        if(supplier.subscription == 0){
+            res.render("shop/basic", {
+                "is_connected" : is_connected,
+                "vendor": req.cookies.vendor,
+                "user": req.cookies.user,
+                "token": req.cookies.token,
+                "all_products":all_products,
+                "supplier": supplier,
+                "basic" : 0,
+            });
+        }
+        // Simple template => BASIC MODE
+        if(supplier.subscription == 1){
+            res.render("shop/basic", {
+                "is_connected" : is_connected,
+                "vendor": req.cookies.vendor,
+                "user": req.cookies.user,
+                "token": req.cookies.token,
+                "all_products":all_products,
+                "supplier": supplier,
+                "basic" : 1,
+            });
+        }
+
+        // Attractive template => PRO MODE
+        if(supplier.subscription == 2){
+            res.render("shop/basic", {
+                "is_connected" : is_connected,
+                "vendor": req.cookies.vendor,
+                "user": req.cookies.user,
+                "token": req.cookies.token,
+                "all_products":all_products,
+                "supplier": supplier
+            });
+        }
+
+         // E-commerce template => AFFAIRE - ENTREPISE - ILLIMITED MODE
+         if(supplier.subscription == 3 || supplier.subscription == 4 || supplier.subscription == 5){
+            res.render("shop/basic", {
+                "is_connected" : is_connected,
+                "vendor": req.cookies.vendor,
+                "user": req.cookies.user,
+                "token": req.cookies.token,
+                "all_products":all_products,
+                "supplier": supplier
+            });
+        }
+
+        
     }else{
 
         if(username==="shop"){

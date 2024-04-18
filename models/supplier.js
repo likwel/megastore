@@ -81,6 +81,11 @@ const Supplier = db.define('supplier', {
         type: DataTypes.INTEGER,
         allowNull: true
     },
+    subscription: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        defaultValue : 0
+    },
 });
 
 Supplier.sync().then(() => {

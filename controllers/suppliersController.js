@@ -133,10 +133,10 @@ const login = async (req, res) => {
 
 const getAllSuppliers = async (req, res) => {
     Supplier.findAll({
-        include: [{
-          model: User,
-        //   required: true
-         }]
+        // include: [{
+        //   model: User,
+        // //   required: true
+        //  }]
       }).then(result => {
         res.send(result);
     })

@@ -25,7 +25,7 @@
     
 </head>
 
-<body>
+<body onload="demandeGeolocalisation()">
     <!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THQTXJ7" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript> -->
 
@@ -165,7 +165,7 @@
                                                                 class="accordion-panel-header w-100 d-flex align-items-center justify-content-between"
                                                                 data-toggle="collapse" role="button"
                                                                 aria-expanded="false" aria-controls="reviews"><span
-                                                                    class="icon-title h6 mb-0 font-weight-bold">Rating</span>
+                                                                    class="icon-title h6 mb-0 font-weight-bold">Note & avis</span>
                                                                 <span class="icon"><span
                                                                         class="fas fa-plus"></span></span></a>
                                                             <ul id="reviews"
@@ -279,7 +279,7 @@
                                                                 class="accordion-panel-header w-100 d-flex align-items-center justify-content-between"
                                                                 data-toggle="collapse" role="button"
                                                                 aria-expanded="false" aria-controls="amenities-1"><span
-                                                                    class="icon-title h6 mb-0 font-weight-bold">Amenities</span>
+                                                                    class="icon-title h6 mb-0 font-weight-bold">Catégories</span>
                                                                 <span class="icon"><i
                                                                         class="fas fa-plus"></i></span></a>
                                                             <ul id="amenities-1"
@@ -328,25 +328,24 @@
                                                                 class="accordion-panel-header w-100 d-flex align-items-center justify-content-between"
                                                                 data-toggle="collapse" role="button"
                                                                 aria-expanded="false" aria-controls="price-1"><span
-                                                                    class="icon-title h6 mb-0 font-weight-bold">Price</span>
+                                                                    class="icon-title h6 mb-0 font-weight-bold">Prix</span>
                                                                 <span class="icon"><i
                                                                         class="fas fa-plus"></i></span></a>
                                                             <div id="price-1" class="collapse pt-5">
                                                                 <div id="input-slider-range" data-range-value-min="100"
-                                                                    data-range-value-max="500"></div>
+                                                                    data-range-value-max="10000000"></div>
                                                                 <div class="row d-none">
                                                                     <div class="col-6"><span
                                                                             class="range-slider-value value-low"
-                                                                            data-range-value-low="200"
+                                                                            data-range-value-low="200000"
                                                                             id="input-slider-range-value-low"></span>
                                                                     </div>
                                                                     <div class="col-6 text-right"><span
                                                                             class="range-slider-value value-high"
-                                                                            data-range-value-high="400"
+                                                                            data-range-value-high="7500000"
                                                                             id="input-slider-range-value-high"></span>
                                                                     </div>
-                                                                </div><span class="font-xs small text-gray">*Prices are
-                                                                    in USD</span>
+                                                                </div><span class="font-xs small text-gray">*Prix en Ariary</span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -360,9 +359,9 @@
                                                 <div class="col-6 col-lg-4 mb-3 mb-lg-0"><button
                                                         class="btn btn-primary btn-block animate-up-2"
                                                         type="submit">Rechercher</button></div>
-                                                <div class="col-6 col-lg-4 mb-3 mb-lg-0"><button
+                                                <div class="col-6 col-lg-4 mb-3 mb-lg-0"><a href="?closer=true"
                                                         class="btn btn-outline-gray btn-block animate-up-2"
-                                                        type="reset"><i class="fa-solid fa-location-crosshairs"></i> Plus proches de vous</button></div>
+                                                        type="reset"><i class="fa-solid fa-location-crosshairs"></i> Plus proches de vous</a></div>
                                                 <div
                                                     class="col-12 col-lg-4 d-flex justify-content-between align-items-center">
                                                     <a href="#" data-target="#collapseAdvanced"
@@ -597,11 +596,12 @@
         <div class="modal-dialog modal-dialog-centered modal-full" role="document">
             <div class="modal-content position-relative">
                 <div class="preloadermap bg-dark flex-column justify-content-center align-items-center">
-                    <div class="position-relative"><img
-                            src="https://demo.themesberg.com/bootstrap/spaces/assets/img/brand/light-without-letter.svg"
-                            alt="Logo loader"> <img
-                            src="https://demo.themesberg.com/bootstrap/spaces/assets/img/brand/letter.svg"
-                            class="rotate-letter" alt="Letter loader"></div>
+                    <div class="position-relative">
+                        <img src="/assets/images/logo_2.png" alt="Logo loader"> 
+                        <div class="progress mt-2" style="height: 2px;">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-header border-0 pb-1 d-block">
                     <div class="d-flex justify-content-end d-lg-none mb-2"><button type="button" class="close"
@@ -638,19 +638,21 @@
                 </div>
                 <div class="modal-body overflow-hidden d-flex py-4">
                     <div class="row h-100">
-                        <div class="d-none d-xl-block col-12 col-lg-5 overflow-auto h-100">
+                        <div class="d-none d-xl-block col-12 col-lg-5 overflow-auto h-100" id="vendors-inmap">
                             <div class="row">
+
+                            <% for(let vendor of all_vendor_limit) {%>
                                 <div class="col-12">
                                     <div class="card border-light mb-4 animate-up-5">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col-12 col-lg-6 col-xl-5"><a
-                                                    href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"><img
-                                                        src="https://demo.themesberg.com/bootstrap/spaces/assets/img/private-office.jpg"
+                                                    href="<%=vendor.company_url%>"><img
+                                                        src="<%=vendor.company_photo?vendor.company_photo:'../assets/images/default_pdc.jpg'%>"
                                                         alt="private office" class="card-img p-2 rounded-xl"></a></div>
                                             <div class="col-12 col-lg-6 col-xl-7">
-                                                <div class="card-body px-3 py-2"><a
-                                                        href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html">
-                                                        <h4 class="h6">Collaborative Workspace</h4>
+                                                <div class="card-body px-3 py-2"><a class="name-inmap"
+                                                        href="#" data-lat="<%=vendor.latitude%>" data-lng="<%=vendor.longitude%>" onclick="syncMap(this)">
+                                                        <h4 class="h6"><%=vendor.company_name%></h4>
                                                     </a>
                                                     <div class="d-flex my-2 small"><span
                                                             class="star fas fa-star text-warning"></span> <span
@@ -660,148 +662,26 @@
                                                             class="star fas fa-star text-warning"></span> <span
                                                             class="badge badge-pill small badge-primary ml-2">5.0</span>
                                                     </div>
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="col pl-0"><span
-                                                                class="text-muted small d-block mb-1">Monthly</span>
-                                                            <span
-                                                                class="h5 small text-dark font-weight-bold">500$</span>
-                                                        </div>
-                                                        <div class="col"><span
-                                                                class="text-muted small d-block mb-1">People</span>
-                                                            <span class="h5 small text-dark font-weight-bold">12</span>
-                                                        </div>
-                                                        <div class="col pr-0"><span
-                                                                class="text-muted small d-block mb-1">Sq.Ft</span> <span
-                                                                class="h5 small text-dark font-weight-bold">600</span>
-                                                        </div>
-                                                    </div>
+                                                    <ul class="list-group mb-3">
+                                                        <li class="list-group-item small p-0"><span
+                                                                class="fas fa-map-marker-alt mr-2"></span><%=vendor.address%></li>
+                                                        <li class="list-group-item small p-0"><span class="fa-solid fa-globe mr-2"></span><%=vendor.ville%> <%=vendor.country%></li>
+                                                        <li class="list-group-item small p-0">
+                                                            <a href="<%=vendor.company_url%>" type="button" class="btn btn-sm btn-primary" title="Boutique"><i class="fas fa-shopping-bag mr-2"></i>Boutique</a>
+                                                            <a href="/vendor/<%=vendor.id%>"type="button" class="btn btn-sm btn-tertiary" title="Profil"> <i class="fa-regular fa-user mr-2"></i>Profil</a>
+                                                            <button class="btn btn-sm btn-icon-only rounded-circle btn-danger" type="button" title="Suivre">
+                                                                <span class="btn-inner-icon"><i class="far fa-thumbs-up"></i></span>
+                                                            </button>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <div class="card border-light mb-4 animate-up-5">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col-12 col-lg-6 col-xl-5"><a
-                                                    href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"><img
-                                                        src="https://demo.themesberg.com/bootstrap/spaces/assets/img/meeting-office.jpg"
-                                                        alt="private office" class="card-img p-2 rounded-xl"></a></div>
-                                            <div class="col-12 col-lg-6 col-xl-7">
-                                                <div class="card-body px-3 py-2"><a
-                                                        href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html">
-                                                        <h4 class="h6">Meeting Office</h4>
-                                                    </a>
-                                                    <div class="d-flex my-2 small"><span
-                                                            class="star fas fa-star text-warning"></span> <span
-                                                            class="star fas fa-star text-warning"></span> <span
-                                                            class="star fas fa-star text-warning"></span> <span
-                                                            class="star fas fa-star text-warning"></span> <span
-                                                            class="star fas fa-star-half text-warning"></span> <span
-                                                            class="badge badge-pill small badge-primary ml-2">4.7</span>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="col pl-0"><span
-                                                                class="text-muted small d-block mb-1">Monthly</span>
-                                                            <span
-                                                                class="h5 small text-dark font-weight-bold">200$</span>
-                                                        </div>
-                                                        <div class="col"><span
-                                                                class="text-muted small d-block mb-1">People</span>
-                                                            <span class="h5 small text-dark font-weight-bold">40</span>
-                                                        </div>
-                                                        <div class="col pr-0"><span
-                                                                class="text-muted small d-block mb-1">Sq.Ft</span> <span
-                                                                class="h5 small text-dark font-weight-bold">1200</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="card border-light mb-4 animate-up-5">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col-12 col-lg-6 col-xl-5"><a
-                                                    href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"><img
-                                                        src="https://demo.themesberg.com/bootstrap/spaces/assets/img/lifestyle-office.jpg"
-                                                        alt="private office" class="card-img p-2 rounded-xl"></a></div>
-                                            <div class="col-12 col-lg-6 col-xl-7">
-                                                <div class="card-body px-3 py-2"><a
-                                                        href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html">
-                                                        <h4 class="h6">Lifestyle Office</h4>
-                                                    </a>
-                                                    <div class="d-flex my-2 small"><span
-                                                            class="star fas fa-star text-warning"></span> <span
-                                                            class="star fas fa-star text-warning"></span> <span
-                                                            class="star fas fa-star text-warning"></span> <span
-                                                            class="star fas fa-star text-warning"></span> <span
-                                                            class="star fas fa-star text-warning"></span> <span
-                                                            class="badge badge-pill small badge-primary ml-2">5.0</span>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="col pl-0"><span
-                                                                class="text-muted small d-block mb-1">Monthly</span>
-                                                            <span
-                                                                class="h5 small text-dark font-weight-bold">500$</span>
-                                                        </div>
-                                                        <div class="col"><span
-                                                                class="text-muted small d-block mb-1">People</span>
-                                                            <span
-                                                                class="h5 small text-dark font-weight-bold">10-50</span>
-                                                        </div>
-                                                        <div class="col pr-0"><span
-                                                                class="text-muted small d-block mb-1">Sq.Ft</span> <span
-                                                                class="h5 small text-dark font-weight-bold">900</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="card border-light mb-4 animate-up-5">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col-12 col-lg-6 col-xl-5"><a
-                                                    href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html"><img
-                                                        src="https://demo.themesberg.com/bootstrap/spaces/assets/img/conference-office.jpg"
-                                                        alt="private office" class="card-img p-2 rounded-xl"></a></div>
-                                            <div class="col-12 col-lg-6 col-xl-7">
-                                                <div class="card-body px-3 py-2"><a
-                                                        href="https://demo.themesberg.com/bootstrap/spaces/html/single-space.html">
-                                                        <h4 class="h6">Conference Office</h4>
-                                                    </a>
-                                                    <div class="d-flex my-2 small"><span
-                                                            class="star fas fa-star text-warning"></span> <span
-                                                            class="star fas fa-star text-warning"></span> <span
-                                                            class="star fas fa-star text-warning"></span> <span
-                                                            class="star fas fa-star text-warning"></span> <span
-                                                            class="star fas fa-star text-warning"></span> <span
-                                                            class="badge badge-pill small badge-primary ml-2">5.0</span>
-                                                    </div>
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="col pl-0"><span
-                                                                class="text-muted small d-block mb-1">Monthly</span>
-                                                            <span
-                                                                class="h5 small text-dark font-weight-bold">500$</span>
-                                                        </div>
-                                                        <div class="col"><span
-                                                                class="text-muted small d-block mb-1">People</span>
-                                                            <span
-                                                                class="h5 small text-dark font-weight-bold">10-50</span>
-                                                        </div>
-                                                        <div class="col pr-0"><span
-                                                                class="text-muted small d-block mb-1">Sq.Ft</span> <span
-                                                                class="h5 small text-dark font-weight-bold">900</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
+                                <%}%>
+
                                 <div id="extraContent" style="display: none">
                                     <div class="col-12">
                                         <div class="card border-light mb-4 animate-up-5">

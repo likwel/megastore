@@ -1,6 +1,8 @@
 
 
 "use strict";
+
+var mapListings;
 $(document).ready(function () {
 
     var config = {
@@ -14,55 +16,143 @@ $(document).ready(function () {
         $preloader.delay(1500).slideUp();
     }
 
-    var baseLatLng = [37.57, -122.26];
-    var zoom = 10;
-    var listings = [
-        {
-            url: 'single-space.html',
-            latLng: [37.70, -122.41],
-            name: 'Meeting Workspace',
-            price: '$99',
-            people: '12',
-            sqFt: '120',
-            rating: 3
-        },
-        {
-            url: 'single-space.html',
-            latLng: [37.59, -122.39],
-            name: 'Private Workspace',
-            price: '$49',
-            people: '12',
-            sqFt: '123',
-            rating: 4
-        },
-        {
-            url: 'single-space.html',
-            latLng: [37.52, -122.29],
-            name: 'Lifestyle Workspace',
-            price: '$120',
-            people: '3',
-            sqFt: '120',
-            rating: 5
-        },
-        {
-            url: 'single-space.html',
-            latLng: [37.37, -122.12],
-            name: 'Basic Workspace',
-            price: '$299',
-            people: '5',
-            sqFt: '180',
-            rating: 5
-        },
-        {
-            url: 'single-space.html',
-            latLng: [37.36, -121.94],
-            name: 'Collaborative Workspace',
-            price: '$1200',
-            people: '30',
-            sqFt: '1200',
-            rating: 5
+    var baseLatLng = [-18.877938, 47.5373728];;
+
+    var zoom = 5;
+
+    var listings = []
+    var markers =[]
+
+    mapListings = L.map('mapListings').setView(baseLatLng, zoom);
+
+    // var zoomLevel = mapListings.getZoom();
+
+    fetch("/getAllSupplier").then(res=>res.json())
+    .then(results=>{
+        console.log(results);
+
+        for(let res of results){
+
+            // console.log(res);
+            listings.push({
+                url: res.company_url,
+                latLng: [res.latitude, res.longitude],
+                name: res.company_name,
+                price: res.nif,
+                people: res.stat,
+                sqFt: res.rcs,
+                rating: 3,
+                adresse : res.address,
+                photo : res.company_photo,
+            })
         }
-    ]
+
+        $.each(listings, function(index, listing) {
+
+            var i;
+            var ratingStarsHtml = '';
+            for (i = 1; i <= 5; i++) {
+                if (i < listing.rating) {
+                    ratingStarsHtml += '<i class="star fas fa-star text-warning"></i>'
+                } else {
+                    ratingStarsHtml += '<i class="star far fa-star text-gray-500"></i>'
+                }
+              }
+
+            var popupHtml = `
+
+                <div class="card card-article-wide no-gutters no-hover p-0">
+                    <img src="${listing.photo?listing.photo:"../assets/images/default_pdc.jpg"}" class="card-img-top-map" alt="...">
+                    <div class="card-body py-1 px-2">
+                        <h4 class="h6 font-weight-normal mb-2"><a href="${listing.url}">${listing.name}</a></h4>
+                        <div class="d-flex font-small">
+                            ${ratingStarsHtml}
+                            <span class="badge badge-pill badge-secondary map-badge ml-2">${listing.rating}</span>
+                        </div>
+                        <span class="font-small text-dark font-weight-bold">Adresse : ${listing.adresse}</span>
+                    </div>
+                </div>
+                
+                
+            `;
+
+            var randomColor = getRandomColor();
+            var randomColorFill = getRandomColor();
+
+            var marker = L.marker(listing.latLng, { icon: createFlexibleIcon(randomColorFill) }).addTo(mapListings);
+
+            marker.bindTooltip('<span class="custom-tooltip" style="pointer:cursor;color:'+randomColor+'">'+listing.name+'</span>', {
+                permanent: true, // Le tooltip est affiché en permanence
+                direction: 'left', // Direction du tooltip
+                className: 'custom-tooltip', // Classe CSS personnalisée pour le tooltip
+              }).openTooltip();
+
+            marker.bindPopup(popupHtml);
+
+            markers.push(marker);
+
+        });
+        
+    })
+
+
+    // Écouter les événements de zoom sur la carte
+    mapListings.on('zoomend', function() {
+        var zoomLevel = mapListings.getZoom();
+        markers.forEach(function(marker) {
+            // marker.setIcon(createFlexibleIcon(20)); // Ajustez le facteur de zoom selon vos besoins
+        });
+        // adjustMarkers(zoomLevel);
+    });
+
+
+    // var listings = [
+    //     {
+    //         url: 'single-space.html',
+    //         latLng: [37.70, -122.41],
+    //         name: 'Meeting Workspace',
+    //         price: '$99',
+    //         people: '12',
+    //         sqFt: '120',
+    //         rating: 3
+    //     },
+    //     {
+    //         url: 'single-space.html',
+    //         latLng: [37.59, -122.39],
+    //         name: 'Private Workspace',
+    //         price: '$49',
+    //         people: '12',
+    //         sqFt: '123',
+    //         rating: 4
+    //     },
+    //     {
+    //         url: 'single-space.html',
+    //         latLng: [37.52, -122.29],
+    //         name: 'Lifestyle Workspace',
+    //         price: '$120',
+    //         people: '3',
+    //         sqFt: '120',
+    //         rating: 5
+    //     },
+    //     {
+    //         url: 'single-space.html',
+    //         latLng: [37.37, -122.12],
+    //         name: 'Basic Workspace',
+    //         price: '$299',
+    //         people: '5',
+    //         sqFt: '180',
+    //         rating: 5
+    //     },
+    //     {
+    //         url: 'single-space.html',
+    //         latLng: [37.36, -121.94],
+    //         name: 'Collaborative Workspace',
+    //         price: '$1200',
+    //         people: '30',
+    //         sqFt: '1200',
+    //         rating: 5
+    //     }
+    // ]
 
 
     if ($('#map-listings').length) {
@@ -80,7 +170,7 @@ $(document).ready(function () {
         });
 
         // modal listing view
-        var mapListings = L.map('mapListings').setView(baseLatLng, zoom);
+        
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             maxZoom: 18,
@@ -88,47 +178,47 @@ $(document).ready(function () {
             accessToken: config.mapboxToken
         }).addTo(mapListings);
 
-        $.each(listings, function(index, listing) {
+        // $.each(listings, function(index, listing) {
 
-            var i;
-            var ratingStarsHtml = '';
-            for (i = 1; i <= 5; i++) {
-                if (i < listing.rating) {
-                    ratingStarsHtml += '<i class="star fas fa-star text-warning"></i>'
-                } else {
-                    ratingStarsHtml += '<i class="star far fa-star text-gray-500"></i>'
-                }
-              }
+        //     var i;
+        //     var ratingStarsHtml = '';
+        //     for (i = 1; i <= 5; i++) {
+        //         if (i < listing.rating) {
+        //             ratingStarsHtml += '<i class="star fas fa-star text-warning"></i>'
+        //         } else {
+        //             ratingStarsHtml += '<i class="star far fa-star text-gray-500"></i>'
+        //         }
+        //       }
 
-            var popupHtml = `
-                <a href="${listing.url}" class="card card-article-wide flex-column no-gutters no-hover">
-                    <div class="card-body py-0 d-flex flex-column justify-content-between col-12">
-                        <h4 class="h6 font-weight-normal mb-3">${listing.name}</h4>
-                        <div class="d-flex font-small">
-                            ${ratingStarsHtml}
-                            <span class="badge badge-pill badge-secondary map-badge ml-2">${listing.rating}</span>
-                        </div>
-                        <div class="d-flex justify-content-between my-3">
-                            <div class="col pl-0">
-                                <span class="text-muted font-xs d-block mb-1">Price</span>
-                                <span class="font-small text-dark font-weight-bold">${listing.price}</span>
-                            </div>
-                            <div class="col">
-                                <span class="text-muted font-xs d-block mb-1">Size</span>
-                                <span class="font-small text-dark font-weight-bold">${listing.people}</span>
-                            </div>
-                            <div class="col pr-0">
-                                <span class="text-muted font-xs d-block mb-1">Sq.Ft</span>
-                                <span class="font-small text-dark font-weight-bold">${listing.sqFt}</span>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            `;
+        //     var popupHtml = `
+        //         <a href="${listing.url}" class="card card-article-wide flex-column no-gutters no-hover">
+        //             <div class="card-body py-0 d-flex flex-column justify-content-between col-12">
+        //                 <h4 class="h6 font-weight-normal mb-3">${listing.name}</h4>
+        //                 <div class="d-flex font-small">
+        //                     ${ratingStarsHtml}
+        //                     <span class="badge badge-pill badge-secondary map-badge ml-2">${listing.rating}</span>
+        //                 </div>
+        //                 <div class="d-flex justify-content-between my-3">
+        //                     <div class="col pl-0">
+        //                         <span class="text-muted font-xs d-block mb-1">Price</span>
+        //                         <span class="font-small text-dark font-weight-bold">${listing.price}</span>
+        //                     </div>
+        //                     <div class="col">
+        //                         <span class="text-muted font-xs d-block mb-1">Size</span>
+        //                         <span class="font-small text-dark font-weight-bold">${listing.people}</span>
+        //                     </div>
+        //                     <div class="col pr-0">
+        //                         <span class="text-muted font-xs d-block mb-1">Sq.Ft</span>
+        //                         <span class="font-small text-dark font-weight-bold">${listing.sqFt}</span>
+        //                     </div>
+        //                 </div>
+        //             </div>
+        //         </a>
+        //     `;
 
-            var marker = L.marker(listing.latLng, { icon: icon }).addTo(mapListings);
-            marker.bindPopup(popupHtml);
-        });
+        //     var marker = L.marker(listing.latLng, { icon: icon }).addTo(mapListings);
+        //     marker.bindPopup(popupHtml);
+        // });
 
         // must render map again after modal is shown
         $('#map-listings').on('shown.bs.modal', function() {
@@ -155,13 +245,13 @@ $(document).ready(function () {
         });
 
         // modal listing view
-        var mapListings = L.map('mapListings2').setView(baseLatLng, zoom);
+        var mapListings2 = L.map('mapListings2').setView(baseLatLng, zoom);
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
             maxZoom: 18,
             id: config.mapboxId,
             accessToken: config.mapboxToken
-        }).addTo(mapListings);
+        }).addTo(mapListings2);
 
         $.each(listings, function(index, listing) {
 
@@ -201,7 +291,7 @@ $(document).ready(function () {
                 </a>
             `;
 
-            var marker = L.marker(listing.latLng, { icon: icon }).addTo(mapListings);
+            var marker = L.marker(listing.latLng, { icon: icon }).addTo(mapListings2);
             marker.bindPopup(popupHtml);
         });
 
@@ -1051,4 +1141,75 @@ function choosePlan(id, val){
         }
       });
 
+}
+
+function demandeGeolocalisation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            // alert(`Latitude: ${latitude}, Longitude: ${longitude}`);
+        }, (error) => {
+            console.error('Erreur de géolocalisation:', error);
+        });
+    } else {
+        console.error('La géolocalisation n\'est pas prise en charge par ce navigateur.');
+    }
+}
+
+// Fonction pour générer une couleur aléatoire
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+// Fonction pour créer une icône flexible en fonction du niveau de zoom
+function createFlexibleIcon(color) {
+    // Créer une icône SVG avec un cercle de la taille spécifiée
+
+    var svg2 = `
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="35" x="0px" y="0px" viewBox="0 0 256 256" enable-background="new 0 0 256 256" xml:space="preserve">
+    <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>
+    <g> <path fill="#e94419" d="M128,10c-45.6,0-82.6,37-82.6,82.6C45.4,138.2,128,246,128,246s82.6-107.8,82.6-153.4 C210.6,47,173.6,10,128,10z M128,133.9c-22.8,0-41.3-18.5-41.3-41.3s18.5-41.3,41.3-41.3s41.3,18.5,41.3,41.3 S150.8,133.9,128,133.9z"/></g>
+    </svg>
+    `
+    let svg =`
+            <svg width="32" height="35" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                viewBox="0 0 656.467 656.467" xml:space="preserve">
+            <g>
+                <g>
+                    <g>
+                        <path style="fill:${color};" d="M328.238,46.77c88.254,0,160.025,71.801,160.025,160.006c0,88.244-71.781,160.016-160.025,160.016
+                            c-88.234,0-159.996-71.781-159.996-160.016C168.242,118.571,240.004,46.77,328.238,46.77 M328.238,0
+                            C214.035,0,121.433,92.582,121.433,206.786c0,114.243,206.805,449.682,206.805,449.682s206.795-335.449,206.795-449.691
+                            C535.044,92.572,442.471,0,328.238,0z M414.089,146.689h-25.315v-1.573c0-33.306-27.151-60.448-60.507-60.448
+                            s-60.458,27.142-60.458,60.448v1.573h-25.344L227.655,311.6h201.226L414.089,146.689z M328.258,92.064
+                            c22.071,0,41.035,13.502,49.017,32.711c-10.513-15.818-28.568-26.292-49.017-26.292c-20.439,0-38.446,10.493-49.027,26.35
+                            C287.262,105.615,306.197,92.064,328.258,92.064z M278.958,146.689c4.953-22.735,25.158-39.784,49.31-39.784
+                            c24.162,0,44.405,17.039,49.31,39.784H278.958z"/>
+                    </g>
+                </g>
+            </g>
+        </svg>
+    `
+    return L.divIcon({
+        iconSize : [32, 35],
+        html: svg,
+        iconAnchor: [16, 30],
+        popupAnchor: [0, -20],
+        shadowSize: [68, 95],
+        shadowAnchor: [22, 94],
+        popupAnchor:  [0, -20],
+        className: 'flexible-icon'
+    });
+}
+
+function syncMap(item){
+    var lat = parseFloat(item.getAttribute('data-lat'));
+    var lng = parseFloat(item.getAttribute('data-lng'));
+    mapListings.setView([lat, lng], 10);
 }

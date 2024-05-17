@@ -14,6 +14,7 @@ const {
 const router = express.Router()
 
 const Supplier = require('../models/supplier');
+const Product = require('../models/product');
 
 //signup endpoint
 //passing the middleware function to the signup

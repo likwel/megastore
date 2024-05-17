@@ -2,6 +2,8 @@ const { Sequelize, DataTypes } = require('sequelize');
 
 const db = require('../connexion');
 
+// const Supplier = require('../models/supplier');
+
 const User = db.define('user', {
 
     username: {

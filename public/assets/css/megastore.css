@@ -37471,3 +37471,42 @@ img.cursor-pointer{
     vertical-align: middle;
 }
 /** End publicité*/
+
+.custom-tooltip{
+    background-color: transparent;
+    /* color: #04AA6D !important; */
+    border: none;
+    box-shadow: none;
+    cursor: pointer !important;
+    font-weight: bold;
+    margin-top: -13px;
+    margin-left: -4px;
+}
+.custom-tooltip:hover{
+    color:#0d6efd !important;
+}
+.leaflet-popup-content-wrapper{
+    padding: 0 !important;
+}
+.leaflet-popup-content{
+    margin: 0 !important;
+}
+.card-img-top-map {
+    border-top-left-radius: calc(.45rem - .0625rem) !important;
+    border-top-right-radius: calc(.45rem - .0625rem) !important;
+    /* border-radius: .85rem !important; */
+    max-height: 150px !important;
+
+}
+.leaflet-tooltip-left:before{
+    border: none !important;
+    margin-right: -10px !important;
+}
+.leaflet-popup{
+    bottom: -1px !important;
+    /* left: -90px !important; */
+}
+.leaflet-marker-icon{
+    /* margin: 0 !important; */
+    
+}

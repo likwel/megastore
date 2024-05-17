@@ -199,6 +199,7 @@
         var long = document.querySelector("#long").value;
 
         // console.log(JSON.parse(vendor));
+        // alert(vendor.id)
 
         fetch("/set-lat-long?lat=" + lat + "&lon=" + long +"&id="+vendor.id, {
             method: "POST",

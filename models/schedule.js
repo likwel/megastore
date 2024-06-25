@@ -5,62 +5,65 @@ const db = require('../connexion');
 const Schedule = db.define('schedule', {
 
     // Monday, Tuesday, Wednesday, Thursday, Friday, Saturday et Sunday
+    id_vendor :{
+        type: DataTypes.INTEGER,
+        allowNull: true,
+    }
     monday: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
+        allowNull: true,
     },
     monday_hours: {
         type: DataTypes.JSON,
-        allowNull: false,
+        allowNull: true,
     },
     tuesday: {
         type: DataTypes.BOOLEAN,
-        unique: true,
-        allowNull: false
+        allowNull: true
     },
     tuesday_hours: {
         type: DataTypes.JSON,
-        allowNull: false,
+        allowNull: true,
     },
     wednesday: {
         type: DataTypes.BOOLEAN,
-        allowNull: false
+        allowNull: true
     },
     wednesday_hours: {
         type: DataTypes.JSON,
-        allowNull: false,
+        allowNull: true,
     },
     thursday: {
         type: DataTypes.BOOLEAN,
-        allowNull: false
+        allowNull: true
     },
     thursday_hours: {
         type: DataTypes.JSON,
-        allowNull: false,
+        allowNull: true,
     },
     friday: {
         type: DataTypes.BOOLEAN,
-        allowNull: false
+        allowNull: true
     },
     friday_hours: {
         type: DataTypes.JSON,
-        allowNull: false,
+        allowNull: true,
     },
     saturday: {
         type: DataTypes.BOOLEAN,
-        allowNull: false
+        allowNull: true
     },
     saturday_hours: {
         type: DataTypes.JSON,
-        allowNull: false,
+        allowNull: true,
     },
     sunday: {
         type: DataTypes.BOOLEAN,
-        allowNull: false
+        allowNull: true
     },
     sunday_hours: {
         type: DataTypes.JSON,
-        allowNull: false,
+        allowNull: true,
     },
     
 });

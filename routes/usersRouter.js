@@ -73,6 +73,20 @@ router.get('/my-account/settings', (req, res) => {
     });
 })
 
+router.get('/my-account/schedule', (req, res) => {
+
+    let is_connected = false;
+    if(req.cookies.user){
+        is_connected=true
+    }
+    
+    res.render("schedule", {
+        "is_connected" : is_connected,
+        "user": req.cookies.user,
+        "vendor": req.cookies.vendor,
+        "token": req.cookies.token
+    });
+})
 router.get('/my-account/setting-advanced', (req, res) => {
 
     let is_connected = false;

@@ -9,6 +9,7 @@ const {
     setlatlong, 
     logout,
     choosePlan,
+    setHoraire,
     } = supController
 
 const router = express.Router()
@@ -21,6 +22,8 @@ const Product = require('../models/product');
 router.post('/save-supplier', supAuth.saveSupplier, signup)
 
 router.post('/set-lat-long', setlatlong)
+
+router.post('/set-horaire', setHoraire)
 
 router.get('/update-plan', choosePlan)
 

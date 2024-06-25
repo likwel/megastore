@@ -32,11 +32,7 @@
                         class="icon icon-xs ml-auto"><span
                             class="fas fa-chevron-right"></span></span> 
                 </a>
-                <a href="/my-account/settings"
-                    class="d-flex list-group-item list-group-item-action <%= settings %>">Paramètres<span
-                        class="icon icon-xs ml-auto"><span
-                            class="fas fa-chevron-right"></span></span> 
-                </a>
+                
                 <!-- <a href="/<%= user?JSON.parse(user).username :'#'%>"
                     class="d-flex list-group-item list-group-item-action <%= items %>">Marketplace<span
                         class="icon icon-xs ml-auto"><span
@@ -70,6 +66,16 @@
                     class="d-flex list-group-item list-group-item-action border-0 <%= message %>">Messages<span
                         class="icon icon-xs ml-auto"><span
                             class="fas fa-chevron-right"></span></span>
+                </a>
+                <a href="/my-account/schedule"
+                    class="d-flex list-group-item list-group-item-action <%= schedule %>"">Horaires<span
+                        class="icon icon-xs ml-auto"><span
+                            class="fas fa-chevron-right"></span></span> 
+                </a>
+                <a href="/my-account/settings"
+                    class="d-flex list-group-item list-group-item-action <%= settings %>">Paramètres<span
+                        class="icon icon-xs ml-auto"><span
+                            class="fas fa-chevron-right"></span></span> 
                 </a>
                 <a href="/my-account/setting-advanced"
                     class="d-flex list-group-item list-group-item-action border-0 <%= message %>">Paramètre avancé<span

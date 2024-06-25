@@ -8,6 +8,7 @@ const app = express();
 
 // Assigning users to the variable User
 const Supplier = require('../models/supplier');
+const Schedule = require('../models/schedule');
 const User = require('../models/users');
 
 //signing a user up
@@ -166,6 +167,40 @@ const setlatlong = async (req, res) => {
       })
 }
 
+const setHoraire = async (req, res) => {
+
+    const data = req.body; // Récupérer l'objet JSON envoyé dans la requête
+    console.log(data); // Afficher les données dans la console par exemple
+
+    const project = await Schedule.findOne({ where: { id_vendor: data.vendor_id} });
+    if (project === null) {
+        // console.log('Not found!');
+        if(data.isFull){
+            // Schedule.create({ data.day: data.isFull });
+        }else if(data.isNotFull){
+            Schedule.create({ data.day: 'notFull'});
+        }else{
+            Schedule.create({ data.day: 'notFull'});
+        }
+    }else{
+        // console.log(project);
+        Schedule.update(data, {
+            where: {
+              id_vendor: data.vendor_id,
+            },
+          })
+    }
+    
+    // Schedule.update({ schedule
+    // Supplier.update({ latitude: req.query.lat, longitude : req.query.lon }, {
+    //     where: {
+    //         id: req.query.id,
+    //     },
+    // })
+
+    res.json({ message: 'Données reçues avec succès' }); // Répondre à la requête avec un message
+}
+
 const choosePlan = async (req, res) => {
     // Supplier.update(dataUser);
     Supplier.update({ subscription : req.query.plan}, {
@@ -194,4 +229,5 @@ module.exports = {
     logout, 
     updateSupplier,
     choosePlan,
+    setHoraire,
 };
